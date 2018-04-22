@@ -10,6 +10,11 @@
 		1A2A7571208D4750009883BF /* RxState.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A2A7567208D474F009883BF /* RxState.framework */; };
 		1A2A7576208D4750009883BF /* RxStateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2A7575208D4750009883BF /* RxStateTests.swift */; };
 		1A2A7578208D4750009883BF /* RxState.h in Headers */ = {isa = PBXBuildFile; fileRef = 1A2A756A208D4750009883BF /* RxState.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1A2A7584208D50BC009883BF /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A2A7582208D50BC009883BF /* RxSwift.framework */; };
+		1A2A7585208D50BC009883BF /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A2A7583208D50BC009883BF /* RxCocoa.framework */; };
+		1A2A758A208D51E2009883BF /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2A7587208D51E2009883BF /* State.swift */; };
+		1A2A758B208D51E2009883BF /* Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2A7588208D51E2009883BF /* Action.swift */; };
+		1A2A758C208D51E2009883BF /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2A7589208D51E2009883BF /* Store.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,6 +34,11 @@
 		1A2A7570208D4750009883BF /* RxStateTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RxStateTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1A2A7575208D4750009883BF /* RxStateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxStateTests.swift; sourceTree = "<group>"; };
 		1A2A7577208D4750009883BF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1A2A7582208D50BC009883BF /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = Carthage/Build/iOS/RxSwift.framework; sourceTree = "<group>"; };
+		1A2A7583208D50BC009883BF /* RxCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxCocoa.framework; path = Carthage/Build/iOS/RxCocoa.framework; sourceTree = "<group>"; };
+		1A2A7587208D51E2009883BF /* State.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = State.swift; sourceTree = "<group>"; };
+		1A2A7588208D51E2009883BF /* Action.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Action.swift; sourceTree = "<group>"; };
+		1A2A7589208D51E2009883BF /* Store.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -36,6 +46,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1A2A7584208D50BC009883BF /* RxSwift.framework in Frameworks */,
+				1A2A7585208D50BC009883BF /* RxCocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -56,6 +68,7 @@
 				1A2A7569208D4750009883BF /* RxState */,
 				1A2A7574208D4750009883BF /* RxStateTests */,
 				1A2A7568208D474F009883BF /* Products */,
+				1A2A7581208D50BB009883BF /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -72,6 +85,9 @@
 			isa = PBXGroup;
 			children = (
 				1A2A756A208D4750009883BF /* RxState.h */,
+				1A2A7588208D51E2009883BF /* Action.swift */,
+				1A2A7587208D51E2009883BF /* State.swift */,
+				1A2A7589208D51E2009883BF /* Store.swift */,
 				1A2A756B208D4750009883BF /* Info.plist */,
 			);
 			path = RxState;
@@ -84,6 +100,15 @@
 				1A2A7577208D4750009883BF /* Info.plist */,
 			);
 			path = RxStateTests;
+			sourceTree = "<group>";
+		};
+		1A2A7581208D50BB009883BF /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1A2A7583208D50BC009883BF /* RxCocoa.framework */,
+				1A2A7582208D50BC009883BF /* RxSwift.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -104,6 +129,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1A2A757B208D4750009883BF /* Build configuration list for PBXNativeTarget "RxState" */;
 			buildPhases = (
+				1A2A7586208D50CA009883BF /* ⚙ Swiftlint Code Analysis */,
 				1A2A7562208D474F009883BF /* Sources */,
 				1A2A7563208D474F009883BF /* Frameworks */,
 				1A2A7564208D474F009883BF /* Headers */,
@@ -148,6 +174,7 @@
 				TargetAttributes = {
 					1A2A7566208D474F009883BF = {
 						CreatedOnToolsVersion = 9.3;
+						LastSwiftMigration = 0930;
 					};
 					1A2A756F208D4750009883BF = {
 						CreatedOnToolsVersion = 9.3;
@@ -189,11 +216,31 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		1A2A7586208D50CA009883BF /* ⚙ Swiftlint Code Analysis */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "⚙ Swiftlint Code Analysis";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint\nelse\n    echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		1A2A7562208D474F009883BF /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1A2A758C208D51E2009883BF /* Store.swift in Sources */,
+				1A2A758A208D51E2009883BF /* State.swift in Sources */,
+				1A2A758B208D51E2009883BF /* Action.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -339,6 +386,7 @@
 		1A2A757C208D4750009883BF /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
@@ -346,8 +394,13 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = RxState/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -356,6 +409,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = io.warpfactor.RxState;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -364,6 +418,7 @@
 		1A2A757D208D4750009883BF /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
@@ -371,8 +426,13 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = RxState/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -389,6 +449,7 @@
 		1A2A757F208D4750009883BF /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3V5265LQM9;
 				INFOPLIST_FILE = RxStateTests/Info.plist;
@@ -407,6 +468,7 @@
 		1A2A7580208D4750009883BF /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3V5265LQM9;
 				INFOPLIST_FILE = RxStateTests/Info.plist;
