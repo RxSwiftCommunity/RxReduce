@@ -6,6 +6,9 @@
 build/
 DerivedData/
 
+## macos
+.DS_Store
+
 ## Various settings
 *.pbxuser
 !default.pbxuser
@@ -50,8 +53,8 @@ playground.xcworkspace
 # Carthage
 #
 # Add this line if you want to avoid checking in source code from Carthage dependencies.
-# Carthage/Checkouts
-
+Carthage
+Carthage/Checkouts
 Carthage/Build
 
 # fastlane
