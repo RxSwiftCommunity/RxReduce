@@ -9,11 +9,11 @@
 import Foundation
 import RxSwift
 
-protocol Action: CustomStringConvertible {
+public protocol Action: CustomStringConvertible {
     func toStream () -> Observable<Action>
 }
 
-extension Action {
+public extension Action {
     func toStream () -> Observable<Action> {
         return Observable<Action>.just(self)
     }

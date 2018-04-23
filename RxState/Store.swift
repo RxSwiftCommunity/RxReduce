@@ -10,9 +10,9 @@ import Foundation
 import RxSwift
 import RxCocoa
 
-typealias Reducer<StateType: State> = (_ state: StateType?, _ action: Action) -> StateType
+public typealias Reducer<StateType: State> = (_ state: StateType?, _ action: Action) -> StateType
 
-protocol Store {
+public protocol Store {
     associatedtype StateType: State
 
     init(withReducers reducers: [Reducer<StateType>])
@@ -22,7 +22,7 @@ protocol Store {
     func dispatch (action: Action)
 }
 
-final class DefaultStore<StateType: State>: Store {
+public final class DefaultStore<StateType: State>: Store {
 
     let disposeBag = DisposeBag()
 
@@ -33,7 +33,7 @@ final class DefaultStore<StateType: State>: Store {
 
     let reducers: [Reducer<StateType>]
 
-    init(withReducers reducers: [Reducer<StateType>]) {
+    public init(withReducers reducers: [Reducer<StateType>]) {
         self.reducers = reducers
     }
 

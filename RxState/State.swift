@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol State {}
+public protocol State {}
 
 struct EmptyState: State {
 }
