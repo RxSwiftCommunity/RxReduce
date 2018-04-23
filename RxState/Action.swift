@@ -22,3 +22,9 @@ public extension Action {
         return "\(type(of: self))"
     }
 }
+
+extension Array: Action where Element == Action {
+    public func toStream() -> Observable<Action> {
+        return Observable<Action>.concat(self.map { $0.toStream() })
+    }
+}
