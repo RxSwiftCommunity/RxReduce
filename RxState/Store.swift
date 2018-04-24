@@ -40,7 +40,7 @@ public final class DefaultStore<StateType: State>: Store {
     public func dispatch (action: Action) {
 
         action
-            .toStream()
+            .toAsync(withState: self.stateSubject.value)
             .map { [unowned self] (action) -> StateType? in
                 return self.reducers.reduce(self.stateSubject.value, { (currentState, reducer) -> StateType? in
                     return reducer(currentState, action)
