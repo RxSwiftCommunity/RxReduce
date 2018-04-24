@@ -9,22 +9,24 @@
 import Foundation
 import RxSwift
 
-public protocol Action: CustomStringConvertible {
-    func toStream () -> Observable<Action>
+public protocol Action {
+    func toAsync<StateType: State> (withState state: StateType?) -> Observable<Action>
 }
 
 public extension Action {
-    func toStream () -> Observable<Action> {
+    func toAsync<StateType: State> (withState state: StateType? = nil) -> Observable<Action> {
         return Observable<Action>.just(self)
-    }
-
-    var description: String {
-        return "\(type(of: self))"
     }
 }
 
 extension Array: Action where Element == Action {
-    public func toStream() -> Observable<Action> {
-        return Observable<Action>.concat(self.map { $0.toStream() })
+    public func toAsync<StateType: State> (withState state: StateType? = nil) -> Observable<Action> {
+        return Observable<Action>.concat(self.map { $0.toAsync(withState: state) })
+    }
+}
+
+extension Observable: Action where Element == Action {
+    public func toAsync<StateType: State> (withState state: StateType? = nil) -> Observable<Action> {
+        return self
     }
 }
