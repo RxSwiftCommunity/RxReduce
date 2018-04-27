@@ -1,8 +1,8 @@
 Pod::Spec.new do |s|
 
   s.name         = "RxState"
-  s.version      = "0.1.0"
-  s.summary      = "RxState is a lightweight framework that ease the implementation of a Redux like parttern in a Reactive Programming compliant way."
+  s.version      = "0.2.0"
+  s.summary      = "RxState is a lightweight framework that ease the implementation of a Redux like pattern in a Reactive Programming compliant way."
 
   s.description  = <<-DESC
 RxState provides:
