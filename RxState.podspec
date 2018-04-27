@@ -14,7 +14,7 @@ RxState provides:
                    DESC
 
   s.homepage     = "https://github.com/twittemb/RxState"
-  s.screenshots  = "https://raw.githubusercontent.com/twittemb/RxState/develop/Resources/RxState_logo.png"
+  s.screenshots  = "https://raw.githubusercontent.com/twittemb/RxState/develop/Resources/RxState_Logo.png"
   s.license      = { :type => "MIT", :file => "LICENSE" }
   s.authors      = { "Thibault Wittemberg" => "thibault.wittemberg@gmail.com" }
   s.social_media_url   = "http://twitter.com/thwittem"

@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// Conform to the State protocol to be handled by a Store
 public protocol State {}
 
 struct EmptyState: State {
