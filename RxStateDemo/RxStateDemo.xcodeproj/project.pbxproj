@@ -7,19 +7,21 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1AAA7E1B20952A7F00BED242 /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A3BB49E2093A4F500B1E37F /* RxCocoa.framework */; };
+		1AAA7E1C20952A7F00BED242 /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A3BB4A02093A4F500B1E37F /* RxSwift.framework */; };
+		1AAA7E1E20952A8000BED242 /* RxState.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AAA7E1D20952A8000BED242 /* RxState.framework */; };
+		1AAA7E1F20952BAD00BED242 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A3BB49D2093A4F500B1E37F /* Alamofire.framework */; };
+		1AAA7E2020952BAD00BED242 /* AlamofireImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A3BB49C2093A4F500B1E37F /* AlamofireImage.framework */; };
+		1AAA7E2120952BAD00BED242 /* Reusable.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A3BB49F2093A4F500B1E37F /* Reusable.framework */; };
 		4A3BB48420939F9000B1E37F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3BB48320939F9000B1E37F /* AppDelegate.swift */; };
 		4A3BB48620939F9000B1E37F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3BB48520939F9000B1E37F /* ViewController.swift */; };
 		4A3BB48920939F9000B1E37F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4A3BB48720939F9000B1E37F /* Main.storyboard */; };
 		4A3BB48B20939F9100B1E37F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4A3BB48A20939F9100B1E37F /* Assets.xcassets */; };
 		4A3BB48E20939F9100B1E37F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4A3BB48C20939F9100B1E37F /* LaunchScreen.storyboard */; };
-		4A3BB4A12093A4F500B1E37F /* AlamofireImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A3BB49C2093A4F500B1E37F /* AlamofireImage.framework */; };
-		4A3BB4A22093A4F500B1E37F /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A3BB49D2093A4F500B1E37F /* Alamofire.framework */; };
-		4A3BB4A32093A4F500B1E37F /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A3BB49E2093A4F500B1E37F /* RxCocoa.framework */; };
-		4A3BB4A42093A4F500B1E37F /* Reusable.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A3BB49F2093A4F500B1E37F /* Reusable.framework */; };
-		4A3BB4A52093A4F500B1E37F /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A3BB4A02093A4F500B1E37F /* RxSwift.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1AAA7E1D20952A8000BED242 /* RxState.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxState.framework; path = Carthage/Build/iOS/RxState.framework; sourceTree = "<group>"; };
 		4A3BB48020939F9000B1E37F /* RxStateDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RxStateDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A3BB48320939F9000B1E37F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4A3BB48520939F9000B1E37F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -39,11 +41,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4A3BB4A12093A4F500B1E37F /* AlamofireImage.framework in Frameworks */,
-				4A3BB4A22093A4F500B1E37F /* Alamofire.framework in Frameworks */,
-				4A3BB4A32093A4F500B1E37F /* RxCocoa.framework in Frameworks */,
-				4A3BB4A42093A4F500B1E37F /* Reusable.framework in Frameworks */,
-				4A3BB4A52093A4F500B1E37F /* RxSwift.framework in Frameworks */,
+				1AAA7E1F20952BAD00BED242 /* Alamofire.framework in Frameworks */,
+				1AAA7E2020952BAD00BED242 /* AlamofireImage.framework in Frameworks */,
+				1AAA7E2120952BAD00BED242 /* Reusable.framework in Frameworks */,
+				1AAA7E1E20952A8000BED242 /* RxState.framework in Frameworks */,
+				1AAA7E1B20952A7F00BED242 /* RxCocoa.framework in Frameworks */,
+				1AAA7E1C20952A7F00BED242 /* RxSwift.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -83,6 +86,7 @@
 		4A3BB49B2093A4F400B1E37F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1AAA7E1D20952A8000BED242 /* RxState.framework */,
 				4A3BB49D2093A4F500B1E37F /* Alamofire.framework */,
 				4A3BB49C2093A4F500B1E37F /* AlamofireImage.framework */,
 				4A3BB49F2093A4F500B1E37F /* Reusable.framework */,

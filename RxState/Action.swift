@@ -15,7 +15,7 @@ public protocol Action {
 //    func toAsync<StateType: State> (withState state: StateType?) -> Observable<Action>
 }
 
-public extension Action {
+extension Action {
     func toAsync<StateType: State> (withState state: StateType? = nil) -> Observable<Action> {
         return Observable<Action>.just(self)
     }
