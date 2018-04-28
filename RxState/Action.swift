@@ -21,14 +21,14 @@ extension Action {
     }
 }
 
-extension Array: Action where Element == Action {
+extension Array: Action where Element: Action {
     public func toAsync<StateType: State> (withState state: StateType? = nil) -> Observable<Action> {
         return Observable<Action>.concat(self.map { $0.toAsync(withState: state) })
     }
 }
 
-extension Observable: Action where Element == Action {
-    public func toAsync<StateType: State> (withState state: StateType? = nil) -> Observable<Action> {
+extension Observable: Action where Element: Action {
+    public func toAsync<StateType: State> (withState state: StateType? = nil) -> Observable<Element> {
         return self
     }
 }
