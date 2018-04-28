@@ -7,3 +7,13 @@
 //
 
 import Foundation
+import RxState
+
+struct IncreaseAction: Action {
+    let increment: Int
+}
+
+struct DecreaseAction: Action {
+    let decrement: Int
+}
+

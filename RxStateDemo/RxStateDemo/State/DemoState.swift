@@ -7,3 +7,8 @@
 //
 
 import Foundation
+import RxState
+
+struct DemoState: State {
+    let counter: Int
+}
