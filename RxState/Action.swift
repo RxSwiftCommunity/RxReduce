@@ -10,25 +10,23 @@ import Foundation
 import RxSwift
 
 /// Conform to an Action to mutate the State synchronously or asynchronously
-/// For async processing, just override the `toAsync` function
 public protocol Action {
-//    func toAsync<StateType: State> (withState state: StateType?) -> Observable<Action>
 }
 
 extension Action {
-    func toAsync<StateType: State> (withState state: StateType? = nil) -> Observable<Action> {
+    func toAsync () -> Observable<Action> {
         return Observable<Action>.just(self)
     }
 }
 
 extension Array: Action where Element: Action {
-    public func toAsync<StateType: State> (withState state: StateType? = nil) -> Observable<Action> {
-        return Observable<Action>.concat(self.map { $0.toAsync(withState: state) })
+    public func toAsync () -> Observable<Action> {
+        return Observable<Action>.concat(self.map { $0.toAsync() })
     }
 }
 
 extension Observable: Action where Element: Action {
-    public func toAsync<StateType: State> (withState state: StateType? = nil) -> Observable<Element> {
+    public func toAsync () -> Observable<Element> {
         return self
     }
 }
