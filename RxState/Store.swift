@@ -10,7 +10,6 @@ import Foundation
 import RxSwift
 import RxCocoa
 
-
 /// A Reducer mutates an input state into an output state according to an action
 public typealias Reducer<StateType: State> = (_ state: StateType?, _ action: Action) -> StateType
 
@@ -20,7 +19,7 @@ public protocol Store {
     associatedtype StateType: State
 
     /// The current State (UI compliant)
-    var state: Driver<StateType> { get }
+    var state: Observable<StateType> { get }
 
     /// Inits the Store with its reducers stack
     ///
@@ -38,12 +37,11 @@ public final class DefaultStore<StateType: State>: Store {
     let disposeBag = DisposeBag()
 
     private let stateSubject = BehaviorRelay<StateType?>(value: nil)
-    public lazy var state: Driver<StateType> = { [unowned self] in
+    public lazy var state: Observable<StateType> = { [unowned self] in
         return self.stateSubject
             .asObservable()
             .filter { $0 != nil }
             .map { $0! }
-            .asDriver(onErrorJustReturn: EmptyState())
         }()
 
     let reducers: [Reducer<StateType>]

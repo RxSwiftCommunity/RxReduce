@@ -1,3 +1,4 @@
+github "twittemb/RxState" "develop"
 github "ReactiveX/RxSwift" ~> 4.0
 github "AliSoftware/Reusable"
 github "Alamofire/Alamofire"

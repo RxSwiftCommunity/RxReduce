@@ -12,7 +12,7 @@ import RxSwift
 /// Conform to an Action to mutate the State synchronously or asynchronously
 /// For async processing, just override the `toAsync` function
 public protocol Action {
-    func toAsync<StateType: State> (withState state: StateType?) -> Observable<Action>
+//    func toAsync<StateType: State> (withState state: StateType?) -> Observable<Action>
 }
 
 public extension Action {
