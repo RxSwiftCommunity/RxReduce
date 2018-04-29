@@ -16,6 +16,8 @@ public typealias Reducer<StateType: State> = (_ state: StateType?, _ action: Act
 /// A Store holds the state, mutate the state through actions / reducers and exposes the state via a Driver
 /// A Store is dedicated to a State Type
 public protocol Store {
+
+    /// A store is dedicated to the mutation/observation of this StateType
     associatedtype StateType: State
 
     /// The current State (UI compliant)
@@ -32,6 +34,8 @@ public protocol Store {
     func dispatch<ActionType: Action> (action: ActionType)
 }
 
+
+/// A default store that will handle a specific kind of State
 public final class DefaultStore<StateType: State>: Store {
 
     let disposeBag = DisposeBag()
