@@ -19,7 +19,7 @@ public protocol Store {
     associatedtype StateType: State
 
     /// The current State (UI compliant)
-    var state: Observable<StateType> { get }
+    var state: Driver<StateType> { get }
 
     /// Inits the Store with its reducers stack
     ///
@@ -37,9 +37,9 @@ public final class DefaultStore<StateType: State>: Store {
     let disposeBag = DisposeBag()
 
     private let stateSubject = BehaviorRelay<StateType?>(value: nil)
-    public lazy var state: Observable<StateType> = { [unowned self] in
+    public lazy var state: Driver<StateType> = { [unowned self] in
         return self.stateSubject
-            .asObservable()
+            .asDriver()
             .filter { $0 != nil }
             .map { $0! }
         }()
