@@ -1,6 +1,6 @@
 //
 //  Action.swift
-//  WarpFactorIOS
+//  RxState
 //
 //  Created by Thibault Wittemberg on 18-04-14.
 //  Copyright © 2018 WarpFactor. All rights reserved.
@@ -10,6 +10,7 @@ import Foundation
 import RxSwift
 
 /// Conform to an Action to mutate the State synchronously or asynchronously
+/// Arrays of Actions and Observable of Action are considered to be Actions as well
 public protocol Action {
     func toAsync () -> Observable<Action>
 }
@@ -26,8 +27,8 @@ extension Array: Action where Element == Action {
     }
 }
 
-extension Observable: Action where Element == Action {
+extension Observable: Action where Element: Action {
     public func toAsync () -> Observable<Action> {
-        return self
+        return self.map { $0 as Action }
     }
 }

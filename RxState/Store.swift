@@ -1,6 +1,6 @@
 //
 //  Store.swift
-//  WarpFactorIOS
+//  RxState
 //
 //  Created by Thibault Wittemberg on 18-04-15.
 //  Copyright © 2018 WarpFactor. All rights reserved.
@@ -29,7 +29,7 @@ public protocol Store {
     /// Dispatch an action through the reducers to mutate the state
     ///
     /// - Parameter action: the actual action that will go through the reducers
-    func dispatch (action: Action)
+    func dispatch<ActionType: Action> (action: ActionType)
 }
 
 public final class DefaultStore<StateType: State>: Store {
@@ -50,7 +50,8 @@ public final class DefaultStore<StateType: State>: Store {
         self.reducers = reducers
     }
 
-    public func dispatch (action: Action) {
+    public func dispatch<ActionType: Action> (action: ActionType) {
+        // every received action is converted to an async action
         action
             .toAsync()
             .map { [unowned self] (action) -> StateType? in
