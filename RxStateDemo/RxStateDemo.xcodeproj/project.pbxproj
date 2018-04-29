@@ -15,6 +15,7 @@
 		1AAA7E2420952BF900BED242 /* DemoState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AAA7E2320952BF900BED242 /* DemoState.swift */; };
 		1AAA7E2620952C3300BED242 /* IncreaseAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AAA7E2520952C3300BED242 /* IncreaseAction.swift */; };
 		1AAA7E282095305800BED242 /* Reducers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AAA7E272095305800BED242 /* Reducers.swift */; };
+		1AAA7E292096866800BED242 /* RxState.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AAA7E1D20952A8000BED242 /* RxState.framework */; };
 		4A3BB48420939F9000B1E37F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3BB48320939F9000B1E37F /* AppDelegate.swift */; };
 		4A3BB48620939F9000B1E37F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3BB48520939F9000B1E37F /* ViewController.swift */; };
 		4A3BB48920939F9000B1E37F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4A3BB48720939F9000B1E37F /* Main.storyboard */; };
@@ -46,6 +47,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1AAA7E292096866800BED242 /* RxState.framework in Frameworks */,
 				1AAA7E1F20952BAD00BED242 /* Alamofire.framework in Frameworks */,
 				1AAA7E2020952BAD00BED242 /* AlamofireImage.framework in Frameworks */,
 				1AAA7E2120952BAD00BED242 /* Reusable.framework in Frameworks */,
@@ -190,6 +192,7 @@
 				"$(SRCROOT)/Carthage/Build/iOS/RxCocoa.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/Alamofire.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/AlamofireImage.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/RxState.framework",
 			);
 			name = "⚙️ Carthage Frameworks";
 			outputPaths = (
@@ -198,6 +201,7 @@
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/RxCocoa.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Alamofire.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/AlamofireImage.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/RxState.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
