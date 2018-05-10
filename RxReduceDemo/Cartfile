@@ -1,0 +1,5 @@
+github "twittemb/RxReduce" "develop"
+github "ReactiveX/RxSwift" ~> 4.0
+github "AliSoftware/Reusable"
+github "Alamofire/Alamofire"
+github "Alamofire/AlamofireImage"
