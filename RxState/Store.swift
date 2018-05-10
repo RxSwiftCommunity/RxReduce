@@ -34,7 +34,6 @@ public protocol Store {
     func dispatch<ActionType: Action> (action: ActionType)
 }
 
-
 /// A default store that will handle a specific kind of State
 public final class DefaultStore<StateType: State>: Store {
 
