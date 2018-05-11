@@ -9,16 +9,27 @@
 import Foundation
 import RxReduce
 
-func reducer (state: DemoState?, action: Action) -> DemoState {
+func demoReducer (state: DemoState?, action: Action) -> DemoState {
 
-    let newState = state ?? DemoState(counter: 0)
+    let currentState = state ?? DemoState.empty
 
+    var currentCounter = 0
+
+    // we extract the current counter value from the current state
+    switch currentState {
+    case .decreasing(let counter), .increasing(let counter):
+        currentCounter = counter
+    default:
+        currentCounter = 0
+    }
+
+    // according to the action we create a new state
     switch action {
     case let action as IncreaseAction:
-        return DemoState(counter: newState.counter+action.increment)
+        return .increasing(counter: currentCounter+action.increment)
     case let action as DecreaseAction:
-        return DemoState(counter: newState.counter-action.decrement)
+        return .decreasing(counter: currentCounter-action.decrement)
     default:
-        return newState
+        return currentState
     }
 }

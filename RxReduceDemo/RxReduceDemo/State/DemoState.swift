@@ -9,6 +9,9 @@
 import Foundation
 import RxReduce
 
-struct DemoState: State {
-    let counter: Int
+enum DemoState: State {
+    case empty
+    case increasing (counter: Int)
+    case decreasing (counter: Int)
+    case stopped
 }
