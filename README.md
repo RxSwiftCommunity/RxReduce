@@ -1,4 +1,4 @@
-| <img alt="RxReduce Logo" src="https://raw.githubusercontent.com/twittemb/RxReduce/develop/Resources/Rx RxReduce_Logo.png" width="250"/> | <ul align="left"><li><a href="#about">About</a><li><a href="#architecture-concerns">Architecture concerns</a><li><a href="#rxreduce">RxReduce</a><li><a href="#installation">Installation</a><li><a href="#the-key-principles">The key principles</a><li><a href="#how-to-use-rxreduce">How to use RxReduce</a><li><a href="#tools-and-dependencies">Tools and dependencies</a></ul> |
+| <img alt="RxReduce Logo" src="https://raw.githubusercontent.com/twittemb/RxReduce/develop/Resources/RxReduce_Logo.png" width="250"/> | <ul align="left"><li><a href="#about">About</a><li><a href="#architecture-concerns">Architecture concerns</a><li><a href="#rxreduce">RxReduce</a><li><a href="#installation">Installation</a><li><a href="#the-key-principles">The key principles</a><li><a href="#how-to-use-rxreduce">How to use RxReduce</a><li><a href="#tools-and-dependencies">Tools and dependencies</a></ul> |
 | -------------- | -------------- |
 | Travis CI | [![Build Status](https://travis-ci.org/twittemb/RxReduce.svg?branch=develop)](https://travis-ci.org/twittemb/RxReduce) |
 | Frameworks | [![Carthage Compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage) [![CocoaPods Compatible](https://img.shields.io/cocoapods/v/RxReduce.svg?style=flat)](http://cocoapods.org/pods/RxReduce) |
@@ -184,15 +184,24 @@ New state is increasing(10)
 New state is decreasing(5)
 ```
 
-## But wait, there's more than that
+## But wait, there's more ...
 
-### Actions everywhere !
+### List of actions
 
 RxReduce is a lightweight framework. Pretty much everything is a protocol (except the DefaultStore, but if you want to implement you own Store it is perfectly OK since Store is also a protocol you can conform to).
 
 Lately, Swift 4.1 has introduced conditional conformance. If you are not familiar with this concept: [A Glance at conditional conformance](https://medium.com/@thibault.wittemberg/a-glance-at-conditional-conformance-c1f2d9ea29a3).
 
-Basically it allows to make a generic type conform to a protocol only if the associated inner type also conforms to this protocol. I have leverage this to 
+Basically it allows to make a generic type conform to a protocol only if the associated inner type also conforms to this protocol. 
+
+For instance, RxReduce leverages this feature to make an Array of Actions be an Action to ! Doing so, it is perfectly OK to dispatch a list of actions to the Store like that:
+
+```swift
+let actions: [Action] = [IncreaseAction(increment: 10), DecreaseAction(increment: 5)]
+self.store.dispatch(action: actions)
+```
+
+The actions declared within the array will be executed sequentially 👌
 
 ### Asynchronisity
 
