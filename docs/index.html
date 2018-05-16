@@ -76,7 +76,7 @@
             <table><thead>
 <tr>
 <th><img alt="RxReduce Logo" src="https://raw.githubusercontent.com/twittemb/RxReduce/develop/Resources/Rx RxReduce_Logo.png" width="250"/></th>
-<th><ul align="left"><li><a href="#about">About</a><li><a href="#architecture-concerns">Architecture concerns</a><li><a href="#state-container-+-reactive-programming-=-rxreduce">State Container + Reactive Programming = RxReduce</a><li><a href="#installation">Installation</a><li><a href="#the-core-principles">The core principles</a><li><a href="#how-to-use-rxflow">How to use RxFlow</a><li><a href="#tools-and-dependencies">Tools and dependencies</a></ul></th>
+<th><ul align="left"><li><a href="#about">About</a><li><a href="#architecture-concerns">Architecture concerns</a><li><a href="#rxreduce">RxReduce</a><li><a href="#installation">Installation</a><li><a href="#the-key-principles">The key principles</a><li><a href="#how-to-use-rxreduce">How to use RxReduce</a><li><a href="#tools-and-dependencies">Tools and dependencies</a></ul></th>
 </tr>
 </thead><tbody>
 <tr>
@@ -108,14 +108,14 @@
 <p>Since a few years there has been a lot, I mean a LOT, of blogs posts, tutorials, books, conferences about adapting alternate architecture patterns to mobile applications. The idea behind all those patterns is to provide a better way to:</p>
 
 <ul>
-<li>meet the SOLID requirements <a href="Wikipedia">https://en.wikipedia.org/wiki/SOLID_(object-oriented_design)</a></li>
+<li>meet the SOLID requirements <a href="https://en.wikipedia.org/wiki/SOLID_(object-oriented_design)">Wikipedia</a></li>
 <li>produce a safer code by design</li>
 <li>make our code more testable</li>
 </ul>
 
 <p>The good old MVC tends to be replaced by MVP, MVVM or VIPER. I wont go into details about these ones as they are well documented. I think MVVM is currently the most trending pattern, mostly because of its similarities with MVC and MVP and its ability to leverage data binding to ease the data flow within an application. Moreover it is pretty easy to be enhanced by a Coordinator pattern and Reactive programming.</p>
 
-<p>Go check this project if you&rsquo;re interested in Reactive Coordinators (<a href="RxFlow">https://github.com/RxSwiftCommunity/RxFlow</a>) 👌</p>
+<p>Go check this project if you&rsquo;re interested in Reactive Coordinators (<a href="https://github.com/RxSwiftCommunity/RxFlow">RxFlow</a>) 👌</p>
 
 <p>That being said, there is at least one other architecture pattern that stands out a little bit: <strong>State Container</strong>.</p>
 
@@ -124,8 +124,8 @@
 <p>Some resources about state containers:</p>
 
 <ul>
-<li><a href="State%20Container">https://jobandtalent.engineering/ios-architecture-an-state-container-based-approach-4f1a9b00b82e</a></li>
-<li><a href="https://academy.realm.io/posts/benji-encz-unidirectional-data-flow-swift/">https://academy.realm.io/posts/benji-encz-unidirectional-data-flow-swift/</a> (Unidirectional Data Flow)</li>
+<li><a href="https://jobandtalent.engineering/ios-architecture-an-state-container-based-approach-4f1a9b00b82e">State Container</a></li>
+<li><a href="https://academy.realm.io/posts/benji-encz-unidirectional-data-flow-swift/">Unidirectional Data Flow</a></li>
 </ul>
 
 <p>The main goals of such patterns are to:</p>
@@ -145,7 +145,7 @@
 <li>handle state mutation propagation</li>
 <li>build asynchronous actions to mutate the state</li>
 </ul>
-<h1 id='state-container-reactive-programming-rxreduce' class='heading'>State Container + Reactive programming = RxReduce</h1>
+<h1 id='rxreduce' class='heading'>RxReduce</h1>
 
 <p>RxReduce:</p>
 
@@ -167,13 +167,13 @@
 </code></pre>
 <h1 id='the-key-principles' class='heading'>The key principles</h1>
 
-<p>The core mechanism is very straightforward:</p>
+<p>The core mechanism of <strong>RxReduce</strong> is very straightforward:</p>
 
 <ul>
-<li>the <strong>Store</strong> is the component that handles your state. It has one function <q>dispatch</q> that will take an <strong>Action</strong> as a parameter.</li>
+<li>the <strong>Store</strong> is the component that handles your state. It has only one input: the <q>dispatch</q> function, that takes an <strong>Action</strong> as a parameter.</li>
 <li>The only way to trigger a <strong>State</strong> mutation is to call this <q>dispatch</q> function.</li>
-<li>Actions are simple types with no business logic. They embed the payload needed to mutate the <strong>state</strong></li>
-<li>Only simple, pure and testable functions called <strong>Reducers</strong> (RxReduce !) can mutate a <strong>State</strong>. A <q>reduce</q> function takes a <strong>State</strong>, an <strong>Action</strong> and returns the new <strong>State</strong> &hellip; that simple.</li>
+<li><strong>Actions</strong> are simple types with no business logic. They embed the payload needed to mutate the <strong>state</strong></li>
+<li>Only pure and testable functions called <strong>Reducers</strong> (RxReduce !) can mutate a <strong>State</strong>. A <q>reduce</q> function takes a <strong>State</strong>, an <strong>Action</strong> and returns the new <strong>State</strong> &hellip; that simple.</li>
 <li>You can have as many reducers as you want, they will be applied by the <strong>Store</strong>&lsquo;s <q>dispatch</q> function sequentially.</li>
 <li>Reducers <strong>cannot</strong> perform asynchronous logic. This kind of work will be taken care of by <strong>Reactive Actions</strong>.</li>
 <li>Finally, you can be notified of the state mutation thanks to a <q>RxCocoa</q> <strong>Driver&lt;State&gt;</strong> exposed by the <strong>Store</strong>.</li>
@@ -181,10 +181,114 @@
 <h1 id='how-to-use-rxreduce' class='heading'>How to use RxReduce</h1>
 <h2 id='code-samples' class='heading'>Code samples</h2>
 <h3 id='how-to-declare-a-strong-state-strong' class='heading'>How to declare a <strong>State</strong></h3>
-<h3 id='how-to-declare-a-strong-store-strong' class='heading'>How to declare a <strong>Store</strong></h3>
-<h3 id='how-to-declare-an-strong-action-strong' class='heading'>How to declare an <strong>Action</strong></h3>
+
+<p>As the main idea of state containers is about immutability, avoiding reference type uncontrolled propagation and race conditions, a <strong>State</strong> must be a value type. Structs and Enums are great for that.</p>
+<pre class="highlight swift"><code><span class="kd">import</span> <span class="kt">RxReduce</span>
+
+<span class="kd">enum</span> <span class="kt">DemoState</span><span class="p">:</span> <span class="kt">State</span> <span class="p">{</span>
+    <span class="k">case</span> <span class="n">empty</span>
+    <span class="k">case</span> <span class="nf">increasing</span> <span class="p">(</span><span class="nv">counter</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span>
+    <span class="k">case</span> <span class="nf">decreasing</span> <span class="p">(</span><span class="nv">counter</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span>
+    <span class="k">case</span> <span class="n">stopped</span>
+<span class="p">}</span>
+</code></pre>
 <h3 id='how-to-declare-a-strong-reducer-strong' class='heading'>How to declare a <strong>Reducer</strong></h3>
+
+<p>As I said, a <strong>reducer</strong> is a pure function. Why ? because functions take inputs and return outputs, and guess what ? It is super easy to test 👍</p>
+<pre class="highlight swift"><code><span class="kd">import</span> <span class="kt">RxReduce</span>
+
+<span class="kd">func</span> <span class="nf">demoReducer</span> <span class="p">(</span><span class="nv">state</span><span class="p">:</span> <span class="kt">DemoState</span><span class="p">?,</span> <span class="nv">action</span><span class="p">:</span> <span class="kt">Action</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">DemoState</span> <span class="p">{</span>
+
+    <span class="k">let</span> <span class="nv">currentState</span> <span class="o">=</span> <span class="n">state</span> <span class="p">??</span> <span class="kt">DemoState</span><span class="o">.</span><span class="n">empty</span>
+
+    <span class="k">var</span> <span class="nv">currentCounter</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="c1">// we extract the current counter value from the current state</span>
+    <span class="k">switch</span> <span class="n">currentState</span> <span class="p">{</span>
+    <span class="k">case</span> <span class="o">.</span><span class="nf">decreasing</span><span class="p">(</span><span class="k">let</span> <span class="nv">counter</span><span class="p">),</span> <span class="o">.</span><span class="nf">increasing</span><span class="p">(</span><span class="k">let</span> <span class="nv">counter</span><span class="p">):</span>
+        <span class="n">currentCounter</span> <span class="o">=</span> <span class="n">counter</span>
+    <span class="k">default</span><span class="p">:</span>
+        <span class="n">currentCounter</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="p">}</span>
+
+    <span class="c1">// according to the action we create a new state</span>
+    <span class="k">switch</span> <span class="n">action</span> <span class="p">{</span>
+    <span class="k">case</span> <span class="k">let</span> <span class="nv">action</span> <span class="k">as</span> <span class="kt">IncreaseAction</span><span class="p">:</span>
+        <span class="k">return</span> <span class="o">.</span><span class="nf">increasing</span><span class="p">(</span><span class="nv">counter</span><span class="p">:</span> <span class="n">currentCounter</span><span class="o">+</span><span class="n">action</span><span class="o">.</span><span class="n">increment</span><span class="p">)</span>
+    <span class="k">case</span> <span class="k">let</span> <span class="nv">action</span> <span class="k">as</span> <span class="kt">DecreaseAction</span><span class="p">:</span>
+        <span class="k">return</span> <span class="o">.</span><span class="nf">decreasing</span><span class="p">(</span><span class="nv">counter</span><span class="p">:</span> <span class="n">currentCounter</span><span class="o">-</span><span class="n">action</span><span class="o">.</span><span class="n">decrement</span><span class="p">)</span>
+    <span class="k">default</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">currentState</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+<h3 id='how-to-declare-a-strong-store-strong' class='heading'>How to declare a <strong>Store</strong></h3>
+
+<p><strong>RxReduce</strong> provides a default store. The only thing you need to create a Store is to have reducers the <q>dispatch</q> function can call and a State to handle.</p>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">store</span> <span class="o">=</span> <span class="kt">DefaultStore</span><span class="o">&lt;</span><span class="kt">DemoState</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">withReducers</span><span class="p">:</span> <span class="p">[</span><span class="n">demoReducer</span><span class="p">])</span>
+</code></pre>
+<h3 id='how-to-declare-an-strong-action-strong' class='heading'>How to declare an <strong>Action</strong></h3>
+
+<p>Actions are simple data types that embed a payload used in the reducers to mutate the state.</p>
+<pre class="highlight swift"><code><span class="kd">import</span> <span class="kt">RxReduce</span>
+
+<span class="kd">struct</span> <span class="kt">IncreaseAction</span><span class="p">:</span> <span class="kt">Action</span> <span class="p">{</span>
+    <span class="k">let</span> <span class="nv">increment</span><span class="p">:</span> <span class="kt">Int</span>
+<span class="p">}</span>
+
+<span class="kd">struct</span> <span class="kt">DecreaseAction</span><span class="p">:</span> <span class="kt">Action</span> <span class="p">{</span>
+    <span class="k">let</span> <span class="nv">decrement</span><span class="p">:</span> <span class="kt">Int</span>
+<span class="p">}</span>
+</code></pre>
 <h3 id='let-39-s-put-the-pieces-all-together' class='heading'>Let&rsquo;s put the pieces all together</h3>
+
+<p>This is how we listen for state mutations:</p>
+<pre class="highlight swift"><code><span class="k">self</span><span class="o">.</span><span class="n">store</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="nf">drive</span><span class="p">(</span><span class="nv">onNext</span><span class="p">:</span> <span class="p">{</span> <span class="p">(</span><span class="n">state</span><span class="p">)</span> <span class="k">in</span>
+    <span class="nf">print</span> <span class="p">(</span><span class="s">"New state is available </span><span class="se">\(</span><span class="n">state</span><span class="se">)</span><span class="s">"</span><span class="p">)</span>
+<span class="p">})</span><span class="o">.</span><span class="nf">disposed</span><span class="p">(</span><span class="nv">by</span><span class="p">:</span> <span class="k">self</span><span class="o">.</span><span class="n">disposeBag</span><span class="p">)</span>
+</code></pre>
+
+<p>And now lets mutate the state:</p>
+<pre class="highlight swift"><code><span class="k">self</span><span class="o">.</span><span class="n">store</span><span class="o">.</span><span class="nf">dispatch</span><span class="p">(</span><span class="nv">action</span><span class="p">:</span> <span class="kt">IncreaseAction</span><span class="p">(</span><span class="nv">increment</span><span class="p">:</span> <span class="mi">10</span><span class="p">))</span>
+<span class="k">self</span><span class="o">.</span><span class="n">store</span><span class="o">.</span><span class="nf">dispatch</span><span class="p">(</span><span class="nv">action</span><span class="p">:</span> <span class="kt">DecreaseAction</span><span class="p">(</span><span class="nv">increment</span><span class="p">:</span> <span class="mi">5</span><span class="p">))</span>
+</code></pre>
+
+<p>The output will be:</p>
+<pre class="highlight swift"><code><span class="kt">New</span> <span class="n">state</span> <span class="k">is</span> <span class="nf">increasing</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="kt">New</span> <span class="n">state</span> <span class="k">is</span> <span class="nf">decreasing</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+</code></pre>
+<h2 id='but-wait-there-39-s-more' class='heading'>But wait, there&rsquo;s more &hellip;</h2>
+<h3 id='list-of-actions' class='heading'>List of actions</h3>
+
+<p>RxReduce is a lightweight framework. Pretty much everything is a protocol (except the DefaultStore, but if you want to implement you own Store it is perfectly OK since Store is also a protocol you can conform to).</p>
+
+<p>Lately, Swift 4.1 has introduced conditional conformance. If you are not familiar with this concept: <a href="https://medium.com/@thibault.wittemberg/a-glance-at-conditional-conformance-c1f2d9ea29a3">A Glance at conditional conformance</a>.</p>
+
+<p>Basically it allows to make a generic type conform to a protocol only if the associated inner type also conforms to this protocol. </p>
+
+<p>For instance, RxReduce leverages this feature to make an Array of Actions be an Action to ! Doing so, it is perfectly OK to dispatch a list of actions to the Store like that:</p>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">actions</span><span class="p">:</span> <span class="p">[</span><span class="kt">Action</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="kt">IncreaseAction</span><span class="p">(</span><span class="nv">increment</span><span class="p">:</span> <span class="mi">10</span><span class="p">),</span> <span class="kt">DecreaseAction</span><span class="p">(</span><span class="nv">increment</span><span class="p">:</span> <span class="mi">5</span><span class="p">)]</span>
+<span class="k">self</span><span class="o">.</span><span class="n">store</span><span class="o">.</span><span class="nf">dispatch</span><span class="p">(</span><span class="nv">action</span><span class="p">:</span> <span class="n">actions</span><span class="p">)</span>
+</code></pre>
+
+<p>The actions declared within the array will be executed sequentially 👌</p>
+<h3 id='asynchronisity' class='heading'>Asynchronisity</h3>
+
+<p>Making an Array of Actions be an Action itself is neat, but since we&rsquo;re using Reactive Programming, RxReduxe also applies this technic to Observables. It provides a very elegant way to disptach an Observable&lt;Action&gt; to the Store (because Observable&lt;Action&gt; is also an Action), making asynchronous actions very simple. </p>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">increaseAction</span> <span class="o">=</span> <span class="kt">Observable</span><span class="o">&lt;</span><span class="kt">Int</span><span class="o">&gt;.</span><span class="nf">interval</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nv">scheduler</span><span class="p">:</span> <span class="kt">MainScheduler</span><span class="o">.</span><span class="n">instance</span><span class="p">)</span><span class="o">.</span><span class="n">map</span> <span class="p">{</span> <span class="n">_</span> <span class="k">in</span> <span class="kt">IncreaseAction</span><span class="p">(</span><span class="nv">increment</span><span class="p">:</span> <span class="mi">1</span><span class="p">)</span> <span class="p">}</span>
+<span class="k">self</span><span class="o">.</span><span class="n">store</span><span class="o">.</span><span class="nf">dispatch</span><span class="p">(</span><span class="nv">action</span><span class="p">:</span> <span class="n">increaseAction</span><span class="p">)</span>
+</code></pre>
+
+<p>If we want to compare RxReduce with Redux, this ability to execute async actions would be equivalent to the <q>Action Creator</q> principle.</p>
+
+<p>For the record, we could even dispatch to the Store an Array of Observable&lt;Action&gt;, and it will be seen as an Action as well.</p>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">increaseAction</span> <span class="o">=</span> <span class="kt">Observable</span><span class="o">&lt;</span><span class="kt">Int</span><span class="o">&gt;.</span><span class="nf">interval</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nv">scheduler</span><span class="p">:</span> <span class="kt">MainScheduler</span><span class="o">.</span><span class="n">instance</span><span class="p">)</span><span class="o">.</span><span class="n">map</span> <span class="p">{</span> <span class="n">_</span> <span class="k">in</span> <span class="kt">IncreaseAction</span><span class="p">(</span><span class="nv">increment</span><span class="p">:</span> <span class="mi">1</span><span class="p">)</span> <span class="p">}</span>
+<span class="k">let</span> <span class="nv">decreaseAction</span> <span class="o">=</span> <span class="kt">Observable</span><span class="o">&lt;</span><span class="kt">Int</span><span class="o">&gt;.</span><span class="nf">interval</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nv">scheduler</span><span class="p">:</span> <span class="kt">MainScheduler</span><span class="o">.</span><span class="n">instance</span><span class="p">)</span><span class="o">.</span><span class="n">map</span> <span class="p">{</span> <span class="n">_</span> <span class="k">in</span> <span class="kt">DecreaseAction</span><span class="p">(</span><span class="nv">decrement</span><span class="p">:</span> <span class="mi">1</span><span class="p">)</span> <span class="p">}</span>
+<span class="k">let</span> <span class="nv">asyncActions</span><span class="p">:</span> <span class="p">[</span><span class="kt">Action</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">increaseAction</span><span class="p">,</span> <span class="n">decreaseAction</span><span class="p">]</span>
+<span class="k">self</span><span class="o">.</span><span class="n">store</span><span class="o">.</span><span class="nf">dispatch</span><span class="p">(</span><span class="nv">action</span><span class="p">:</span> <span class="n">asyncActions</span><span class="p">)</span>
+</code></pre>
+
+<p>Conditional Conformance is a very powerful feature.</p>
 <h2 id='demo-application' class='heading'>Demo Application</h2>
 
 <p>A demo application is provided to illustrate the core mechanisms.</p>
@@ -201,8 +305,8 @@
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2018 <a class="link" href="https://github.com/twittemb/RxReduce" target="_blank" rel="external">Thibault Wittemberg</a>. All rights reserved. (Last updated: 2018-05-09)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.0</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>&copy; 2018 <a class="link" href="https://github.com/twittemb/RxReduce" target="_blank" rel="external">Thibault Wittemberg</a>. All rights reserved. (Last updated: 2018-05-16)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>

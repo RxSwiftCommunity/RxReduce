@@ -24,7 +24,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		1AAA7E1D20952A8000BED242 /* RxState.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxState.framework; path = Carthage/Build/iOS/RxState.framework; sourceTree = "<group>"; };
+		1AAA7E1D20952A8000BED242 /* RxReduce.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxReduce.framework; path = Carthage/Build/iOS/RxReduce.framework; sourceTree = "<group>"; };
 		1AAA7E2320952BF900BED242 /* DemoState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoState.swift; sourceTree = "<group>"; };
 		1AAA7E2520952C3300BED242 /* IncreaseAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncreaseAction.swift; sourceTree = "<group>"; };
 		1AAA7E272095305800BED242 /* Reducers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reducers.swift; sourceTree = "<group>"; };
@@ -105,7 +105,6 @@
 			isa = PBXGroup;
 			children = (
 				1ADAD0C420A524FC003049A9 /* RxReduce.framework */,
-				1AAA7E1D20952A8000BED242 /* RxState.framework */,
 				4A3BB49D2093A4F500B1E37F /* Alamofire.framework */,
 				4A3BB49C2093A4F500B1E37F /* AlamofireImage.framework */,
 				4A3BB49F2093A4F500B1E37F /* Reusable.framework */,
@@ -132,7 +131,7 @@
 			dependencies = (
 			);
 			name = RxReduceDemo;
-			productName = RxStateDemo;
+			productName = RxReduceDemo;
 			productReference = 4A3BB48020939F9000B1E37F /* RxReduceDemo.app */;
 			productType = "com.apple.product-type.application";
 		};

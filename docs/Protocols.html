@@ -10,6 +10,7 @@
     
   </head>
   <body>
+    <a name="//apple_ref/swift/Section/Protocols" class="dashAnchor"></a>
     <a title="Protocols  Reference"></a>
     <header>
       <div class="content-wrapper">
@@ -82,9 +83,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:8RxReduce5StoreP"></a>
-                    <a name="//apple_ref/swift/Protocol/Store" class="dashAnchor"></a>
-                    <a class="token" href="#/s:8RxReduce5StoreP">Store</a>
+                    <a name="/s:8RxReduce6ActionP"></a>
+                    <a name="//apple_ref/swift/Protocol/Action" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8RxReduce6ActionP">Action</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -92,16 +93,16 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>A Store holds the state, mutate the state through actions / reducers and exposes the state via a Driver
-A Store is dedicated to a State Type</p>
+                        <p>Conform to an Action to mutate the State synchronously or asynchronously
+Arrays of Actions and Observable of Action are considered to be Actions as well</p>
 
-                        <a href="Protocols/Store.html" class="slightly-smaller">See more</a>
+                        <a href="Protocols/Action.html" class="slightly-smaller">See more</a>
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">Store</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">Action</span></code></pre>
 
                         </div>
                       </div>
@@ -132,7 +133,7 @@ A Store is dedicated to a State Type</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">State</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">State</span></code></pre>
 
                         </div>
                       </div>
@@ -146,9 +147,9 @@ A Store is dedicated to a State Type</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:8RxReduce6ActionP"></a>
-                    <a name="//apple_ref/swift/Protocol/Action" class="dashAnchor"></a>
-                    <a class="token" href="#/s:8RxReduce6ActionP">Action</a>
+                    <a name="/s:8RxReduce5StoreP"></a>
+                    <a name="//apple_ref/swift/Protocol/Store" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8RxReduce5StoreP">Store</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -156,16 +157,16 @@ A Store is dedicated to a State Type</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Conform to an Action to mutate the State synchronously or asynchronously
-Arrays of Actions and Observable of Action are considered to be Actions as well</p>
+                        <p>A Store holds the state, mutate the state through actions / reducers and exposes the state via a Driver
+A Store is dedicated to a State Type</p>
 
-                        <a href="Protocols/Action.html" class="slightly-smaller">See more</a>
+                        <a href="Protocols/Store.html" class="slightly-smaller">See more</a>
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">Action</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">Store</span></code></pre>
 
                         </div>
                       </div>
@@ -177,8 +178,8 @@ Arrays of Actions and Observable of Action are considered to be Actions as well<
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2018 <a class="link" href="https://github.com/twittemb/RxReduce" target="_blank" rel="external">Thibault Wittemberg</a>. All rights reserved. (Last updated: 2018-05-09)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.0</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>&copy; 2018 <a class="link" href="https://github.com/twittemb/RxReduce" target="_blank" rel="external">Thibault Wittemberg</a>. All rights reserved. (Last updated: 2018-05-16)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>

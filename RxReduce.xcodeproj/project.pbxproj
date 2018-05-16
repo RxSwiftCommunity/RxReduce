@@ -23,7 +23,7 @@
 			containerPortal = 1A2A755E208D474F009883BF /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 1A2A7566208D474F009883BF;
-			remoteInfo = RxState;
+			remoteInfo = RxReduce;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -140,7 +140,7 @@
 			dependencies = (
 			);
 			name = RxReduce;
-			productName = RxState;
+			productName = RxReduce;
 			productReference = 1A2A7567208D474F009883BF /* RxReduce.framework */;
 			productType = "com.apple.product-type.framework";
 		};
@@ -158,7 +158,7 @@
 				1A2A7573208D4750009883BF /* PBXTargetDependency */,
 			);
 			name = RxReduceTests;
-			productName = RxStateTests;
+			productName = RxReduceTests;
 			productReference = 1A2A7570208D4750009883BF /* RxReduceTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
