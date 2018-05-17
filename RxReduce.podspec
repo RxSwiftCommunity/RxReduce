@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "RxReduce"
-  s.version      = "0.2.0"
+  s.version      = "0.3"
   s.summary      = "RxReduce is a lightweight framework that ease the implementation of a state container pattern in a Reactive Programming compliant way."
 
   s.description  = <<-DESC
