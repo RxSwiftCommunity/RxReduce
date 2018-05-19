@@ -10,8 +10,6 @@
 # About
 RxReduce is a Reactive implementation of the state container pattern (like Redux). It is based on the simple concepts of state immutability and unidirectionnal data flow.
 
-The Jazzy documentation can be seen here as well: [Documentation](http://community.rxswift.org/RxReduce/)
-
 # Architecture concerns
 Since a few years there has been a lot, I mean a LOT, of blogs posts, tutorials, books, conferences about adapting alternate architecture patterns to mobile applications. The idea behind all those patterns is to provide a better way to:
 
