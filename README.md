@@ -13,11 +13,11 @@ RxReduce is a Reactive implementation of the state container pattern (like Redux
 # Architecture concerns
 Since a few years there has been a lot, I mean a LOT, of blogs posts, tutorials, books, conferences about adapting alternate architecture patterns to mobile applications. The idea behind all those patterns is to provide a better way to:
 
-- meet the SOLID requirements [Wikipedia](https://en.wikipedia.org/wiki/SOLID_(object-oriented_design))
+- meet the SOLID requirements ([Wikipedia](https://en.wikipedia.org/wiki/SOLID_(object-oriented_design)))
 - produce a safer code by design
 - make our code more testable
 
-The good old MVC tends to be replaced by MVP, MVVM or VIPER. I wont go into details about these ones as they are well documented. I think MVVM is currently the most trending pattern, mostly because of its similarities with MVC and MVP and its ability to leverage data binding to ease the data flow within an application. Moreover it is pretty easy to be enhanced by a Coordinator pattern and Reactive programming.
+The good old MVC tends to be replaced by MVP, MVVM or VIPER. I won't go into details about these ones as they are well documented. I think MVVM is currently the most trending pattern, mostly because of its similarities with MVC and MVP and its ability to leverage data binding to ease the data flow within an application. Moreover it is pretty easy to be enhanced by a Coordinator pattern and Reactive programming.
 
 Go check this project if you're interested in Reactive Coordinators ([RxFlow](https://github.com/RxSwiftCommunity/RxFlow)) 👌
 
@@ -59,7 +59,7 @@ RxReduce:
 In your Cartfile:
 
 ```ruby
-github "RxSwiftCommunity/RxReduce"
+github "twittemb/RxReduce"
 ```
 
 ## CocoaPods
@@ -81,6 +81,7 @@ The core mechanism of **RxReduce** is very straightforward:
 - You can have as many reducers as you want, they will be applied by the **Store**'s "dispatch" function sequentially.
 - Reducers **cannot** perform asynchronous logic. This kind of work will be taken care of by **Reactive Actions**.
 - Finally, you can be notified of the state mutation thanks to a "RxCocoa" **Driver\<State\>** exposed by the **Store**.
+- In order to trigger some code that has nothing to do with state mutation (such as logging or state recording), RxReduce allows to implement Middlewares.
 
 # How to use RxReduce
 

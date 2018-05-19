@@ -52,15 +52,11 @@ public final class DefaultStore<StateType: State>: Store {
         }()
 
     let reducers: [Reducer<StateType>]
-	let middlewares: [Middleware<StateType>]
+	let middlewares: [Middleware<StateType>]?
 
     public init(withReducers reducers: [Reducer<StateType>], withMiddleware middlewares: [Middleware<StateType>]? = nil) {
         self.reducers = reducers
-		if let middlewares = middlewares {
-			self.middlewares = middlewares.reversed()
-		} else {
-			self.middlewares = [Middleware<StateType>]()
-		}
+        self.middlewares = middlewares
     }
 
     public func dispatch<ActionType: Action> (action: ActionType) {
@@ -68,7 +64,7 @@ public final class DefaultStore<StateType: State>: Store {
         action
             .toAsync()
 			.do(onNext: { (action) in
-				self.middlewares.forEach({ (middleware) in
+				self.middlewares?.forEach({ (middleware) in
 					middleware(self.stateSubject.value, action)
 				})
 			})
