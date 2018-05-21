@@ -30,7 +30,7 @@ public protocol Store {
     ///
     /// - Parameter reducers: the reducers to be executed by the dispatch function
 	/// - Parameter middlewares: the middlewartes to be executed by the dispatch function (the will be executed in reverse order)
-	init(withReducers reducers: [Reducer<StateType>], withMiddleware middlewares: [Middleware<StateType>]?)
+	init(withReducers reducers: [Reducer<StateType>], withMiddlewares middlewares: [Middleware<StateType>]?)
 
     /// Dispatch an action through the reducers to mutate the state
     ///
@@ -54,7 +54,7 @@ public final class DefaultStore<StateType: State>: Store {
     let reducers: [Reducer<StateType>]
 	let middlewares: [Middleware<StateType>]?
 
-    public init(withReducers reducers: [Reducer<StateType>], withMiddleware middlewares: [Middleware<StateType>]? = nil) {
+    public init(withReducers reducers: [Reducer<StateType>], withMiddlewares middlewares: [Middleware<StateType>]? = nil) {
         self.reducers = reducers
         self.middlewares = middlewares
     }
