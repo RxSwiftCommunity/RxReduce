@@ -136,10 +136,10 @@ func demoReducer (state: DemoState?, action: Action) -> DemoState {
 
 ### How to declare a **Store**
 
-**RxReduce** provides a default store. The only thing you need to create a Store is to have reducers the "dispatch" function can call and a State to handle.
+**RxReduce** provides a concrete Store type. The only thing you need to create a Store is to have at least one reducer.
 
 ```swift
-let store = DefaultStore<DemoState>(withReducers: [demoReducer])
+let store = Store<DemoState>(withReducers: [demoReducer])
 ```
 
 ### How to declare an **Action**
@@ -178,7 +178,7 @@ func loggingMiddleware (state: DemoState?, action: Action) {
 A Store initializer takes Reducers and if needed, an Array of Middlewares as well:
 
 ```swift
-let store = DefaultStore<DemoState>(withReducers: [demoReducer], withMiddlewares: [loggingMiddleware])
+let store = Store<DemoState>(withReducers: [demoReducer], withMiddlewares: [loggingMiddleware])
 ```
 
 ### Let's put the pieces all together
@@ -211,7 +211,7 @@ New state is decreasing(5)
 
 ### List of actions
 
-RxReduce is a lightweight framework. Pretty much everything is a protocol (except the DefaultStore, but if you want to implement you own Store it is perfectly OK since Store is also a protocol you can conform to).
+RxReduce is a lightweight framework. Pretty much everything is a protocol (except the Store, but if you want to implement you own Store it is perfectly fine since RxReduce providers a StoreType protocol you can conform to).
 
 Lately, Swift 4.1 has introduced conditional conformance. If you are not familiar with this concept: [A Glance at conditional conformance](https://medium.com/@thibault.wittemberg/a-glance-at-conditional-conformance-c1f2d9ea29a3).
 

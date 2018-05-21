@@ -15,7 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-    let store = DefaultStore<DemoState>(withReducers: [demoReducer], withMiddlewares: [loggingMiddleware])
+    let store = Store<DemoState>(withReducers: [demoReducer], withMiddlewares: [loggingMiddleware])
     let disposeBag = DisposeBag()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
