@@ -18,7 +18,7 @@ public typealias Middleware<StateType: State> = (_ state: StateType?, _ action: 
 
 /// A Store holds the state, mutate the state through actions / reducers and exposes the state via a Driver
 /// A Store is dedicated to a State Type
-public protocol Store {
+public protocol StoreType {
 
     /// A store is dedicated to the mutation/observation of this StateType
     associatedtype StateType: State
@@ -39,9 +39,9 @@ public protocol Store {
 }
 
 /// A default store that will handle a specific kind of State
-public final class DefaultStore<StateType: State>: Store {
+public final class Store<StateType: State>: StoreType {
 
-    let disposeBag = DisposeBag()
+    private let disposeBag = DisposeBag()
 
     private let stateSubject = BehaviorRelay<StateType?>(value: nil)
     public lazy var state: Driver<StateType> = { [unowned self] in
@@ -64,7 +64,7 @@ public final class DefaultStore<StateType: State>: Store {
         action
             .toAsync()
 			.do(onNext: { (action) in
-				self.middlewares?.forEach({ (middleware) in
+				self.middlewares?.forEach({ [unowned self] (middleware) in
 					middleware(self.stateSubject.value, action)
 				})
 			})
