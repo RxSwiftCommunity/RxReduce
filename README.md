@@ -158,6 +158,28 @@ struct DecreaseAction: Action {
 }
 ```
 
+### How to declare a **Middleware**
+
+Middlewares are very similar to Reducers BUT they cannot mutate the state. Somehow they are some kind of "passive observers" of what's being dispatched to the store. Middlewares can be used for logging, analytics, state recording, ...
+
+```swift
+import RxReduce
+
+func loggingMiddleware (state: DemoState?, action: Action) {
+    guard let state = state else {
+        print ("A new Action \(action) will provide a first value for an empty state")
+        return
+    }
+
+    print ("A new Action \(action) will mutate current State : \(state)")
+}
+```
+
+A Store initializer takes Reducers and if needed, an Array of Middlewares as well:
+
+```swift
+let store = DefaultStore<DemoState>(withReducers: [demoReducer], withMiddlewares: [loggingMiddleware])
+```
 
 ### Let's put the pieces all together
 
@@ -173,13 +195,15 @@ And now lets mutate the state:
 
 ```swift
 self.store.dispatch(action: IncreaseAction(increment: 10))
-self.store.dispatch(action: DecreaseAction(increment: 5))
+self.store.dispatch(action: DecreaseAction(decrement: 5))
 ```
 
 The output will be:
 
 ```swift
+A new Action IncreaseAction(increment: 10) will provide a first value for an empty state
 New state is increasing(10)
+A new Action DecreaseAction(decrement: 5) will mutate current State : increasing(10)
 New state is decreasing(5)
 ```
 

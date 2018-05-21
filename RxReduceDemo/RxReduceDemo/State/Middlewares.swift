@@ -10,5 +10,10 @@ import Foundation
 import RxReduce
 
 func loggingMiddleware (state: DemoState?, action: Action) {
-    print ("A new Action \(action) will nutate current State : \(state)")
+    guard let state = state else {
+        print ("A new Action \(action) will provide a first value for an empty state")
+        return
+    }
+
+    print ("A new Action \(action) will mutate current State : \(state)")
 }
