@@ -226,7 +226,7 @@ self.store.dispatch(action: actions)
 
 The actions declared within the array will be executed sequentially 👌
 
-### Asynchronisity
+### Asynchronicity
 
 Making an Array of Actions be an Action itself is neat, but since we're using Reactive Programming, RxReduxe also applies this technic to Observables. It provides a very elegant way to disptach an Observable\<Action\> to the Store (because Observable\<Action\> is also an Action), making asynchronous actions very simple. 
 
