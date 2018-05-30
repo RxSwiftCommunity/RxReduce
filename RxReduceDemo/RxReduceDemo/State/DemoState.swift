@@ -9,7 +9,7 @@
 import Foundation
 import RxReduce
 
-enum DemoState: State {
+enum DemoState: State, Equatable {
     case empty
     case increasing (counter: Int)
     case decreasing (counter: Int)

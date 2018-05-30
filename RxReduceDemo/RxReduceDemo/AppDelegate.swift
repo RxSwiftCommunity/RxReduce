@@ -9,6 +9,7 @@
 import UIKit
 import RxReduce
 import RxSwift
+import RxCocoa
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -20,7 +21,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 
-        self.store.state.drive(onNext: { (state) in
+        let state: Driver<DemoState> = self.store.state()
+
+        state.drive(onNext: { (state) in
             print ("New state is \(state)")
         }).disposed(by: self.disposeBag)
 

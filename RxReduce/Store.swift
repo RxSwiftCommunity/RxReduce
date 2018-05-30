@@ -24,7 +24,11 @@ public protocol StoreType {
     associatedtype StateType: State & Equatable
 
     /// The current State or SubState (UI compliant)
-    func state<SubStateType: Equatable> (from: @escaping (StateType) -> SubStateType) -> Driver<SubStateType>
+    ///
+    /// - Parameter distinct: true if you want the store not to fire a new sub state if it is equal to the previous one
+    /// - Parameter from: the closure that allows to extract a sub state
+    /// - Returns: a Driver of the mutated sub state
+    func state<SubStateType: Equatable> (distinct: Bool, from: @escaping (StateType) -> SubStateType) -> Driver<SubStateType>
 
     /// Inits the Store with its reducers stack
     ///
@@ -47,16 +51,23 @@ public final class Store<StateType: State & Equatable>: StoreType {
     let reducers: [Reducer<StateType>]
     let middlewares: [Middleware<StateType>]?
 
-    public func state<SubStateType: Equatable>(from: @escaping (StateType) -> SubStateType = { (state: StateType) in return (state as! SubStateType) }) -> Driver<SubStateType> {
-        return self.stateSubject
+    // swiftlint:disable force_cast
+    public func state<SubStateType: Equatable>(distinct: Bool = true, from: @escaping (StateType) -> SubStateType = { (state: StateType) in return (state as! SubStateType) }) -> Driver<SubStateType> {
+        let stateDriver = self.stateSubject
             .asDriver()
             .filter { $0 != nil }
             .map { $0! }
             .map { (state) -> SubStateType in
                 return from(state)
             }
-            .distinctUntilChanged()
+
+        if distinct {
+            return stateDriver.distinctUntilChanged()
+        }
+
+        return stateDriver
     }
+    // swiftlint:enable force_cast
 
     public init(withReducers reducers: [Reducer<StateType>], withMiddlewares middlewares: [Middleware<StateType>]? = nil) {
         self.reducers = reducers
