@@ -94,28 +94,35 @@ As the main idea of state containers is about immutability, avoiding reference t
 ```swift
 import RxReduce
 
-enum DemoState: State {
+struct DemoState: State, Equatable {
+    var counterState: CounterState
+    var usersState: [String]
+}
+
+enum CounterState: Equatable {
     case empty
     case increasing (counter: Int)
     case decreasing (counter: Int)
     case stopped
 }
 ```
-### How to declare a **Reducer**
+### How to declare **Reducers**
 
 As I said, a **reducer** is a pure function. Why ? because functions take inputs and return outputs, and guess what ? It is super easy to test 👍
+
+Here we define 2 **reducers** that will be applied in sequence each time an Action is dispatched in the **Store**.
 
 ```swift
 import RxReduce
 
-func demoReducer (state: DemoState?, action: Action) -> DemoState {
+func counterReducer (state: DemoState?, action: Action) -> DemoState {
 
-    let currentState = state ?? DemoState.empty
+    var currentState = state ?? DemoState(counterState: CounterState.empty, usersState: [])
 
     var currentCounter = 0
 
     // we extract the current counter value from the current state
-    switch currentState {
+    switch currentState.counterState {
     case .decreasing(let counter), .increasing(let counter):
         currentCounter = counter
     default:
@@ -125,9 +132,25 @@ func demoReducer (state: DemoState?, action: Action) -> DemoState {
     // according to the action we create a new state
     switch action {
     case let action as IncreaseAction:
-        return .increasing(counter: currentCounter+action.increment)
+        currentState.counterState = .increasing(counter: currentCounter+action.increment)
+        return currentState
     case let action as DecreaseAction:
-        return .decreasing(counter: currentCounter-action.decrement)
+        currentState.counterState = .decreasing(counter: currentCounter-action.decrement)
+        return currentState
+    default:
+        return currentState
+    }
+}
+
+func usersReducer (state: DemoState?, action: Action) -> DemoState {
+
+    var currentState = state ?? DemoState(counterState: CounterState.empty, usersState: [])
+
+    // according to the action we create a new state
+    switch action {
+    case let action as AddUserAction:
+        currentState.usersState.append(action.user)
+        return currentState
     default:
         return currentState
     }
@@ -139,7 +162,7 @@ func demoReducer (state: DemoState?, action: Action) -> DemoState {
 **RxReduce** provides a concrete Store type. The only thing you need to create a Store is to have at least one reducer.
 
 ```swift
-let store = Store<DemoState>(withReducers: [demoReducer])
+let store = Store<DemoState>(withReducers: [counterReducer, usersReducer])
 ```
 
 ### How to declare an **Action**
@@ -155,6 +178,10 @@ struct IncreaseAction: Action {
 
 struct DecreaseAction: Action {
     let decrement: Int
+}
+
+struct AddUserAction: Action {
+    let user: String
 }
 ```
 
@@ -178,16 +205,35 @@ func loggingMiddleware (state: DemoState?, action: Action) {
 A Store initializer takes Reducers and if needed, an Array of Middlewares as well:
 
 ```swift
-let store = Store<DemoState>(withReducers: [demoReducer], withMiddlewares: [loggingMiddleware])
+let store = Store<DemoState>(withReducers: [counterReducer, usersReducer], withMiddlewares: [loggingMiddleware])
 ```
 
 ### Let's put the pieces all together
 
-This is how we listen for state mutations:
+RxReduce allows to listen to the whole state or to some of its properties (we may call them **substates**).
+Listening only to substates make sense when the state begins to be huge and you do not want to be notified each time one of its portion has been modified.
+
+First we pick the substate we want to observe (by passing a closure to the state() function):
 
 ```swift
-self.store.state.drive(onNext: { (state) in
-    print ("New state is available \(state)")
+let counterState: Driver<CounterState> = self.store.state { (demoState) -> CounterState in
+    return demoState.counterState
+}
+
+let usersState: Driver<[String]> = self.store.state { (demoState) -> [String] in
+    return demoState.usersState
+}
+```
+
+Then we subscribe to the substate:
+
+```swift
+counterState.drive(onNext: { (counterState) in
+    print ("New counterState is \(counterState)")
+}).disposed(by: self.disposeBag)
+
+usersState.drive(onNext: { (usersState) in
+    print ("New usersState is \(usersState)")
 }).disposed(by: self.disposeBag)
 ```
 
@@ -195,17 +241,21 @@ And now lets mutate the state:
 
 ```swift
 self.store.dispatch(action: IncreaseAction(increment: 10))
-self.store.dispatch(action: DecreaseAction(decrement: 5))
+self.store.dispatch(action: IncreaseAction(increment: 0))
+self.store.dispatch(action: AddUserAction(user: "Spock"))
 ```
+
+Please notice that the second action will not modify the state, and the **Store** will be smart about that and will not trigger a new value for the **counterState**. This happens only because **DemoState** conforms to **Equatable** (I encourage you to do so with your state).
 
 The output will be:
 
 ```swift
-A new Action IncreaseAction(increment: 10) will provide a first value for an empty state
-New state is increasing(10)
-A new Action DecreaseAction(decrement: 5) will mutate current State : increasing(10)
-New state is decreasing(5)
+New counterState is increasing(10)
+New usersState is []
+New usersState is ["Spock"]
 ```
+
+As we can see, **counterState** has received only one value 👌
 
 ## But wait, there's more ...
 

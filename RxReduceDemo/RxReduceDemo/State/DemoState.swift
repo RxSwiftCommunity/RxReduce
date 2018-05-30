@@ -9,7 +9,12 @@
 import Foundation
 import RxReduce
 
-enum DemoState: State, Equatable {
+struct DemoState: State, Equatable {
+    var counterState: CounterState
+    var usersState: [String]
+}
+
+enum CounterState: Equatable {
     case empty
     case increasing (counter: Int)
     case decreasing (counter: Int)

@@ -17,3 +17,7 @@ struct DecreaseAction: Action {
     let decrement: Int
 }
 
+struct AddUserAction: Action {
+    let user: String
+}
+
