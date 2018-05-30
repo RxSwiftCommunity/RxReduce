@@ -21,14 +21,19 @@ public typealias Middleware<StateType: State> = (_ state: StateType?, _ action: 
 public protocol StoreType {
 
     /// A store is dedicated to the mutation/observation of this StateType
-    associatedtype StateType: State & Equatable
+    associatedtype StateType: State
 
     /// The current State or SubState (UI compliant)
     ///
-    /// - Parameter distinct: true if you want the store not to fire a new sub state if it is equal to the previous one
     /// - Parameter from: the closure that allows to extract a sub state
     /// - Returns: a Driver of the mutated sub state
-    func state<SubStateType: Equatable> (distinct: Bool, from: @escaping (StateType) -> SubStateType) -> Driver<SubStateType>
+    func state<SubStateType> (from: @escaping (StateType) -> SubStateType) -> Driver<SubStateType>
+
+    /// The current State or SubState (UI compliant), avoiding duplicate notifications in case of state equality
+    ///
+    /// - Parameter from: the closure that allows to extract a sub state
+    /// - Returns: a Driver of the mutated sub state
+    func state<SubStateType: Equatable> (from: @escaping (StateType) -> SubStateType) -> Driver<SubStateType>
 
     /// Inits the Store with its reducers stack
     ///
@@ -43,7 +48,7 @@ public protocol StoreType {
 }
 
 /// A default store that will handle a specific kind of State
-public final class Store<StateType: State & Equatable>: StoreType {
+public final class Store<StateType: State>: StoreType {
 
     private let disposeBag = DisposeBag()
 
@@ -52,20 +57,26 @@ public final class Store<StateType: State & Equatable>: StoreType {
     let middlewares: [Middleware<StateType>]?
 
     // swiftlint:disable force_cast
-    public func state<SubStateType: Equatable>(distinct: Bool = true, from: @escaping (StateType) -> SubStateType = { (state: StateType) in return (state as! SubStateType) }) -> Driver<SubStateType> {
-        let stateDriver = self.stateSubject
+    public func state<SubStateType>(from: @escaping (StateType) -> SubStateType = { (state: StateType) in return (state as! SubStateType) }) -> Driver<SubStateType> {
+        return self.stateSubject
             .asDriver()
             .filter { $0 != nil }
             .map { $0! }
             .map { (state) -> SubStateType in
                 return from(state)
-            }
-
-        if distinct {
-            return stateDriver.distinctUntilChanged()
         }
+    }
+    // swiftlint:enable force_cast
 
-        return stateDriver
+    // swiftlint:disable force_cast
+    public func state<SubStateType: Equatable>(from: @escaping (StateType) -> SubStateType = { (state: StateType) in return (state as! SubStateType) }) -> Driver<SubStateType> {
+        return self.stateSubject
+            .asDriver()
+            .filter { $0 != nil }
+            .map { $0! }
+            .map { (state) -> SubStateType in
+                return from(state)
+            }.distinctUntilChanged()
     }
     // swiftlint:enable force_cast
 
