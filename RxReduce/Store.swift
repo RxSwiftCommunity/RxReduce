@@ -44,7 +44,7 @@ public protocol StoreType {
     /// Dispatch an action through the reducers to mutate the state
     ///
     /// - Parameter action: the actual action that will go through the reducers
-    func dispatch<ActionType: Action> (action: ActionType)
+    func dispatch (action: Action)
 }
 
 /// A default store that will handle a specific kind of State
@@ -85,7 +85,7 @@ public final class Store<StateType: State>: StoreType {
         self.middlewares = middlewares
     }
 
-    public func dispatch<ActionType: Action> (action: ActionType) {
+    public func dispatch (action: Action) {
         // every received action is converted to an async action
         action
             .toAsync()
