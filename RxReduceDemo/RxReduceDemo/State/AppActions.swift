@@ -9,15 +9,13 @@
 import Foundation
 import RxReduce
 
-struct IncreaseAction: Action {
-    let increment: Int
+struct FetchMovieListAction: Action {}
+
+struct LoadMovieListAction: Action {
+    let movies: [DiscoverMovieModel]
 }
 
-struct DecreaseAction: Action {
-    let decrement: Int
-}
-
-struct AddUserAction: Action {
-    let user: String
+struct LoadMovieAction: Action {
+    let movie:DiscoverMovieModel
 }
 

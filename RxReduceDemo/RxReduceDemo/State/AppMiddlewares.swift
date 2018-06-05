@@ -9,7 +9,7 @@
 import Foundation
 import RxReduce
 
-func loggingMiddleware (state: DemoState?, action: Action) {
+func loggingMiddleware (state: AppState?, action: Action) {
     guard let state = state else {
         print ("A new Action \(action) will provide a first value for an empty state")
         return

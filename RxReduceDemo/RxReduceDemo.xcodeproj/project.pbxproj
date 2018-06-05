@@ -7,33 +7,51 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1A16F86420C31D6600D5BE85 /* Routes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A16F86320C31D6600D5BE85 /* Routes.swift */; };
+		1A16F86620C31D9A00D5BE85 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A16F86520C31D9A00D5BE85 /* NetworkService.swift */; };
+		1A16F86B20C31E1400D5BE85 /* DiscoverTVResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A16F86820C31E1400D5BE85 /* DiscoverTVResponse.swift */; };
+		1A16F86C20C31E1400D5BE85 /* DiscoverMovieResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A16F86920C31E1400D5BE85 /* DiscoverMovieResponse.swift */; };
+		1A16F86D20C31E1400D5BE85 /* Media.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A16F86A20C31E1400D5BE85 /* Media.swift */; };
 		1AAA7E1B20952A7F00BED242 /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A3BB49E2093A4F500B1E37F /* RxCocoa.framework */; };
 		1AAA7E1C20952A7F00BED242 /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A3BB4A02093A4F500B1E37F /* RxSwift.framework */; };
 		1AAA7E1F20952BAD00BED242 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A3BB49D2093A4F500B1E37F /* Alamofire.framework */; };
 		1AAA7E2020952BAD00BED242 /* AlamofireImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A3BB49C2093A4F500B1E37F /* AlamofireImage.framework */; };
 		1AAA7E2120952BAD00BED242 /* Reusable.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A3BB49F2093A4F500B1E37F /* Reusable.framework */; };
-		1AAA7E2420952BF900BED242 /* DemoState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AAA7E2320952BF900BED242 /* DemoState.swift */; };
-		1AAA7E2620952C3300BED242 /* DemoActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AAA7E2520952C3300BED242 /* DemoActions.swift */; };
-		1AAA7E282095305800BED242 /* DemoReducers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AAA7E272095305800BED242 /* DemoReducers.swift */; };
+		1AAA7E2420952BF900BED242 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AAA7E2320952BF900BED242 /* AppState.swift */; };
+		1AAA7E2620952C3300BED242 /* AppActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AAA7E2520952C3300BED242 /* AppActions.swift */; };
+		1AAA7E282095305800BED242 /* AppReducers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AAA7E272095305800BED242 /* AppReducers.swift */; };
+		1AC102B820C5F6570083BB46 /* MovieListViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1AC102B720C5F6570083BB46 /* MovieListViewController.storyboard */; };
+		1AC102BA20C5F6D60083BB46 /* MovieListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AC102B920C5F6D60083BB46 /* MovieListViewController.swift */; };
+		1AC102BD20C5F8240083BB46 /* Injectable+RxReduce.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AC102BC20C5F8240083BB46 /* Injectable+RxReduce.swift */; };
+		1AC102C020C5F8610083BB46 /* Injectable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AC102BF20C5F8610083BB46 /* Injectable.swift */; };
+		1AC102C620C61CF30083BB46 /* HasProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AC102C520C61CF30083BB46 /* HasProtocols.swift */; };
+		1AC102C820C61F870083BB46 /* DependencyContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AC102C720C61F870083BB46 /* DependencyContainer.swift */; };
 		1ADAD0C520A524FC003049A9 /* RxReduce.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1ADAD0C420A524FC003049A9 /* RxReduce.framework */; };
-		1AFFA38520B25C3400A0BB81 /* DemoMiddlewares.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AFFA38420B25C3400A0BB81 /* DemoMiddlewares.swift */; };
+		1AFFA38520B25C3400A0BB81 /* AppMiddlewares.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AFFA38420B25C3400A0BB81 /* AppMiddlewares.swift */; };
 		4A3BB48420939F9000B1E37F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3BB48320939F9000B1E37F /* AppDelegate.swift */; };
-		4A3BB48620939F9000B1E37F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3BB48520939F9000B1E37F /* ViewController.swift */; };
-		4A3BB48920939F9000B1E37F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4A3BB48720939F9000B1E37F /* Main.storyboard */; };
 		4A3BB48B20939F9100B1E37F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4A3BB48A20939F9100B1E37F /* Assets.xcassets */; };
 		4A3BB48E20939F9100B1E37F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4A3BB48C20939F9100B1E37F /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		1AAA7E2320952BF900BED242 /* DemoState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoState.swift; sourceTree = "<group>"; };
-		1AAA7E2520952C3300BED242 /* DemoActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoActions.swift; sourceTree = "<group>"; };
-		1AAA7E272095305800BED242 /* DemoReducers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoReducers.swift; sourceTree = "<group>"; };
+		1A16F86320C31D6600D5BE85 /* Routes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Routes.swift; sourceTree = "<group>"; };
+		1A16F86520C31D9A00D5BE85 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		1A16F86820C31E1400D5BE85 /* DiscoverTVResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscoverTVResponse.swift; sourceTree = "<group>"; };
+		1A16F86920C31E1400D5BE85 /* DiscoverMovieResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscoverMovieResponse.swift; sourceTree = "<group>"; };
+		1A16F86A20C31E1400D5BE85 /* Media.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Media.swift; sourceTree = "<group>"; };
+		1AAA7E2320952BF900BED242 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
+		1AAA7E2520952C3300BED242 /* AppActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppActions.swift; sourceTree = "<group>"; };
+		1AAA7E272095305800BED242 /* AppReducers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppReducers.swift; sourceTree = "<group>"; };
+		1AC102B720C5F6570083BB46 /* MovieListViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MovieListViewController.storyboard; sourceTree = "<group>"; };
+		1AC102B920C5F6D60083BB46 /* MovieListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListViewController.swift; sourceTree = "<group>"; };
+		1AC102BC20C5F8240083BB46 /* Injectable+RxReduce.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Injectable+RxReduce.swift"; sourceTree = "<group>"; };
+		1AC102BF20C5F8610083BB46 /* Injectable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Injectable.swift; sourceTree = "<group>"; };
+		1AC102C520C61CF30083BB46 /* HasProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HasProtocols.swift; sourceTree = "<group>"; };
+		1AC102C720C61F870083BB46 /* DependencyContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependencyContainer.swift; sourceTree = "<group>"; };
 		1ADAD0C420A524FC003049A9 /* RxReduce.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxReduce.framework; path = Carthage/Build/iOS/RxReduce.framework; sourceTree = "<group>"; };
-		1AFFA38420B25C3400A0BB81 /* DemoMiddlewares.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoMiddlewares.swift; sourceTree = "<group>"; };
+		1AFFA38420B25C3400A0BB81 /* AppMiddlewares.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppMiddlewares.swift; sourceTree = "<group>"; };
 		4A3BB48020939F9000B1E37F /* RxReduceDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RxReduceDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A3BB48320939F9000B1E37F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		4A3BB48520939F9000B1E37F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		4A3BB48820939F9000B1E37F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		4A3BB48A20939F9100B1E37F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4A3BB48D20939F9100B1E37F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4A3BB48F20939F9100B1E37F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -61,15 +79,76 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1A16F86220C31D4F00D5BE85 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				1A16F86320C31D6600D5BE85 /* Routes.swift */,
+				1A16F86520C31D9A00D5BE85 /* NetworkService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		1A16F86720C31DBA00D5BE85 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				1A16F86920C31E1400D5BE85 /* DiscoverMovieResponse.swift */,
+				1A16F86820C31E1400D5BE85 /* DiscoverTVResponse.swift */,
+				1A16F86A20C31E1400D5BE85 /* Media.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		1AAA7E2220952BE900BED242 /* State */ = {
 			isa = PBXGroup;
 			children = (
-				1AAA7E2320952BF900BED242 /* DemoState.swift */,
-				1AAA7E2520952C3300BED242 /* DemoActions.swift */,
-				1AAA7E272095305800BED242 /* DemoReducers.swift */,
-				1AFFA38420B25C3400A0BB81 /* DemoMiddlewares.swift */,
+				1AAA7E2320952BF900BED242 /* AppState.swift */,
+				1AAA7E272095305800BED242 /* AppReducers.swift */,
+				1AFFA38420B25C3400A0BB81 /* AppMiddlewares.swift */,
+				1AAA7E2520952C3300BED242 /* AppActions.swift */,
 			);
 			path = State;
+			sourceTree = "<group>";
+		};
+		1AC102B420C5F6260083BB46 /* Features */ = {
+			isa = PBXGroup;
+			children = (
+				1AC102B520C5F6310083BB46 /* MovieList */,
+				1AC102B620C5F6380083BB46 /* MovieDetail */,
+			);
+			path = Features;
+			sourceTree = "<group>";
+		};
+		1AC102B520C5F6310083BB46 /* MovieList */ = {
+			isa = PBXGroup;
+			children = (
+				1AC102B720C5F6570083BB46 /* MovieListViewController.storyboard */,
+				1AC102B920C5F6D60083BB46 /* MovieListViewController.swift */,
+			);
+			path = MovieList;
+			sourceTree = "<group>";
+		};
+		1AC102B620C5F6380083BB46 /* MovieDetail */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = MovieDetail;
+			sourceTree = "<group>";
+		};
+		1AC102BB20C5F80D0083BB46 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				1AC102BC20C5F8240083BB46 /* Injectable+RxReduce.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		1AC102BE20C5F84C0083BB46 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				1AC102BF20C5F8610083BB46 /* Injectable.swift */,
+				1AC102C520C61CF30083BB46 /* HasProtocols.swift */,
+			);
+			path = Protocols;
 			sourceTree = "<group>";
 		};
 		4A3BB47720939F9000B1E37F = {
@@ -92,10 +171,14 @@
 		4A3BB48220939F9000B1E37F /* RxReduceDemo */ = {
 			isa = PBXGroup;
 			children = (
+				1AC102BE20C5F84C0083BB46 /* Protocols */,
+				1AC102BB20C5F80D0083BB46 /* Extensions */,
+				1A16F86720C31DBA00D5BE85 /* Models */,
+				1A16F86220C31D4F00D5BE85 /* Services */,
 				1AAA7E2220952BE900BED242 /* State */,
+				1AC102B420C5F6260083BB46 /* Features */,
 				4A3BB48320939F9000B1E37F /* AppDelegate.swift */,
-				4A3BB48520939F9000B1E37F /* ViewController.swift */,
-				4A3BB48720939F9000B1E37F /* Main.storyboard */,
+				1AC102C720C61F870083BB46 /* DependencyContainer.swift */,
 				4A3BB48A20939F9100B1E37F /* Assets.xcassets */,
 				4A3BB48C20939F9100B1E37F /* LaunchScreen.storyboard */,
 				4A3BB48F20939F9100B1E37F /* Info.plist */,
@@ -177,7 +260,7 @@
 			files = (
 				4A3BB48E20939F9100B1E37F /* LaunchScreen.storyboard in Resources */,
 				4A3BB48B20939F9100B1E37F /* Assets.xcassets in Resources */,
-				4A3BB48920939F9000B1E37F /* Main.storyboard in Resources */,
+				1AC102B820C5F6570083BB46 /* MovieListViewController.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -217,26 +300,27 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1AAA7E2420952BF900BED242 /* DemoState.swift in Sources */,
-				1AAA7E282095305800BED242 /* DemoReducers.swift in Sources */,
-				4A3BB48620939F9000B1E37F /* ViewController.swift in Sources */,
+				1A16F86D20C31E1400D5BE85 /* Media.swift in Sources */,
+				1AAA7E2420952BF900BED242 /* AppState.swift in Sources */,
+				1AC102BD20C5F8240083BB46 /* Injectable+RxReduce.swift in Sources */,
+				1AC102C020C5F8610083BB46 /* Injectable.swift in Sources */,
+				1A16F86420C31D6600D5BE85 /* Routes.swift in Sources */,
+				1AC102BA20C5F6D60083BB46 /* MovieListViewController.swift in Sources */,
+				1AC102C820C61F870083BB46 /* DependencyContainer.swift in Sources */,
+				1A16F86620C31D9A00D5BE85 /* NetworkService.swift in Sources */,
+				1AAA7E282095305800BED242 /* AppReducers.swift in Sources */,
+				1AC102C620C61CF30083BB46 /* HasProtocols.swift in Sources */,
+				1A16F86C20C31E1400D5BE85 /* DiscoverMovieResponse.swift in Sources */,
 				4A3BB48420939F9000B1E37F /* AppDelegate.swift in Sources */,
-				1AAA7E2620952C3300BED242 /* DemoActions.swift in Sources */,
-				1AFFA38520B25C3400A0BB81 /* DemoMiddlewares.swift in Sources */,
+				1AAA7E2620952C3300BED242 /* AppActions.swift in Sources */,
+				1AFFA38520B25C3400A0BB81 /* AppMiddlewares.swift in Sources */,
+				1A16F86B20C31E1400D5BE85 /* DiscoverTVResponse.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		4A3BB48720939F9000B1E37F /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				4A3BB48820939F9000B1E37F /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		4A3BB48C20939F9100B1E37F /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
