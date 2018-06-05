@@ -31,7 +31,7 @@ extension Array: Action where Element == Action {
     }
 }
 
-extension Observable: Action where Element: Action {
+extension Observable: Action where Element == Action {
     public func toAsync () -> Observable<Action> {
         return self.map { $0 as Action }
     }
