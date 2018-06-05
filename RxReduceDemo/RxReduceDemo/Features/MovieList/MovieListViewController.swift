@@ -29,11 +29,12 @@ class MovieListViewController: UITableViewController, StoryboardBased, Injectabl
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
 
-        let loadMovieAction = self.injectionContainer.networkService
+        let loadMovieAction: Observable<Action> = self.injectionContainer.networkService
             .fetch(withRoute: Routes.discoverMovie)
             .asObservable()
             .map { $0.movies }
             .map { LoadMovieListAction.init(movies: $0) }
+            .startWith(FetchMovieListAction())
 
         let movieListState = self.injectionContainer.store.state { (appState) -> MovieListState in
             return appState.movieListState
@@ -42,11 +43,11 @@ class MovieListViewController: UITableViewController, StoryboardBased, Injectabl
         movieListState.drive(onNext: { (movieListState) in
             switch movieListState {
             case .empty:
-                return
+                print ("EMPTY")
             case .loading:
-                return
+                print ("LOADING")
             case .loaded(let movies):
-                return
+                print ("LOADED \(movies)")
             }
         }).disposed(by: self.disposeBag)
 
