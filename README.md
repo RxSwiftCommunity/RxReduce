@@ -130,7 +130,7 @@ struct AddUserAction: Action {
 
 ### How to declare **Reducers**
 
-As I said, a **reducer** is a free function. Why ? because functions take inputs and return outputs, and guess what ? It is super easy to test 👍
+As I said, a **reducer** is a free function. These kind of functions takes a value, returns an idempotent value, and performs no side effects. Their declaration is not even related to a type definition. This is super convenient for testing 👍
 
 Here we define 2 **reducers** that will be applied in sequence each time an Action is dispatched in the **Store**.
 
@@ -215,7 +215,7 @@ let store = Store<DemoState>(withReducers: [counterReducer, usersReducer], withM
 ### Let's put the pieces all together
 
 RxReduce allows to listen to the whole state or to some of its properties (we may call them **substates**).
-Listening only to substates make sense when the state begins to be huge and you do not want to be notified each time one of its portion has been modified.
+Listening only to substates makes sense when the state begins to be huge and you do not want to be notified each time one of its portion has been modified.
 
 First we pick the substate we want to observe (by passing a closure to the **store.state()** function):
 
