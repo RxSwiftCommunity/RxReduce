@@ -14,10 +14,9 @@ import RxReduce
 import Alamofire
 import AlamofireImage
 
-final class MovieListViewController: UITableViewController, StoryboardBased, Injectable {
+final class MovieListViewController: UITableViewController, StoryboardBased, ViewModelBased {
 
-    typealias InjectionContainer = HasStore & HasNetworkService
-    var injectionContainer: InjectionContainer!
+    var viewModel: MovieListViewModel!
 
     private let disposeBag = DisposeBag()
 
@@ -39,26 +38,9 @@ final class MovieListViewController: UITableViewController, StoryboardBased, Inj
         self.clearsSelectionOnViewWillAppear = false
         self.tableView.register(cellType: MovieListViewCell.self)
 
-        // build an asynchronous action to fetch the movies
-        let loadMovieAction: Observable<Action> = self.injectionContainer.networkService
-            .fetch(withRoute: Routes.discoverMovie)
-            .asObservable()
-            .map { $0.movies }
-            .map { LoadMovieListAction.init(movies: $0) }
-            .startWith(FetchMovieListAction())
-
-        // listen for the store's state
-        let movieListState = self.injectionContainer.store.state { (appState) -> MovieListState in
-            return appState.movieListState
-        }
-
-        // update the view according to the state
-        movieListState.drive(onNext: { [weak self] (movieListState) in
+        self.viewModel.fetchMovieList().drive(onNext: { [weak self] (movieListState) in
             self?.render(movieListState: movieListState)
         }).disposed(by: self.disposeBag)
-
-        // dispatch the asynchronous fetch action
-        self.injectionContainer.store.dispatch(action: loadMovieAction)
     }
 
     private func render (movieListState: MovieListState) {

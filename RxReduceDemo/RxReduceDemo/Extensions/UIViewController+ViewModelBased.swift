@@ -9,10 +9,10 @@
 import Foundation
 import Reusable
 
-extension Injectable where Self: StoryboardBased & UIViewController {
-    static func instantiate(with injectionContainer: InjectionContainer) -> Self {
+extension ViewModelBased where Self: StoryboardBased & UIViewController {
+    static func instantiate(with viewModel: ViewModelType) -> Self {
         var viewController = Self.instantiate()
-        viewController.injectionContainer = injectionContainer
+        viewController.viewModel = viewModel
         return viewController
     }
 }

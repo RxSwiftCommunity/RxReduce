@@ -26,8 +26,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         guard let window = self.window else { return false }
 
-        let mainViewController = MovieListViewController.instantiate(with: self.dependencyContainer)
-        window.rootViewController = mainViewController
+        let movieListViewModel = MovieListViewModel(with: self.dependencyContainer)
+        let movieListViewController = MovieListViewController.instantiate(with: movieListViewModel)
+        window.rootViewController = movieListViewController
         window.makeKeyAndVisible()
 
         return true
