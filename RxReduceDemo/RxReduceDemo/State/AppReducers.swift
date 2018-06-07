@@ -17,9 +17,11 @@ func movieReducer (state: AppState?, action: Action) -> AppState {
     switch action {
     case is FetchMovieListAction:
         currentState.movieListState = .loading
+        currentState.movieDetailState = .empty
         return currentState
     case let action as LoadMovieListAction:
         currentState.movieListState = .loaded(action.movies)
+        currentState.movieDetailState = .empty
         return currentState
     case let action as LoadMovieAction:
         currentState.movieDetailState = .loaded(action.movie)

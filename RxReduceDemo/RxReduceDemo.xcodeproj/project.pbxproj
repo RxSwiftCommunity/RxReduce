@@ -26,6 +26,8 @@
 		1AC102C020C5F8610083BB46 /* Injectable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AC102BF20C5F8610083BB46 /* Injectable.swift */; };
 		1AC102C620C61CF30083BB46 /* HasProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AC102C520C61CF30083BB46 /* HasProtocols.swift */; };
 		1AC102C820C61F870083BB46 /* DependencyContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AC102C720C61F870083BB46 /* DependencyContainer.swift */; };
+		1AC102CB20C8DAF30083BB46 /* MovieListViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1AC102C920C8DAF30083BB46 /* MovieListViewCell.xib */; };
+		1AC102CC20C8DAF30083BB46 /* MovieListViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AC102CA20C8DAF30083BB46 /* MovieListViewCell.swift */; };
 		1ADAD0C520A524FC003049A9 /* RxReduce.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1ADAD0C420A524FC003049A9 /* RxReduce.framework */; };
 		1AFFA38520B25C3400A0BB81 /* AppMiddlewares.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AFFA38420B25C3400A0BB81 /* AppMiddlewares.swift */; };
 		4A3BB48420939F9000B1E37F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3BB48320939F9000B1E37F /* AppDelegate.swift */; };
@@ -48,6 +50,8 @@
 		1AC102BF20C5F8610083BB46 /* Injectable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Injectable.swift; sourceTree = "<group>"; };
 		1AC102C520C61CF30083BB46 /* HasProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HasProtocols.swift; sourceTree = "<group>"; };
 		1AC102C720C61F870083BB46 /* DependencyContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependencyContainer.swift; sourceTree = "<group>"; };
+		1AC102C920C8DAF30083BB46 /* MovieListViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MovieListViewCell.xib; sourceTree = "<group>"; };
+		1AC102CA20C8DAF30083BB46 /* MovieListViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieListViewCell.swift; sourceTree = "<group>"; };
 		1ADAD0C420A524FC003049A9 /* RxReduce.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxReduce.framework; path = Carthage/Build/iOS/RxReduce.framework; sourceTree = "<group>"; };
 		1AFFA38420B25C3400A0BB81 /* AppMiddlewares.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppMiddlewares.swift; sourceTree = "<group>"; };
 		4A3BB48020939F9000B1E37F /* RxReduceDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RxReduceDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -123,6 +127,8 @@
 			children = (
 				1AC102B720C5F6570083BB46 /* MovieListViewController.storyboard */,
 				1AC102B920C5F6D60083BB46 /* MovieListViewController.swift */,
+				1AC102C920C8DAF30083BB46 /* MovieListViewCell.xib */,
+				1AC102CA20C8DAF30083BB46 /* MovieListViewCell.swift */,
 			);
 			path = MovieList;
 			sourceTree = "<group>";
@@ -261,6 +267,7 @@
 				4A3BB48E20939F9100B1E37F /* LaunchScreen.storyboard in Resources */,
 				4A3BB48B20939F9100B1E37F /* Assets.xcassets in Resources */,
 				1AC102B820C5F6570083BB46 /* MovieListViewController.storyboard in Resources */,
+				1AC102CB20C8DAF30083BB46 /* MovieListViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -311,6 +318,7 @@
 				1AAA7E282095305800BED242 /* AppReducers.swift in Sources */,
 				1AC102C620C61CF30083BB46 /* HasProtocols.swift in Sources */,
 				1A16F86C20C31E1400D5BE85 /* DiscoverMovieResponse.swift in Sources */,
+				1AC102CC20C8DAF30083BB46 /* MovieListViewCell.swift in Sources */,
 				4A3BB48420939F9000B1E37F /* AppDelegate.swift in Sources */,
 				1AAA7E2620952C3300BED242 /* AppActions.swift in Sources */,
 				1AFFA38520B25C3400A0BB81 /* AppMiddlewares.swift in Sources */,

@@ -11,24 +11,35 @@ import RxSwift
 import RxCocoa
 import Reusable
 import RxReduce
+import Alamofire
+import AlamofireImage
 
-class MovieListViewController: UITableViewController, StoryboardBased, Injectable {
+final class MovieListViewController: UITableViewController, StoryboardBased, Injectable {
 
     typealias InjectionContainer = HasStore & HasNetworkService
-
-    let disposeBag = DisposeBag()
-
     var injectionContainer: InjectionContainer!
+
+    private let disposeBag = DisposeBag()
+
+    private var movies = [DiscoverMovieModel]()
+
+    private lazy var activityIndicator: UIActivityIndicatorView = {
+        let indicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+        indicator.hidesWhenStopped = true
+        indicator.color = .black
+        indicator.frame = self.view.frame
+
+        self.view.addSubview(indicator)
+        return indicator
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
+        self.clearsSelectionOnViewWillAppear = false
+        self.tableView.register(cellType: MovieListViewCell.self)
 
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
-
+        // build an asynchronous action to fetch the movies
         let loadMovieAction: Observable<Action> = self.injectionContainer.networkService
             .fetch(withRoute: Routes.discoverMovie)
             .asObservable()
@@ -36,89 +47,72 @@ class MovieListViewController: UITableViewController, StoryboardBased, Injectabl
             .map { LoadMovieListAction.init(movies: $0) }
             .startWith(FetchMovieListAction())
 
+        // listen for the store's state
         let movieListState = self.injectionContainer.store.state { (appState) -> MovieListState in
             return appState.movieListState
         }
 
-        movieListState.drive(onNext: { (movieListState) in
-            switch movieListState {
-            case .empty:
-                print ("EMPTY")
-            case .loading:
-                print ("LOADING")
-            case .loaded(let movies):
-                print ("LOADED \(movies)")
-            }
+        // update the view according to the state
+        movieListState.drive(onNext: { [weak self] (movieListState) in
+            self?.render(movieListState: movieListState)
         }).disposed(by: self.disposeBag)
 
+        // dispatch the asynchronous fetch action
         self.injectionContainer.store.dispatch(action: loadMovieAction)
+    }
+
+    private func render (movieListState: MovieListState) {
+        switch movieListState {
+        case .empty:
+            self.movies.removeAll()
+            self.activityIndicator.stopAnimating()
+        case .loading:
+            self.movies.removeAll()
+            self.activityIndicator.isHidden = false
+            self.tableView.separatorStyle = UITableViewCellSeparatorStyle.none
+            self.activityIndicator.startAnimating()
+        case .loaded(let movies):
+            self.movies = movies
+            self.tableView.isHidden = false
+            self.activityIndicator.stopAnimating()
+            self.tableView.separatorStyle = UITableViewCellSeparatorStyle.singleLine
+            self.tableView.reloadData()
+        }
     }
 
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 0
+        return self.movies.count
     }
 
-    /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
+        let cell: MovieListViewCell = tableView.dequeueReusableCell(for: indexPath)
+        let movie = self.movies[indexPath.row]
+        cell.title.text = movie.name
+        cell.overview.text = movie.overview
+        let posterPath = "https://image.tmdb.org/t/p/w154"+movie.posterPath
+        Alamofire.request(posterPath).responseImage { (response) in
+            guard response.request?.url?.absoluteString == posterPath else { return }
+            guard let data = response.data else { return }
 
-        // Configure the cell...
+            cell.poster.image = UIImage(data: data)
+        }
 
         return cell
     }
-    */
 
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
+    // MARK: - Table view delegate
+
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 150
     }
-    */
 
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+    override func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 150
     }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
