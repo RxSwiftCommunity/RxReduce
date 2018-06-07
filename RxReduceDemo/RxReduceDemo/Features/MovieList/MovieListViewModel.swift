@@ -12,8 +12,9 @@ import RxSwift
 import RxCocoa
 
 final class MovieListViewModel: ViewModel, Injectable {
+
     typealias InjectionContainer = HasStore & HasNetworkService
-    var injectionContainer: InjectionContainer!
+    var injectionContainer: InjectionContainer
 
     init(with injectionContainer: InjectionContainer) {
         self.injectionContainer = injectionContainer
@@ -32,8 +33,6 @@ final class MovieListViewModel: ViewModel, Injectable {
         self.injectionContainer.store.dispatch(action: loadMovieAction)
 
         // listen for the store's state
-        return self.injectionContainer.store.state { (appState) -> MovieListState in
-            return appState.movieListState
-        }
+        return self.injectionContainer.store.state { $0.movieListState }
     }
 }

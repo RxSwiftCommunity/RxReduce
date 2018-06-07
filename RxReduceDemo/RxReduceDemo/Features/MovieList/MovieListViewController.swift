@@ -38,6 +38,7 @@ final class MovieListViewController: UITableViewController, StoryboardBased, Vie
         self.clearsSelectionOnViewWillAppear = false
         self.tableView.register(cellType: MovieListViewCell.self)
 
+        // ask the view model to fetch the movie list and then listen to the state mutation
         self.viewModel.fetchMovieList().drive(onNext: { [weak self] (movieListState) in
             self?.render(movieListState: movieListState)
         }).disposed(by: self.disposeBag)
@@ -96,5 +97,13 @@ final class MovieListViewController: UITableViewController, StoryboardBased, Vie
 
     override func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         return 150
+    }
+
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let movie = self.movies[indexPath.row]
+
+        let movieDetailViewModel = MovieDetailViewModel(with: self.viewModel.injectionContainer, withMovieId: movie.id)
+        let movieDetailViewController = MovieDetailViewController.instantiate(with: movieDetailViewModel)
+        self.present(movieDetailViewController, animated: true)
     }
 }

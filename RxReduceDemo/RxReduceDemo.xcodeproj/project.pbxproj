@@ -31,6 +31,9 @@
 		1AC102CE20C98D890083BB46 /* MovieListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AC102CD20C98D890083BB46 /* MovieListViewModel.swift */; };
 		1AC102D020C98DAD0083BB46 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AC102CF20C98DAD0083BB46 /* ViewModel.swift */; };
 		1AC102D220C98DD50083BB46 /* ViewModelBased.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AC102D120C98DD50083BB46 /* ViewModelBased.swift */; };
+		1AC102D420C998CD0083BB46 /* MovieDetailViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1AC102D320C998CD0083BB46 /* MovieDetailViewController.storyboard */; };
+		1AC102D620C99CA60083BB46 /* MovieDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AC102D520C99CA60083BB46 /* MovieDetailViewController.swift */; };
+		1AC102D820C99CD60083BB46 /* MovieDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AC102D720C99CD60083BB46 /* MovieDetailViewModel.swift */; };
 		1ADAD0C520A524FC003049A9 /* RxReduce.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1ADAD0C420A524FC003049A9 /* RxReduce.framework */; };
 		1AFFA38520B25C3400A0BB81 /* AppMiddlewares.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AFFA38420B25C3400A0BB81 /* AppMiddlewares.swift */; };
 		4A3BB48420939F9000B1E37F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3BB48320939F9000B1E37F /* AppDelegate.swift */; };
@@ -58,6 +61,9 @@
 		1AC102CD20C98D890083BB46 /* MovieListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListViewModel.swift; sourceTree = "<group>"; };
 		1AC102CF20C98DAD0083BB46 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		1AC102D120C98DD50083BB46 /* ViewModelBased.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelBased.swift; sourceTree = "<group>"; };
+		1AC102D320C998CD0083BB46 /* MovieDetailViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MovieDetailViewController.storyboard; sourceTree = "<group>"; };
+		1AC102D520C99CA60083BB46 /* MovieDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailViewController.swift; sourceTree = "<group>"; };
+		1AC102D720C99CD60083BB46 /* MovieDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailViewModel.swift; sourceTree = "<group>"; };
 		1ADAD0C420A524FC003049A9 /* RxReduce.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxReduce.framework; path = Carthage/Build/iOS/RxReduce.framework; sourceTree = "<group>"; };
 		1AFFA38420B25C3400A0BB81 /* AppMiddlewares.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppMiddlewares.swift; sourceTree = "<group>"; };
 		4A3BB48020939F9000B1E37F /* RxReduceDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RxReduceDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -143,6 +149,9 @@
 		1AC102B620C5F6380083BB46 /* MovieDetail */ = {
 			isa = PBXGroup;
 			children = (
+				1AC102D320C998CD0083BB46 /* MovieDetailViewController.storyboard */,
+				1AC102D520C99CA60083BB46 /* MovieDetailViewController.swift */,
+				1AC102D720C99CD60083BB46 /* MovieDetailViewModel.swift */,
 			);
 			path = MovieDetail;
 			sourceTree = "<group>";
@@ -277,6 +286,7 @@
 				4A3BB48B20939F9100B1E37F /* Assets.xcassets in Resources */,
 				1AC102B820C5F6570083BB46 /* MovieListViewController.storyboard in Resources */,
 				1AC102CB20C8DAF30083BB46 /* MovieListViewCell.xib in Resources */,
+				1AC102D420C998CD0083BB46 /* MovieDetailViewController.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -321,6 +331,7 @@
 				1AAA7E2420952BF900BED242 /* AppState.swift in Sources */,
 				1AC102BD20C5F8240083BB46 /* UIViewController+ViewModelBased.swift in Sources */,
 				1AC102C020C5F8610083BB46 /* Injectable.swift in Sources */,
+				1AC102D820C99CD60083BB46 /* MovieDetailViewModel.swift in Sources */,
 				1A16F86420C31D6600D5BE85 /* Routes.swift in Sources */,
 				1AC102BA20C5F6D60083BB46 /* MovieListViewController.swift in Sources */,
 				1AC102D220C98DD50083BB46 /* ViewModelBased.swift in Sources */,
@@ -332,6 +343,7 @@
 				1A16F86C20C31E1400D5BE85 /* DiscoverMovieResponse.swift in Sources */,
 				1AC102CC20C8DAF30083BB46 /* MovieListViewCell.swift in Sources */,
 				4A3BB48420939F9000B1E37F /* AppDelegate.swift in Sources */,
+				1AC102D620C99CA60083BB46 /* MovieDetailViewController.swift in Sources */,
 				1AAA7E2620952C3300BED242 /* AppActions.swift in Sources */,
 				1AFFA38520B25C3400A0BB81 /* AppMiddlewares.swift in Sources */,
 				1A16F86B20C31E1400D5BE85 /* DiscoverTVResponse.swift in Sources */,

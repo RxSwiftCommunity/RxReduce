@@ -23,8 +23,12 @@ func movieReducer (state: AppState?, action: Action) -> AppState {
         currentState.movieListState = .loaded(action.movies)
         currentState.movieDetailState = .empty
         return currentState
-    case let action as LoadMovieAction:
-        currentState.movieDetailState = .loaded(action.movie)
+    case let action as LoadMovieDetailAction:
+        guard case let .loaded(movies) = currentState.movieListState else { return currentState }
+        let movie = movies.filter { $0.id == action.movieId }.first
+        if let movieDetail = movie {
+            currentState.movieDetailState = .loaded(movieDetail)
+        }
         return currentState
     default:
         return currentState

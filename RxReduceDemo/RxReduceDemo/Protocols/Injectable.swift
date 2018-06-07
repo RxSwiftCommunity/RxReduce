@@ -10,5 +10,5 @@ import Foundation
 
 protocol Injectable {
     associatedtype InjectionContainer
-    var injectionContainer: InjectionContainer! { get set }
+    var injectionContainer: InjectionContainer { get set }
 }

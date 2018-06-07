@@ -15,7 +15,7 @@ struct LoadMovieListAction: Action {
     let movies: [DiscoverMovieModel]
 }
 
-struct LoadMovieAction: Action {
-    let movie:DiscoverMovieModel
+struct LoadMovieDetailAction: Action {
+    let movieId: Int
 }
 
