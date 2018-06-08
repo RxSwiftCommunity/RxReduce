@@ -308,9 +308,8 @@ Conditional Conformance is a very powerful feature.
 
 A demo application is provided to illustrate the core mechanisms, such as asynchronicity, sub states and view state rendering.
 
-<br/>
-<img style="border:2px solid black" width="200" alt="Demo Application" src="https://raw.githubusercontent.com/twittemb/RxReduce/develop/Resources/RxReduceDemo1.png"/>
-<img style="border:2px solid black" width="200" alt="Demo Application" src="https://raw.githubusercontent.com/twittemb/RxReduce/develop/Resources/RxReduceDemo2.png"/>
+<table><tr><td><img style="border:2px solid black" width="200" alt="Demo Application" src="https://raw.githubusercontent.com/twittemb/RxReduce/develop/Resources/RxReduceDemo1.png"/></td>
+<td><img style="border:2px solid black" width="200" alt="Demo Application" src="https://raw.githubusercontent.com/twittemb/RxReduce/develop/Resources/RxReduceDemo2.png"/></td></tr></table>
 
 # Tools and dependencies
 
