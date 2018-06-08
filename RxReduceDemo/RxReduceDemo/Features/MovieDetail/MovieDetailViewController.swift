@@ -50,9 +50,12 @@ class MovieDetailViewController: UIViewController, StoryboardBased, ViewModelBas
             self.activityIndicator.stopAnimating()
         case .loaded(let movie):
             self.activityIndicator.startAnimating()
-            let backdropPath = "https://image.tmdb.org/t/p/w780"+movie.backdropPath
-            Alamofire.request(backdropPath).responseImage { [weak self] (response) in
-                guard response.request?.url?.absoluteString == backdropPath else { return }
+            var posterPath = "https://image.tmdb.org/t/p/w780"+movie.posterPath
+            if let backdropPath = movie.backdropPath {
+                posterPath = "https://image.tmdb.org/t/p/w780"+backdropPath
+            }
+            Alamofire.request(posterPath).responseImage { [weak self] (response) in
+                guard response.request?.url?.absoluteString == posterPath else { return }
                 guard let data = response.data else { return }
 
                 self?.posterImageView.image = UIImage(data: data)

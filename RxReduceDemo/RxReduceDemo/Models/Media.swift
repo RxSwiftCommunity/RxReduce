@@ -17,7 +17,7 @@ protocol Media {
     var voteCount: Int { get }
     var voteAverage: Float { get }
     var posterPath: String { get }
-    var backdropPath: String { get }
+    var backdropPath: String? { get }
     var originalLanguage: String { get }
     var originalName: String { get }
 }

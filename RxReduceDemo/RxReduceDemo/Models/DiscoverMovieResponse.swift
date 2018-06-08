@@ -33,7 +33,7 @@ struct DiscoverMovieModel: Codable, Media, Equatable {
     let voteCount: Int
     let voteAverage: Float
     let posterPath: String
-    let backdropPath: String
+    let backdropPath: String?
     let originalLanguage: String
     let originalName: String
     let releaseDate: String
