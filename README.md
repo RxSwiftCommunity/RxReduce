@@ -306,7 +306,11 @@ Conditional Conformance is a very powerful feature.
 
 ## Demo Application
 
-A demo application is provided to illustrate the core mechanisms.
+A demo application is provided to illustrate the core mechanisms, such as asynchronicity, sub states and view state rendering.
+
+<br/>
+<img style="border:2px solid black" width="200" alt="Demo Application" src="https://raw.githubusercontent.com/twittemb/RxReduce/develop/Resources/RxReduceDemo1.png"/>
+<img style="border:2px solid black" width="200" alt="Demo Application" src="https://raw.githubusercontent.com/twittemb/RxReduce/develop/Resources/RxReduceDemo2.png"/>
 
 # Tools and dependencies
 
