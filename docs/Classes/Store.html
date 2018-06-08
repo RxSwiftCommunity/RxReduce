@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Store Class Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+  </head>
+  <body>
+    <a name="//apple_ref/swift/Class/Store" class="dashAnchor"></a>
+    <a title="Store Class Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="../index.html">RxReduce Docs</a> (100% documented)</p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="../index.html">RxReduce Reference</a>
+        <img id="carat" src="../img/carat.png" />
+        Store Class Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="../Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Classes/Store.html">Store</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Extensions.html">Extensions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Extensions/Array.html">Array</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/Observable.html">Observable</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Protocols.html">Protocols</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Protocols/Action.html">Action</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols.html#/s:8RxReduce5StateP">State</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/StoreType.html">StoreType</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Typealiases.html">Type Aliases</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:8RxReduce10Middlewarea">Middleware</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:8RxReduce7Reducera">Reducer</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            <h1>Store</h1>
+              <div class="declaration">
+                <div class="language">
+                  <pre class="highlight"><code><span class="kd">public</span> <span class="kd">final</span> <span class="kd">class</span> <span class="kt">Store</span><span class="o">&lt;</span><span class="kt">StateType</span><span class="p">:</span> <span class="kt"><a href="../Protocols.html#/s:8RxReduce5StateP">State</a></span><span class="o">&gt;</span><span class="p">:</span> <span class="kt"><a href="../Protocols/StoreType.html">StoreType</a></span></code></pre>
+
+                </div>
+              </div>
+            <p>A default store that will handle a specific kind of State</p>
+
+          </section>
+          <section class="section task-group-section">
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8RxReduce9StoreTypeP5state0A5Cocoa14SharedSequenceVyAE21DriverSharingStrategyVqd__Gqd__05StateD0Qzc4from_tlF"></a>
+                    <a name="//apple_ref/swift/Method/state(from:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8RxReduce9StoreTypeP5state0A5Cocoa14SharedSequenceVyAE21DriverSharingStrategyVqd__Gqd__05StateD0Qzc4from_tlF">state(from:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="n">state</span><span class="o">&lt;</span><span class="kt">SubStateType</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">from</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">StateType</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">SubStateType</span> <span class="o">=</span> <span class="p">{</span> <span class="p">(</span><span class="nv">state</span><span class="p">:</span> <span class="kt">StateType</span><span class="p">)</span> <span class="k">in</span> <span class="nf">return</span> <span class="p">(</span><span class="n">state</span> <span class="k">as!</span> <span class="kt">SubStateType</span><span class="p">)</span> <span class="p">})</span> <span class="o">-&gt;</span> <span class="kt">Driver</span><span class="o">&lt;</span><span class="kt">SubStateType</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8RxReduce9StoreTypeP5state0A5Cocoa14SharedSequenceVyAE21DriverSharingStrategyVqd__Gqd__05StateD0Qzc4from_ts9EquatableRd__lF"></a>
+                    <a name="//apple_ref/swift/Method/state(from:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8RxReduce9StoreTypeP5state0A5Cocoa14SharedSequenceVyAE21DriverSharingStrategyVqd__Gqd__05StateD0Qzc4from_ts9EquatableRd__lF">state(from:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="n">state</span><span class="o">&lt;</span><span class="kt">SubStateType</span><span class="p">:</span> <span class="kt">Equatable</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">from</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">StateType</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">SubStateType</span> <span class="o">=</span> <span class="p">{</span> <span class="p">(</span><span class="nv">state</span><span class="p">:</span> <span class="kt">StateType</span><span class="p">)</span> <span class="k">in</span> <span class="nf">return</span> <span class="p">(</span><span class="n">state</span> <span class="k">as!</span> <span class="kt">SubStateType</span><span class="p">)</span> <span class="p">})</span> <span class="o">-&gt;</span> <span class="kt">Driver</span><span class="o">&lt;</span><span class="kt">SubStateType</span><span class="o">&gt;</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8RxReduce9StoreTypePxSay05StateD0QzAESg_AA6Action_ptcG12withReducers_SayyAF_AaG_ptcGSg0G11Middlewarestcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(withReducers:withMiddlewares:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8RxReduce9StoreTypePxSay05StateD0QzAESg_AA6Action_ptcG12withReducers_SayyAF_AaG_ptcGSg0G11Middlewarestcfc">init(withReducers:withMiddlewares:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="n">withReducers</span> <span class="nv">reducers</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Typealiases.html#/s:8RxReduce7Reducera">Reducer</a></span><span class="o">&lt;</span><span class="kt">StateType</span><span class="o">&gt;</span><span class="p">],</span> <span class="n">withMiddlewares</span> <span class="nv">middlewares</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Typealiases.html#/s:8RxReduce10Middlewarea">Middleware</a></span><span class="o">&lt;</span><span class="kt">StateType</span><span class="o">&gt;</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:8RxReduce9StoreTypeP8dispatchyAA6Action_p6action_tF"></a>
+                    <a name="//apple_ref/swift/Method/dispatch(action:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:8RxReduce9StoreTypeP8dispatchyAA6Action_p6action_tF">dispatch(action:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">dispatch</span> <span class="p">(</span><span class="nv">action</span><span class="p">:</span> <span class="kt"><a href="../Protocols/Action.html">Action</a></span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </section>
+        <section id="footer">
+          <p>&copy; 2018 <a class="link" href="https://github.com/twittemb/RxReduce" target="_blank" rel="external">Thibault Wittemberg</a>. All rights reserved. (Last updated: 2018-06-08)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.0</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>

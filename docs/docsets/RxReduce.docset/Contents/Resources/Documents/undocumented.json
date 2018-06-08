@@ -1,40 +1,6 @@
 {
   "warnings": [
-    {
-      "file": "/Volumes/Users_Data/Users/twittemb/Development/Contribs/RxReduce/RxReduce/Action.swift",
-      "line": 29,
-      "symbol": "Array.toAsync()",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Volumes/Users_Data/Users/twittemb/Development/Contribs/RxReduce/RxReduce/Action.swift",
-      "line": 35,
-      "symbol": "Observable.toAsync()",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Volumes/Users_Data/Users/twittemb/Development/Contribs/RxReduce/RxReduce/Store.swift",
-      "line": 43,
-      "symbol": "DefaultStore.state",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Volumes/Users_Data/Users/twittemb/Development/Contribs/RxReduce/RxReduce/Store.swift",
-      "line": 52,
-      "symbol": "DefaultStore.init(withReducers:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Volumes/Users_Data/Users/twittemb/Development/Contribs/RxReduce/RxReduce/Store.swift",
-      "line": 56,
-      "symbol": "DefaultStore.dispatch(action:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    }
+
   ],
   "source_directory": "/Volumes/Users_Data/Users/twittemb/Development/Contribs/RxReduce"
 }
