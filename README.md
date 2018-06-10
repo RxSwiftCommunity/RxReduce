@@ -284,7 +284,7 @@ The actions declared in the array will be executed sequentially 👌.
 
 ### Asynchronicity
 
-Making an Array of Actions be an Action itself is neat, but since we're using Reactive Programming, RxReduxe also applies this technic to Observables. It provides a very elegant way to disptach an Observable\<Action\> to the Store (because Observable\<Action\> is also an Action), making asynchronous actions very simple. 
+Making an Array of Actions be an Action itself is neat, but since we're using Reactive Programming, RxReduxe also applies this technic to Observables. It provides a very elegant way to dispatch an Observable\<Action\> to the Store (because Observable\<Action\> is also an Action), making asynchronous actions very simple. 
 
 ```swift
 let increaseAction = Observable<Int>.interval(1, scheduler: MainScheduler.instance).map { _ in IncreaseAction(increment: 1) }
@@ -316,5 +316,5 @@ A demo application is provided to illustrate the core mechanisms, such as asynch
 RxReduce relies on:
 
 - SwiftLint for static code analysis ([Github SwiftLint](https://github.com/realm/SwiftLint))
-- RxSwift to expose State and Actions as Observables the your app and the Store can react to ([Github RxSwift](https://github.com/ReactiveX/RxSwift))
+- RxSwift to expose State and Actions as Observables your app and the Store can react to ([Github RxSwift](https://github.com/ReactiveX/RxSwift))
 - Reusable in the Demo App to ease the storyboard cutting into atomic ViewControllers ([Github Reusable](https://github.com/AliSoftware/Reusable))
