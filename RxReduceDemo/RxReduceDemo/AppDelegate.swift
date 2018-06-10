@@ -2,8 +2,8 @@
 //  AppDelegate.swift
 //  RxReduceDemo
 //
-//  Created by Wittemberg, Thibault on 18-04-27.
-//  Copyright © 2018 Wittemberg, Thibault. All rights reserved.
+//  Created by Thibault Wittemberg on 18-06-04.
+//  Copyright (c) RxSwiftCommunity. All rights reserved.
 //
 
 import UIKit

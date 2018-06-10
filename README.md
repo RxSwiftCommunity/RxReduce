@@ -1,6 +1,6 @@
-| <img alt="RxReduce Logo" src="https://raw.githubusercontent.com/twittemb/RxReduce/develop/Resources/RxReduce_Logo.png" width="250"/> | <ul align="left"><li><a href="#about">About</a><li><a href="#architecture-concerns">Architecture concerns</a><li><a href="#rxreduce">RxReduce</a><li><a href="#installation">Installation</a><li><a href="#the-key-principles">The key principles</a><li><a href="#how-to-use-rxreduce">How to use RxReduce</a><li><a href="#tools-and-dependencies">Tools and dependencies</a></ul> |
+| <img alt="RxReduce Logo" src="https://raw.githubusercontent.com/RxSwiftCommunity/RxReduce/develop/Resources/RxReduce_Logo.png" width="250"/> | <ul align="left"><li><a href="#about">About</a><li><a href="#architecture-concerns">Architecture concerns</a><li><a href="#rxreduce">RxReduce</a><li><a href="#installation">Installation</a><li><a href="#the-key-principles">The key principles</a><li><a href="#how-to-use-rxreduce">How to use RxReduce</a><li><a href="#tools-and-dependencies">Tools and dependencies</a></ul> |
 | -------------- | -------------- |
-| Travis CI | [![Build Status](https://travis-ci.org/twittemb/RxReduce.svg?branch=develop)](https://travis-ci.org/twittemb/RxReduce) |
+| Travis CI | [![Build Status](https://travis-ci.org/RxSwiftCommunity/RxReduce.svg?branch=develop)](https://travis-ci.org/RxSwiftCommunity/RxReduce) |
 | Frameworks | [![Carthage Compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage) [![CocoaPods Compatible](https://img.shields.io/cocoapods/v/RxReduce.svg?style=flat)](http://cocoapods.org/pods/RxReduce) |
 | Platform | [![Platform](https://img.shields.io/cocoapods/p/RxReduce.svg?style=flat)](http://cocoapods.org/pods/RxReduce) |
 | Licence | [![License](https://img.shields.io/cocoapods/l/RxReduce.svg?style=flat)](http://cocoapods.org/pods/RxReduce) |
@@ -59,7 +59,7 @@ RxReduce:
 In your Cartfile:
 
 ```ruby
-github "twittemb/RxReduce"
+github "RxSwiftCommunity/RxReduce"
 ```
 
 ## CocoaPods
@@ -308,8 +308,8 @@ Conditional Conformance is a very powerful feature.
 
 A demo application is provided to illustrate the core mechanisms, such as asynchronicity, sub states and view state rendering.
 
-<table><tr><td><img style="border:2px solid black" width="200" alt="Demo Application" src="https://raw.githubusercontent.com/twittemb/RxReduce/develop/Resources/RxReduceDemo1.png"/></td>
-<td><img style="border:2px solid black" width="200" alt="Demo Application" src="https://raw.githubusercontent.com/twittemb/RxReduce/develop/Resources/RxReduceDemo2.png"/></td></tr></table>
+<table><tr><td><img style="border:2px solid black" width="200" alt="Demo Application" src="https://raw.githubusercontent.com/RxSwiftCommunity/RxReduce/develop/Resources/RxReduceDemo1.png"/></td>
+<td><img style="border:2px solid black" width="200" alt="Demo Application" src="https://raw.githubusercontent.com/RxSwiftCommunity/RxReduce/develop/Resources/RxReduceDemo2.png"/></td></tr></table>
 
 # Tools and dependencies
 

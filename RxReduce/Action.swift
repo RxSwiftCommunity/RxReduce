@@ -3,7 +3,7 @@
 //  RxReduce
 //
 //  Created by Thibault Wittemberg on 18-04-14.
-//  Copyright © 2018 WarpFactor. All rights reserved.
+//  Copyright (c) RxSwiftCommunity. All rights reserved.
 //
 
 import Foundation

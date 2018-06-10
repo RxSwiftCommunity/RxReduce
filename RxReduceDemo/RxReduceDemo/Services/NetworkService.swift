@@ -3,7 +3,7 @@
 //  RxReduceDemo
 //
 //  Created by Thibault Wittemberg on 18-06-02.
-//  Copyright © 2018 Wittemberg, Thibault. All rights reserved.
+//  Copyright (c) RxSwiftCommunity. All rights reserved.
 //
 
 import Foundation
