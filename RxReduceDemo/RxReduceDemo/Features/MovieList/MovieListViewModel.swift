@@ -25,7 +25,7 @@ final class MovieListViewModel: ViewModel, Injectable {
         let loadMovieAction: Observable<Action> = self.injectionContainer.networkService
             .fetch(withRoute: Routes.discoverMovie)
             .asObservable()
-            .map { $0.movies }
+            .map { $0.movies.filter {$0.backdropPath != nil } }
             .map { LoadMovieListAction.init(movies: $0) }
             .startWith(FetchMovieListAction())
 
