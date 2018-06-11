@@ -8,13 +8,21 @@
 
 /* Begin PBXBuildFile section */
 		1A2A7571208D4750009883BF /* RxReduce.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A2A7567208D474F009883BF /* RxReduce.framework */; };
-		1A2A7576208D4750009883BF /* RxReduceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2A7575208D4750009883BF /* RxReduceTests.swift */; };
+		1A2A7576208D4750009883BF /* ActionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2A7575208D4750009883BF /* ActionTests.swift */; };
 		1A2A7578208D4750009883BF /* RxReduce.h in Headers */ = {isa = PBXBuildFile; fileRef = 1A2A756A208D4750009883BF /* RxReduce.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1A2A7584208D50BC009883BF /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A2A7582208D50BC009883BF /* RxSwift.framework */; };
 		1A2A7585208D50BC009883BF /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A2A7583208D50BC009883BF /* RxCocoa.framework */; };
 		1A2A758A208D51E2009883BF /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2A7587208D51E2009883BF /* State.swift */; };
 		1A2A758B208D51E2009883BF /* Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2A7588208D51E2009883BF /* Action.swift */; };
 		1A2A758C208D51E2009883BF /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2A7589208D51E2009883BF /* Store.swift */; };
+		1A708BA320CF187300F30C9C /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A2A7583208D50BC009883BF /* RxCocoa.framework */; };
+		1A708BA420CF187300F30C9C /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A2A7582208D50BC009883BF /* RxSwift.framework */; };
+		1A708BA620CF1BFC00F30C9C /* RxCocoa.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 1A2A7583208D50BC009883BF /* RxCocoa.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		1A708BA720CF1BFC00F30C9C /* RxSwift.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 1A2A7582208D50BC009883BF /* RxSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		1A708BA920CF1F4F00F30C9C /* StoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A708BA820CF1F4F00F30C9C /* StoreTests.swift */; };
+		1A708BAB20CF1F8000F30C9C /* Actions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A708BAA20CF1F8000F30C9C /* Actions.swift */; };
+		1A708BAD20CF1FE100F30C9C /* States.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A708BAC20CF1FE100F30C9C /* States.swift */; };
+		1A708BB020CF233600F30C9C /* Reducers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A708BAF20CF233600F30C9C /* Reducers.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -27,18 +35,36 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		1A708BA520CF1BE600F30C9C /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				1A708BA620CF1BFC00F30C9C /* RxCocoa.framework in CopyFiles */,
+				1A708BA720CF1BFC00F30C9C /* RxSwift.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		1A2A7567208D474F009883BF /* RxReduce.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = RxReduce.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1A2A756A208D4750009883BF /* RxReduce.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RxReduce.h; sourceTree = "<group>"; };
 		1A2A756B208D4750009883BF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1A2A7570208D4750009883BF /* RxReduceTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RxReduceTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		1A2A7575208D4750009883BF /* RxReduceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxReduceTests.swift; sourceTree = "<group>"; };
+		1A2A7575208D4750009883BF /* ActionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionTests.swift; sourceTree = "<group>"; };
 		1A2A7577208D4750009883BF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1A2A7582208D50BC009883BF /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = Carthage/Build/iOS/RxSwift.framework; sourceTree = "<group>"; };
 		1A2A7583208D50BC009883BF /* RxCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxCocoa.framework; path = Carthage/Build/iOS/RxCocoa.framework; sourceTree = "<group>"; };
 		1A2A7587208D51E2009883BF /* State.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = State.swift; sourceTree = "<group>"; };
 		1A2A7588208D51E2009883BF /* Action.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Action.swift; sourceTree = "<group>"; };
 		1A2A7589208D51E2009883BF /* Store.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
+		1A708BA820CF1F4F00F30C9C /* StoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreTests.swift; sourceTree = "<group>"; };
+		1A708BAA20CF1F8000F30C9C /* Actions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Actions.swift; sourceTree = "<group>"; };
+		1A708BAC20CF1FE100F30C9C /* States.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = States.swift; sourceTree = "<group>"; };
+		1A708BAF20CF233600F30C9C /* Reducers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reducers.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +82,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				1A2A7571208D4750009883BF /* RxReduce.framework in Frameworks */,
+				1A708BA420CF187300F30C9C /* RxSwift.framework in Frameworks */,
+				1A708BA320CF187300F30C9C /* RxCocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -96,7 +124,9 @@
 		1A2A7574208D4750009883BF /* RxReduceTests */ = {
 			isa = PBXGroup;
 			children = (
-				1A2A7575208D4750009883BF /* RxReduceTests.swift */,
+				1A708BAE20CF231100F30C9C /* State */,
+				1A2A7575208D4750009883BF /* ActionTests.swift */,
+				1A708BA820CF1F4F00F30C9C /* StoreTests.swift */,
 				1A2A7577208D4750009883BF /* Info.plist */,
 			);
 			path = RxReduceTests;
@@ -109,6 +139,16 @@
 				1A2A7582208D50BC009883BF /* RxSwift.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		1A708BAE20CF231100F30C9C /* State */ = {
+			isa = PBXGroup;
+			children = (
+				1A708BAA20CF1F8000F30C9C /* Actions.swift */,
+				1A708BAC20CF1FE100F30C9C /* States.swift */,
+				1A708BAF20CF233600F30C9C /* Reducers.swift */,
+			);
+			path = State;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -151,6 +191,7 @@
 				1A2A756C208D4750009883BF /* Sources */,
 				1A2A756D208D4750009883BF /* Frameworks */,
 				1A2A756E208D4750009883BF /* Resources */,
+				1A708BA520CF1BE600F30C9C /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -248,7 +289,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1A2A7576208D4750009883BF /* RxReduceTests.swift in Sources */,
+				1A708BAB20CF1F8000F30C9C /* Actions.swift in Sources */,
+				1A708BB020CF233600F30C9C /* Reducers.swift in Sources */,
+				1A2A7576208D4750009883BF /* ActionTests.swift in Sources */,
+				1A708BA920CF1F4F00F30C9C /* StoreTests.swift in Sources */,
+				1A708BAD20CF1FE100F30C9C /* States.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -454,6 +499,10 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3V5265LQM9;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = RxReduceTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -473,6 +522,10 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3V5265LQM9;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = RxReduceTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
