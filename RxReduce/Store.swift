@@ -39,7 +39,7 @@ public protocol StoreType {
     ///
     /// - Parameter reducers: the reducers to be executed by the dispatch function
     /// - Parameter middlewares: the middlewartes to be executed by the dispatch function (the will be executed in reverse order)
-    init(withReducers reducers: [Reducer<StateType>], withMiddlewares middlewares: [Middleware<StateType>]?)
+    init(withReducers reducers: ContiguousArray<Reducer<StateType>>, withMiddlewares middlewares: ContiguousArray<Middleware<StateType>>?)
 
     /// Dispatch an action through the reducers to mutate the state
     ///
@@ -53,8 +53,8 @@ public final class Store<StateType: State>: StoreType {
     private let disposeBag = DisposeBag()
 
     private let stateSubject = BehaviorRelay<StateType?>(value: nil)
-    let reducers: [Reducer<StateType>]
-    let middlewares: [Middleware<StateType>]?
+    let reducers: ContiguousArray<Reducer<StateType>>
+    let middlewares: ContiguousArray<Middleware<StateType>>?
 
     // swiftlint:disable force_cast
     public func state<SubStateType>(from: @escaping (StateType) -> SubStateType = { (state: StateType) in return (state as! SubStateType) }) -> Driver<SubStateType> {
@@ -80,7 +80,7 @@ public final class Store<StateType: State>: StoreType {
     }
     // swiftlint:enable force_cast
 
-    public init(withReducers reducers: [Reducer<StateType>], withMiddlewares middlewares: [Middleware<StateType>]? = nil) {
+    public init(withReducers reducers: ContiguousArray<Reducer<StateType>>, withMiddlewares middlewares: ContiguousArray<Middleware<StateType>>? = nil) {
         self.reducers = reducers
         self.middlewares = middlewares
     }
