@@ -79,7 +79,7 @@
             <h1>Store</h1>
               <div class="declaration">
                 <div class="language">
-                  <pre class="highlight"><code><span class="kd">public</span> <span class="kd">final</span> <span class="kd">class</span> <span class="kt">Store</span><span class="o">&lt;</span><span class="kt">StateType</span><span class="p">:</span> <span class="kt"><a href="../Protocols.html#/s:8RxReduce5StateP">State</a></span><span class="o">&gt;</span><span class="p">:</span> <span class="kt"><a href="../Protocols/StoreType.html">StoreType</a></span></code></pre>
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">final</span> <span class="kd">class</span> <span class="kt">Store</span><span class="o">&lt;</span><span class="kt">StateType</span><span class="o">&gt;</span> <span class="p">:</span> <span class="kt"><a href="../Protocols/StoreType.html">StoreType</a></span> <span class="k">where</span> <span class="kt">StateType</span> <span class="p">:</span> <span class="kt"><a href="../Protocols.html#/s:8RxReduce5StateP">State</a></span></code></pre>
 
                 </div>
               </div>
@@ -108,7 +108,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="n">state</span><span class="o">&lt;</span><span class="kt">SubStateType</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">from</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">StateType</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">SubStateType</span> <span class="o">=</span> <span class="p">{</span> <span class="p">(</span><span class="nv">state</span><span class="p">:</span> <span class="kt">StateType</span><span class="p">)</span> <span class="k">in</span> <span class="nf">return</span> <span class="p">(</span><span class="n">state</span> <span class="k">as!</span> <span class="kt">SubStateType</span><span class="p">)</span> <span class="p">})</span> <span class="o">-&gt;</span> <span class="kt">Driver</span><span class="o">&lt;</span><span class="kt">SubStateType</span><span class="o">&gt;</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="n">state</span><span class="o">&lt;</span><span class="kt">SubStateType</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">from</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">StateType</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">SubStateType</span> <span class="o">=</span> <span class="p">{</span> <span class="p">(</span><span class="nv">state</span><span class="p">:</span> <span class="kt">StateType</span><span class="p">)</span> <span class="k">in</span> <span class="nf">return</span> <span class="p">(</span><span class="n">state</span> <span class="k">as!</span> <span class="kt">SubStateType</span><span class="p">)</span> <span class="p">})</span> <span class="o">-&gt;</span> <span class="kt">Driver</span><span class="o">&lt;</span><span class="kt">SubStateType</span><span class="o">&gt;</span></code></pre>
 
                         </div>
                       </div>
@@ -134,7 +134,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="n">state</span><span class="o">&lt;</span><span class="kt">SubStateType</span><span class="p">:</span> <span class="kt">Equatable</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">from</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">StateType</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">SubStateType</span> <span class="o">=</span> <span class="p">{</span> <span class="p">(</span><span class="nv">state</span><span class="p">:</span> <span class="kt">StateType</span><span class="p">)</span> <span class="k">in</span> <span class="nf">return</span> <span class="p">(</span><span class="n">state</span> <span class="k">as!</span> <span class="kt">SubStateType</span><span class="p">)</span> <span class="p">})</span> <span class="o">-&gt;</span> <span class="kt">Driver</span><span class="o">&lt;</span><span class="kt">SubStateType</span><span class="o">&gt;</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="n">state</span><span class="o">&lt;</span><span class="kt">SubStateType</span><span class="p">:</span> <span class="kt">Equatable</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">from</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">StateType</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">SubStateType</span> <span class="o">=</span> <span class="p">{</span> <span class="p">(</span><span class="nv">state</span><span class="p">:</span> <span class="kt">StateType</span><span class="p">)</span> <span class="k">in</span> <span class="nf">return</span> <span class="p">(</span><span class="n">state</span> <span class="k">as!</span> <span class="kt">SubStateType</span><span class="p">)</span> <span class="p">})</span> <span class="o">-&gt;</span> <span class="kt">Driver</span><span class="o">&lt;</span><span class="kt">SubStateType</span><span class="o">&gt;</span></code></pre>
 
                         </div>
                       </div>
@@ -144,9 +144,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:8RxReduce9StoreTypePxSay05StateD0QzAESg_AA6Action_ptcG12withReducers_SayyAF_AaG_ptcGSg0G11Middlewarestcfc"></a>
+                    <a name="/s:8RxReduce9StoreTypePxs15ContiguousArrayVy05StateD0QzAGSg_AA6Action_ptcG12withReducers_AEyyAH_AaI_ptcGSg0I11Middlewarestcfc"></a>
                     <a name="//apple_ref/swift/Method/init(withReducers:withMiddlewares:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:8RxReduce9StoreTypePxSay05StateD0QzAESg_AA6Action_ptcG12withReducers_SayyAF_AaG_ptcGSg0G11Middlewarestcfc">init(withReducers:withMiddlewares:)</a>
+                    <a class="token" href="#/s:8RxReduce9StoreTypePxs15ContiguousArrayVy05StateD0QzAGSg_AA6Action_ptcG12withReducers_AEyyAH_AaI_ptcGSg0I11Middlewarestcfc">init(withReducers:withMiddlewares:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -160,7 +160,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="n">withReducers</span> <span class="nv">reducers</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Typealiases.html#/s:8RxReduce7Reducera">Reducer</a></span><span class="o">&lt;</span><span class="kt">StateType</span><span class="o">&gt;</span><span class="p">],</span> <span class="n">withMiddlewares</span> <span class="nv">middlewares</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Typealiases.html#/s:8RxReduce10Middlewarea">Middleware</a></span><span class="o">&lt;</span><span class="kt">StateType</span><span class="o">&gt;</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="n">withReducers</span> <span class="nv">reducers</span><span class="p">:</span> <span class="kt">ContiguousArray</span><span class="o">&lt;</span><span class="kt"><a href="../Typealiases.html#/s:8RxReduce7Reducera">Reducer</a></span><span class="o">&lt;</span><span class="kt">StateType</span><span class="o">&gt;&gt;</span><span class="p">,</span> <span class="n">withMiddlewares</span> <span class="nv">middlewares</span><span class="p">:</span> <span class="kt">ContiguousArray</span><span class="o">&lt;</span><span class="kt"><a href="../Typealiases.html#/s:8RxReduce10Middlewarea">Middleware</a></span><span class="o">&lt;</span><span class="kt">StateType</span><span class="o">&gt;&gt;</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -186,7 +186,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">dispatch</span> <span class="p">(</span><span class="nv">action</span><span class="p">:</span> <span class="kt"><a href="../Protocols/Action.html">Action</a></span><span class="p">)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">dispatch</span><span class="p">(</span><span class="nv">action</span><span class="p">:</span> <span class="kt"><a href="../Protocols/Action.html">Action</a></span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -198,8 +198,8 @@
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2018 <a class="link" href="https://github.com/RxSwiftCommunity/RxReduce" target="_blank" rel="external">Thibault Wittemberg and RxSwiftCommunity</a>. All rights reserved. (Last updated: 2018-06-09)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.0</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>&copy; 2018 <a class="link" href="https://github.com/RxSwiftCommunity/RxReduce" target="_blank" rel="external">Thibault Wittemberg and RxSwiftCommunity</a>. All rights reserved. (Last updated: 2018-06-14)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>
