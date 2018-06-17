@@ -5,6 +5,8 @@
 ## Build generated
 build/
 DerivedData/
+RxReduce.framework.zip
+undocumented.json
 
 ## macos
 .DS_Store
