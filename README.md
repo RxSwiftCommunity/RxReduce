@@ -74,7 +74,11 @@ pod 'RxReduce'
 
 The core mechanisms of **RxReduce** are very straightforward (if you know Redux, you won't be disturbed):
 
-- the **Store** is the component that handles your state. It has only one input: the "**dispatch()**" function, that takes an **Action** as a parameter.
+Here is a little animation that explains the flow within a state container architecture:
+
+<img width="500" alt="StateContainerArchitectureFlow" src="https://raw.githubusercontent.com/RxSwiftCommunity/RxReduce/develop/Resources/RxReduceScheme.gif"/>
+
+- The **Store** is the component that handles your state. It has only one input: the "**dispatch()**" function, that takes an **Action** as a parameter.
 - The only way to trigger a **State** mutation is to call this "**dispatch()**" function.
 - **Actions** are simple types with no business logic. They embed the payload needed to mutate the **state**
 - Only free and testable functions called **Reducers** (RxReduce !) can mutate a **State**. A "**reduce()**" function takes a **State**, an **Action** and returns the new **State** ... that simple.
