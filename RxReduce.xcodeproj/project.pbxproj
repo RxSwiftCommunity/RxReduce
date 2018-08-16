@@ -12,7 +12,6 @@
 		1A2A7578208D4750009883BF /* RxReduce.h in Headers */ = {isa = PBXBuildFile; fileRef = 1A2A756A208D4750009883BF /* RxReduce.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1A2A7584208D50BC009883BF /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A2A7582208D50BC009883BF /* RxSwift.framework */; };
 		1A2A7585208D50BC009883BF /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A2A7583208D50BC009883BF /* RxCocoa.framework */; };
-		1A2A758A208D51E2009883BF /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2A7587208D51E2009883BF /* State.swift */; };
 		1A2A758B208D51E2009883BF /* Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2A7588208D51E2009883BF /* Action.swift */; };
 		1A2A758C208D51E2009883BF /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2A7589208D51E2009883BF /* Store.swift */; };
 		1A708BA320CF187300F30C9C /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A2A7583208D50BC009883BF /* RxCocoa.framework */; };
@@ -58,7 +57,6 @@
 		1A2A7577208D4750009883BF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1A2A7582208D50BC009883BF /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = Carthage/Build/iOS/RxSwift.framework; sourceTree = "<group>"; };
 		1A2A7583208D50BC009883BF /* RxCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxCocoa.framework; path = Carthage/Build/iOS/RxCocoa.framework; sourceTree = "<group>"; };
-		1A2A7587208D51E2009883BF /* State.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = State.swift; sourceTree = "<group>"; };
 		1A2A7588208D51E2009883BF /* Action.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Action.swift; sourceTree = "<group>"; };
 		1A2A7589208D51E2009883BF /* Store.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
 		1A708BA820CF1F4F00F30C9C /* StoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreTests.swift; sourceTree = "<group>"; };
@@ -114,7 +112,6 @@
 			children = (
 				1A2A756A208D4750009883BF /* RxReduce.h */,
 				1A2A7588208D51E2009883BF /* Action.swift */,
-				1A2A7587208D51E2009883BF /* State.swift */,
 				1A2A7589208D51E2009883BF /* Store.swift */,
 				1A2A756B208D4750009883BF /* Info.plist */,
 			);
@@ -280,7 +277,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				1A2A758C208D51E2009883BF /* Store.swift in Sources */,
-				1A2A758A208D51E2009883BF /* State.swift in Sources */,
 				1A2A758B208D51E2009883BF /* Action.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

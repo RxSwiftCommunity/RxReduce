@@ -9,10 +9,9 @@
 import Foundation
 import RxReduce
 
-func counterReducer (state: TestState?, action: Action) -> TestState {
+func counterReducer (state: TestState, action: Action) -> TestState {
 
-    var currentState = state ?? TestState(counterState: CounterState.empty, users: [])
-
+    var currentState = state
     var currentCounter = 0
 
     // we extract the current counter value from the current state
@@ -39,9 +38,9 @@ func counterReducer (state: TestState?, action: Action) -> TestState {
     }
 }
 
-func usersReducer (state: TestState?, action: Action) -> TestState {
+func usersReducer (state: TestState, action: Action) -> TestState {
 
-    var currentState = state ?? TestState(counterState: CounterState.empty, users: [])
+    var currentState = state
 
     // according to the action we mutate the users state
     switch action {

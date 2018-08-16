@@ -9,7 +9,7 @@
 import Foundation
 import RxReduce
 
-struct TestState: State {
+struct TestState: Equatable {
     var counterState: CounterState
     var users: [String]
 }
