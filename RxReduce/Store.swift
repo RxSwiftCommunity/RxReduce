@@ -20,23 +20,45 @@ import RxCocoa
 /// A Store is dedicated to a State Type
 public final class Store<State: Equatable> {
 
-    public typealias ReducerFunction = (State, Action) -> State
+    private typealias ReducerFunction = (State, Action) -> State
 
     private var state: State
-    private var reducers = [ReducerFunction]()
-//    private let reducers: ContiguousArray<Reducer<StateType>>
+    private var reducers = [String: ReducerFunction]()
+
+    private var subStateTypes = [String]()
 //    private let middlewares: ContiguousArray<Middleware<StateType>>?
 
     public init(withState state: State) {
         self.state = state
+
+        let stateMirror = Mirror(reflecting: self.state)
+        for child in stateMirror.children {
+            let childMirror = Mirror(reflecting: child.value)
+            subStateTypes.append("\(type(of: childMirror.subjectType))")
+        }
+
 //        self.middlewares = middlewares
     }
 
-    public func register<SubState: Equatable> (reducer: Reducer<State, SubState>) {
-        self.reducers.append(reducer.apply)
+    public func register<SubState: Equatable> (reducer: Reducer<State, SubState>) throws {
+        let key = "\(type(of: SubState.self))"
+
+        if let index = self.subStateTypes.index(of: key) {
+            self.subStateTypes.remove(at: index)
+        }
+
+        guard self.reducers[key] == nil else {
+            throw NSError(domain: "ReducerAlreadyExists", code: -1)
+        }
+        self.reducers[key] = reducer.apply
     }
 
     public func dispatch(action: Action) -> Observable<State> {
+
+        guard self.subStateTypes.isEmpty else {
+            fatalError("All substate must be handled")
+        }
+
         // every received action is converted to an async action
         return action
             .toAsync()
@@ -47,7 +69,7 @@ public final class Store<State: Equatable> {
 //            })
             .map { (action) -> State in
 
-                return self.reducers.reduce(self.state, { (currentState, reducer) -> State in
+                return self.reducers.values.reduce(self.state, { (currentState, reducer) -> State in
                     return reducer(currentState, action)
                 })
             }.do(onNext: { [unowned self] (newState) in

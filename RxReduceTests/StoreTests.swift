@@ -32,8 +32,12 @@ class StoreTests: XCTestCase {
         let counterReducer = Reducer<TestState, CounterState>(lens: counterLens, reducer: counterReduce)
         let userReducer = Reducer<TestState, UserState>(lens: userLens, reducer: userReduce)
 
-        store.register(reducer: counterReducer)
-        store.register(reducer: userReducer)
+        do {
+            try store.register(reducer: counterReducer)
+            try store.register(reducer: userReducer)
+        } catch {
+            XCTFail("Reducer registering failure")
+        }
 
         return store
     }()
@@ -143,6 +147,17 @@ class StoreTests: XCTestCase {
 
         waitForExpectations(timeout: 1) { (_) in
             subscription.dispose()
+        }
+    }
+
+    func testStoreRegistering () {
+        do {
+            let counterReducer = Reducer<TestState, CounterState>(lens: counterLens, reducer: counterReduce)
+            try self.store.register(reducer: counterReducer)
+            XCTFail("Counter Reducer has already been registered, it should not be possible to register a new one")
+        } catch {
+            let error = error as NSError
+            XCTAssertEqual("ReducerAlreadyExists", error.domain)
         }
     }
 
