@@ -14,11 +14,32 @@ import RxCocoa
 class StoreTests: XCTestCase {
 
     let disposeBag = DisposeBag()
-    let store = Store<TestState>(withState: TestState(counterState: .empty, users: [String]()),withReducers: [counterReducer, usersReducer])
+
+    let counterLens = Lens<TestState, CounterState> (get: { $0.counterState }) { (testState, counterState) -> TestState in
+        var mutableTestState = testState
+        mutableTestState.counterState = counterState
+        return mutableTestState
+    }
+
+    let userLens = Lens<TestState, UserState> (get: { $0.userState }) { (testState, userState) -> TestState in
+        var mutableTestState = testState
+        mutableTestState.userState = userState
+        return mutableTestState
+    }
+
+    lazy var store: Store<TestState> = {
+        let store = Store<TestState>(withState: TestState(counterState: .empty, userState: .loggedOut))
+        let counterReducer = Reducer<TestState, CounterState>(lens: counterLens, reducer: counterReduce)
+        let userReducer = Reducer<TestState, UserState>(lens: userLens, reducer: userReduce)
+
+        store.register(reducer: counterReducer)
+        store.register(reducer: userReducer)
+
+        return store
+    }()
 
     override func tearDown() {
-        let clearActions: [Action] = [ClearCounterAction(), ClearUsersAction()]
-        store.dispatch(action: clearActions).subscribe().disposed(by: self.disposeBag)
+        store.dispatch(action: ClearAction()).subscribe().disposed(by: self.disposeBag)
     }
 
     func testSynchronousAction() {
@@ -26,11 +47,13 @@ class StoreTests: XCTestCase {
 
         let increaseAction = IncreaseAction(increment: 10)
 
-        let subscription = store.dispatch(action: increaseAction).subscribe(onNext: { (state) in
+        let subscription = store
+            .dispatch(action: increaseAction)
+            .subscribe(onNext: { (state) in
             let counterState = state.counterState
-            let users = state.users
+            let userState = state.userState
 
-            XCTAssert(users.isEmpty)
+            XCTAssertEqual(userState, .loggedOut)
             guard case let .increasing(value) = counterState else {
                 XCTFail()
                 return
@@ -52,15 +75,18 @@ class StoreTests: XCTestCase {
 
         let increaseAction = IncreaseAction(increment: 10)
 
-        let subscription = store.dispatch(action: increaseAction) { $0.counterState }.subscribe(onNext: { (counterState) in
-            guard case let .increasing(value) = counterState else {
-                XCTFail()
-                return
-            }
+        let subscription = store
+            .dispatch(action: increaseAction)
+            .map { $0.counterState }
+            .subscribe(onNext: { (counterState) in
+                guard case let .increasing(value) = counterState else {
+                    XCTFail()
+                    return
+                }
 
-            XCTAssertEqual(10, value)
-            exp.fulfill()
-        })
+                XCTAssertEqual(10, value)
+                exp.fulfill()
+            })
 
         waitForExpectations(timeout: 1) { (_) in
             subscription.dispose()
@@ -76,9 +102,9 @@ class StoreTests: XCTestCase {
             XCTAssertTrue(Thread.isMainThread)
 
             let counterState = state.counterState
-            let users = state.users
+            let userState = state.userState
 
-            XCTAssert(users.isEmpty)
+            XCTAssertEqual(userState, .loggedOut)
             guard case let .increasing(value) = counterState else {
                 XCTFail()
                 return
@@ -95,27 +121,22 @@ class StoreTests: XCTestCase {
 
     func testArrayOfActionsWithObservable () {
 
-        struct SubState: Equatable {
-            let counterState: CounterState
-            let users: [String]
-        }
-
         let exp = expectation(description: "Array subscription")
 
-        let actions: [Action] = [IncreaseAction(increment: 10), Observable<Action>.just(DecreaseAction(decrement: 20)), AddUserAction(user: "Spock")]
+        let actions: [Action] = [IncreaseAction(increment: 10), Observable<Action>.just(DecreaseAction(decrement: 20)), LogUserAction(user: "Spock")]
 
-        let subscription = store.dispatch(action: actions) { state -> SubState in return SubState(counterState: state.counterState, users: state.users) }.subscribe(onNext: { (subState) in
-            print (subState)
-            if case let .increasing(value) = subState.counterState {
+        let subscription = store.dispatch(action: actions).subscribe(onNext: { (state) in
+
+            if case let .increasing(value) = state.counterState {
                 XCTAssertEqual(10, value)
             }
 
-            if case let .decreasing(value) = subState.counterState {
+            if case let .decreasing(value) = state.counterState {
                 XCTAssertEqual(-10, value)
             }
 
-            if !subState.users.isEmpty {
-                XCTAssertEqual("Spock", subState.users[0])
+            if case let .loggedIn(user) = state.userState {
+                XCTAssertEqual("Spock", user)
                 exp.fulfill()
             }
         })
@@ -125,21 +146,21 @@ class StoreTests: XCTestCase {
         }
     }
 
-    func testMiddleware () {
-
-        let exp = expectation(description: "Middleware subscription")
-
-        let increaseAction = IncreaseAction(increment: 10)
-
-        let testStore = Store<TestState>(withState: TestState(counterState: .empty, users: [String]()),withReducers: [counterReducer, usersReducer], withMiddlewares: [{ state, action in
-                exp.fulfill()
-        }])
-
-        let subscription = testStore.dispatch(action: increaseAction).subscribe()
-
-        waitForExpectations(timeout: 1) { (_) in
-            subscription.dispose()
-        }
-
-    }
+//    func testMiddleware () {
+//
+//        let exp = expectation(description: "Middleware subscription")
+//
+//        let increaseAction = IncreaseAction(increment: 10)
+//
+//        let testStore = Store<TestState>(withState: TestState(counterState: .empty, users: [String]()),withReducers: [counterReducer, usersReducer], withMiddlewares: [{ state, action in
+//            exp.fulfill()
+//            }])
+//
+//        let subscription = testStore.dispatch(action: increaseAction).subscribe()
+//
+//        waitForExpectations(timeout: 1) { (_) in
+//            subscription.dispose()
+//        }
+//
+//    }
 }

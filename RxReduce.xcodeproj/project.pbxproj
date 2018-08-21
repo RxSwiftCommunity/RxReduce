@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1A26CF05212BA111008A6D7B /* Lens.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A26CF04212BA111008A6D7B /* Lens.swift */; };
+		1A26CF07212BA15D008A6D7B /* Reducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A26CF06212BA15D008A6D7B /* Reducer.swift */; };
 		1A2A7571208D4750009883BF /* RxReduce.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A2A7567208D474F009883BF /* RxReduce.framework */; };
 		1A2A7576208D4750009883BF /* ActionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2A7575208D4750009883BF /* ActionTests.swift */; };
 		1A2A7578208D4750009883BF /* RxReduce.h in Headers */ = {isa = PBXBuildFile; fileRef = 1A2A756A208D4750009883BF /* RxReduce.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -49,6 +51,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1A26CF04212BA111008A6D7B /* Lens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lens.swift; sourceTree = "<group>"; };
+		1A26CF06212BA15D008A6D7B /* Reducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reducer.swift; sourceTree = "<group>"; };
 		1A2A7567208D474F009883BF /* RxReduce.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = RxReduce.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1A2A756A208D4750009883BF /* RxReduce.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RxReduce.h; sourceTree = "<group>"; };
 		1A2A756B208D4750009883BF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -112,6 +116,8 @@
 			children = (
 				1A2A756A208D4750009883BF /* RxReduce.h */,
 				1A2A7588208D51E2009883BF /* Action.swift */,
+				1A26CF04212BA111008A6D7B /* Lens.swift */,
+				1A26CF06212BA15D008A6D7B /* Reducer.swift */,
 				1A2A7589208D51E2009883BF /* Store.swift */,
 				1A2A756B208D4750009883BF /* Info.plist */,
 			);
@@ -278,6 +284,8 @@
 			files = (
 				1A2A758C208D51E2009883BF /* Store.swift in Sources */,
 				1A2A758B208D51E2009883BF /* Action.swift in Sources */,
+				1A26CF07212BA15D008A6D7B /* Reducer.swift in Sources */,
+				1A26CF05212BA111008A6D7B /* Lens.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

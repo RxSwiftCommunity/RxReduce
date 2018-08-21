@@ -17,12 +17,9 @@ struct DecreaseAction: Action {
     let decrement: Int
 }
 
-struct ClearCounterAction: Action {
+struct ClearAction: Action {
 }
 
-struct AddUserAction: Action {
+struct LogUserAction: Action {
     let user: String
-}
-
-struct ClearUsersAction: Action {
 }

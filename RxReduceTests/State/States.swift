@@ -11,11 +11,16 @@ import RxReduce
 
 struct TestState: Equatable {
     var counterState: CounterState
-    var users: [String]
+    var userState: UserState
 }
 
 enum CounterState: Equatable {
     case empty
     case increasing (Int)
     case decreasing (Int)
+}
+
+enum UserState: Equatable {
+    case loggedIn (name: String)
+    case loggedOut
 }
