@@ -29,12 +29,12 @@ class StoreTests: XCTestCase {
 
     lazy var store: Store<TestState> = {
         let store = Store<TestState>(withState: TestState(counterState: .empty, userState: .loggedOut))
-        let counterReducer = Reducer<TestState, CounterState>(lens: counterLens, reducer: counterReduce)
-        let userReducer = Reducer<TestState, UserState>(lens: userLens, reducer: userReduce)
+        let counterMutator = Mutator<TestState, CounterState>(lens: counterLens, reducer: counterReduce)
+        let userMutator = Mutator<TestState, UserState>(lens: userLens, reducer: userReduce)
 
         do {
-            try store.register(reducer: counterReducer)
-            try store.register(reducer: userReducer)
+            try store.register(mutator: counterMutator)
+            try store.register(mutator: userMutator)
         } catch {
             XCTFail("Reducer registering failure")
         }
@@ -54,18 +54,18 @@ class StoreTests: XCTestCase {
         let subscription = store
             .dispatch(action: increaseAction)
             .subscribe(onNext: { (state) in
-            let counterState = state.counterState
-            let userState = state.userState
+                let counterState = state.counterState
+                let userState = state.userState
 
-            XCTAssertEqual(userState, .loggedOut)
-            guard case let .increasing(value) = counterState else {
-                XCTFail()
-                return
-            }
+                XCTAssertEqual(userState, .loggedOut)
+                guard case let .increasing(value) = counterState else {
+                    XCTFail()
+                    return
+                }
 
-            XCTAssertEqual(10, value)
-            exp.fulfill()
-        })
+                XCTAssertEqual(10, value)
+                exp.fulfill()
+            })
 
         waitForExpectations(timeout: 1) { (_) in
             subscription.dispose()
@@ -80,8 +80,7 @@ class StoreTests: XCTestCase {
         let increaseAction = IncreaseAction(increment: 10)
 
         let subscription = store
-            .dispatch(action: increaseAction)
-            .map { $0.counterState }
+            .dispatch(action: increaseAction) { $0.counterState }
             .subscribe(onNext: { (counterState) in
                 guard case let .increasing(value) = counterState else {
                     XCTFail()
@@ -150,32 +149,45 @@ class StoreTests: XCTestCase {
         }
     }
 
-    func testStoreRegistering () {
+    func testMutatorRegistrationExhaustivity () {
         do {
-            let counterReducer = Reducer<TestState, CounterState>(lens: counterLens, reducer: counterReduce)
-            try self.store.register(reducer: counterReducer)
+            let counterMutator = Mutator<TestState, CounterState>(lens: counterLens, reducer: counterReduce)
+            try self.store.register(mutator: counterMutator)
             XCTFail("Counter Reducer has already been registered, it should not be possible to register a new one")
         } catch {
-            let error = error as NSError
-            XCTAssertEqual("ReducerAlreadyExists", error.domain)
+            if let error = error as? StoreError {
+                XCTAssertEqual(StoreError.mutatorAlreadyExist, error)
+            }
         }
     }
 
-//    func testMiddleware () {
-//
-//        let exp = expectation(description: "Middleware subscription")
-//
-//        let increaseAction = IncreaseAction(increment: 10)
-//
-//        let testStore = Store<TestState>(withState: TestState(counterState: .empty, users: [String]()),withReducers: [counterReducer, usersReducer], withMiddlewares: [{ state, action in
-//            exp.fulfill()
-//            }])
-//
-//        let subscription = testStore.dispatch(action: increaseAction).subscribe()
-//
-//        waitForExpectations(timeout: 1) { (_) in
-//            subscription.dispose()
-//        }
-//
-//    }
+    func testMiddlewares () {
+
+        let exp = expectation(description: "Middleware subscription")
+
+        let increaseAction = IncreaseAction(increment: 10)
+
+        let middlewareStore = Store<TestState>(withState: TestState(counterState: .empty, userState: .loggedOut))
+
+        let counterMutator = Mutator<TestState, CounterState>(lens: counterLens, reducer: counterReduce)
+        let userMutator = Mutator<TestState, UserState>(lens: userLens, reducer: userReduce)
+
+        do {
+            try middlewareStore.register(mutator: counterMutator)
+            try middlewareStore.register(mutator: userMutator)
+        } catch {
+            XCTFail("Reducer registering failure")
+        }
+
+        middlewareStore.register { (state, action) in
+            exp.fulfill()
+        }
+
+        let subscription = middlewareStore.dispatch(action: increaseAction).subscribe()
+
+        waitForExpectations(timeout: 1) { (_) in
+            subscription.dispose()
+        }
+
+    }
 }

@@ -6,7 +6,6 @@
 //  Copyright (c) RxSwiftCommunity. All rights reserved.
 //
 
-import Foundation
 import RxSwift
 
 /// Conform to an Action to mutate the State synchronously or asynchronously
@@ -19,18 +18,21 @@ public protocol Action {
     func toAsync () -> Observable<Action>
 }
 
+// MARK: - Default implementation of toAsync (just transform Self in an Observable)
 extension Action {
     public func toAsync () -> Observable<Action> {
         return Observable<Action>.just(self)
     }
 }
 
+// MARK: - Default implementation of toAsync: Array<Action> is also an Action
 extension Array: Action where Element == Action {
     public func toAsync () -> Observable<Action> {
         return Observable<Action>.concat(self.map { $0.toAsync() })
     }
 }
 
+// MARK: - Default implementation of toAsync: Observable<Action> is also an Action
 extension Observable: Action where Element == Action {
     public func toAsync () -> Observable<Action> {
         return self.map { $0 as Action }
