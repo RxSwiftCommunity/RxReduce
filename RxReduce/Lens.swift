@@ -10,8 +10,8 @@
 public struct Lens<State, SubState> {
 
     /// retrieves a Substate from a State
-    let get: (State) -> SubState
+    public let get: (State) -> SubState
 
     /// Generates a new State based on an original State and on an original SubState 
-    let set: (State, SubState) -> State
+    public let set: (State, SubState) -> State
 }

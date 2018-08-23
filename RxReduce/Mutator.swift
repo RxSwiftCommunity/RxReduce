@@ -8,7 +8,7 @@
 
 /// A Mutator holds all the required tools to mutate a State's Substate and
 // generate a new State
-public struct Mutator<State: Equatable, SubState: Equatable> {
+public struct Mutator<State, SubState> {
     let lens: Lens<State, SubState>
     let reducer: (State, Action) -> SubState
 
