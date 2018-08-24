@@ -32,12 +32,8 @@ class StoreTests: XCTestCase {
         let counterMutator = Mutator<TestState, CounterState>(lens: counterLens, reducer: counterReduce)
         let userMutator = Mutator<TestState, UserState>(lens: userLens, reducer: userReduce)
 
-        do {
-            try store.register(mutator: counterMutator)
-            try store.register(mutator: userMutator)
-        } catch {
-            XCTFail("Reducer registering failure")
-        }
+        store.register(mutator: counterMutator)
+        store.register(mutator: userMutator)
 
         return store
     }()
@@ -149,18 +145,6 @@ class StoreTests: XCTestCase {
         }
     }
 
-    func testMutatorRegistrationExhaustivity () {
-        do {
-            let counterMutator = Mutator<TestState, CounterState>(lens: counterLens, reducer: counterReduce)
-            try self.store.register(mutator: counterMutator)
-            XCTFail("Counter Reducer has already been registered, it should not be possible to register a new one")
-        } catch {
-            if let error = error as? StoreError {
-                XCTAssertEqual(StoreError.mutatorAlreadyExist, error)
-            }
-        }
-    }
-
     func testMiddlewares () {
 
         let exp = expectation(description: "Middleware subscription")
@@ -172,12 +156,8 @@ class StoreTests: XCTestCase {
         let counterMutator = Mutator<TestState, CounterState>(lens: counterLens, reducer: counterReduce)
         let userMutator = Mutator<TestState, UserState>(lens: userLens, reducer: userReduce)
 
-        do {
-            try middlewareStore.register(mutator: counterMutator)
-            try middlewareStore.register(mutator: userMutator)
-        } catch {
-            XCTFail("Reducer registering failure")
-        }
+        middlewareStore.register(mutator: counterMutator)
+        middlewareStore.register(mutator: userMutator)
 
         middlewareStore.register { (state, action) in
             exp.fulfill()
