@@ -9,13 +9,8 @@
 import Foundation
 import RxReduce
 
-struct FetchMovieListAction: Action {}
-
-struct LoadMovieListAction: Action {
-    let movies: [DiscoverMovieModel]
+enum MovieAction: Action {
+    case startLoadingMovies
+    case loadMovies (movies: [DiscoverMovieModel])
+    case loadMovie (movieId: Int)
 }
-
-struct LoadMovieDetailAction: Action {
-    let movieId: Int
-}
-

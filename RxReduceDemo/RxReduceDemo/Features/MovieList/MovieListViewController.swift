@@ -52,13 +52,13 @@ final class MovieListViewController: UITableViewController, StoryboardBased, Vie
         case .loading:
             self.movies.removeAll()
             self.activityIndicator.isHidden = false
-            self.tableView.separatorStyle = UITableViewCellSeparatorStyle.none
+            self.tableView.separatorStyle = UITableViewCell.SeparatorStyle.none
             self.activityIndicator.startAnimating()
         case .loaded(let movies):
             self.movies = movies
             self.tableView.isHidden = false
             self.activityIndicator.stopAnimating()
-            self.tableView.separatorStyle = UITableViewCellSeparatorStyle.singleLine
+            self.tableView.separatorStyle = UITableViewCell.SeparatorStyle.singleLine
             self.tableView.reloadData()
         }
     }

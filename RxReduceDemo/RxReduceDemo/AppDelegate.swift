@@ -17,12 +17,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     let networkService: NetworkService = NetworkService(withBaseUrl: URL(string: "https://api.themoviedb.org/3/")!, andApiKey: "3afafd21270fe0414eb760a41f2620eb")
-    let store = Store<AppState>(withReducers: [movieReducer], withMiddlewares: [loggingMiddleware])
+    private lazy var store: Store<AppState> = {
+        let store = Store<AppState>(withState: AppState(movieListState: .empty, movieDetailState: .empty))
+
+        let movieListMutator = Mutator<AppState, MovieListState>(lens: AppLenses.movieListLens, reducer: movieListReducer)
+        let movieDetailMutator = Mutator<AppState, MovieDetailState>(lens: AppLenses.movieDetailLens, reducer: movieDetailReducer)
+
+        store.register(mutator: movieListMutator)
+        store.register(mutator: movieDetailMutator)
+        store.register(middleware: loggingMiddleware)
+        
+        return store
+    }()
+
     lazy var dependencyContainer: DependencyContainer = {
         return DependencyContainer(withStore: self.store, withNetworkService: self.networkService)
     }()
 
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+    internal func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
         guard let window = self.window else { return false }
 

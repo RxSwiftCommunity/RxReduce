@@ -9,7 +9,7 @@
 import Foundation
 import RxReduce
 
-struct AppState: State, Equatable {
+struct AppState: Equatable {
     var movieListState: MovieListState
     var movieDetailState: MovieDetailState
 }

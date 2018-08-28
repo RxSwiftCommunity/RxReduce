@@ -9,28 +9,38 @@
 import Foundation
 import RxReduce
 
-func movieReducer (state: AppState?, action: Action) -> AppState {
+func movieListReducer (state: AppState, action: Action) -> MovieListState {
 
-    var currentState = state ?? AppState(movieListState: .empty, movieDetailState: .empty)
+    guard let action = action as? MovieAction else {
+        return state.movieListState
+    }
+
+    switch action {
+    case .startLoadingMovies:
+        return .loading
+    case .loadMovies(let movies):
+        return .loaded(movies)
+    default:
+        return state.movieListState
+    }
+}
+
+func movieDetailReducer (state: AppState, action: Action) -> MovieDetailState {
+
+    guard let action = action as? MovieAction else {
+        return state.movieDetailState
+    }
 
     // according to the action we create a new state
     switch action {
-    case is FetchMovieListAction:
-        currentState.movieListState = .loading
-        currentState.movieDetailState = .empty
-        return currentState
-    case let action as LoadMovieListAction:
-        currentState.movieListState = .loaded(action.movies)
-        currentState.movieDetailState = .empty
-        return currentState
-    case let action as LoadMovieDetailAction:
-        guard case let .loaded(movies) = currentState.movieListState else { return currentState }
-        let movie = movies.filter { $0.id == action.movieId }.first
+    case .startLoadingMovies, .loadMovies(_):
+        return .empty
+    case .loadMovie(let movieId):
+        guard case let .loaded(movies) = state.movieListState else { return state.movieDetailState }
+        let movie = movies.filter { $0.id == movieId }.first
         if let movieDetail = movie {
-            currentState.movieDetailState = .loaded(movieDetail)
+            return .loaded(movieDetail)
         }
-        return currentState
-    default:
-        return currentState
+        return state.movieDetailState
     }
 }

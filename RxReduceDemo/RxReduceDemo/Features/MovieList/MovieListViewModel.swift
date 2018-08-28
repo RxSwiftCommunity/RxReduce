@@ -26,13 +26,13 @@ final class MovieListViewModel: ViewModel, Injectable {
             .fetch(withRoute: Routes.discoverMovie)
             .asObservable()
             .map { $0.movies.filter {$0.backdropPath != nil } }
-            .map { LoadMovieListAction.init(movies: $0) }
-            .startWith(FetchMovieListAction())
+            .map { MovieAction.loadMovies(movies: $0) }
+            .startWith(MovieAction.startLoadingMovies)
 
         // dispatch the asynchronous fetch action
-        self.injectionContainer.store.dispatch(action: loadMovieAction)
-
-        // listen for the store's state
-        return self.injectionContainer.store.state { $0.movieListState }
+        return self.injectionContainer
+            .store
+            .dispatch(action: loadMovieAction) { $0.movieListState }
+            .asDriver(onErrorJustReturn: .empty)
     }
 }

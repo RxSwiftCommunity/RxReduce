@@ -9,89 +9,68 @@
 import XCTest
 import RxSwift
 import RxCocoa
-@testable import RxReduce
+import RxBlocking
+import RxReduce
 
 class ActionTests: XCTestCase {
 
     let disposeBag = DisposeBag()
 
-    func testSynchronousAction() {
-
-        let exp = expectation(description: "IncreaseAction")
+    func testSynchronousAction() throws {
 
         let increaseAction = IncreaseAction(increment: 10)
 
-        increaseAction.toAsync().subscribe(onNext: { (action) in
-            guard let action = action as? IncreaseAction else {
-                XCTFail()
-                return
-            }
+        let action = try increaseAction.toAsync().toBlocking().single()
+        if let action = action as? IncreaseAction {
             XCTAssertEqual(10, action.increment)
-            exp.fulfill()
-        }).disposed(by: self.disposeBag)
-
-        waitForExpectations(timeout: 1)
+        } else {
+            XCTFail()
+        }
     }
 
-    func testAsynchronousAction () {
-
-        let exp = expectation(description: "IncreaseAction")
+    func testAsynchronousAction () throws {
 
         let increaseAction = Observable<Action>.just(IncreaseAction(increment: 10))
 
-        increaseAction.toAsync().subscribe(onNext: { (action) in
-            guard let action = action as? IncreaseAction else {
-                XCTFail()
-                return
-            }
+        let action = try increaseAction.toAsync().toBlocking().single()
+        if let action = action as? IncreaseAction {
             XCTAssertEqual(10, action.increment)
-            exp.fulfill()
-        }).disposed(by: self.disposeBag)
-
-        waitForExpectations(timeout: 1)
-
+        } else {
+            XCTFail()
+        }
     }
 
-    func testArrayOfActions () {
-
-        let exp = expectation(description: "IncreaseActions")
-        exp.expectedFulfillmentCount = 3
+    func testArrayOfActions () throws {
 
         let actions: [Action] = [IncreaseAction(increment: 10), IncreaseAction(increment: 20), IncreaseAction(increment: 30)]
 
         var initialIncrement = 10
-        actions.toAsync().subscribe(onNext: { (action) in
-            guard let action = action as? IncreaseAction else {
-                XCTFail()
-                return
-            }
-            XCTAssertEqual(initialIncrement, action.increment)
-            initialIncrement += 10
-            exp.fulfill()
-        }).disposed(by: self.disposeBag)
+        let actionsToTest = try actions.toAsync().toBlocking().toArray()
 
-        waitForExpectations(timeout: 1)
+        actionsToTest.forEach {
+            if let action = $0 as? IncreaseAction {
+                XCTAssertEqual(initialIncrement, action.increment)
+                initialIncrement += 10
+            } else {
+                XCTFail()
+            }
+        }
     }
 
-    func testArrayOfActionsWithObservable () {
-
-        let exp = expectation(description: "IncreaseActions")
-        exp.expectedFulfillmentCount = 3
+    func testArrayOfActionsWithObservable () throws {
 
         let actions: [Action] = [IncreaseAction(increment: 10), Observable<Action>.just(IncreaseAction(increment: 20)), IncreaseAction(increment: 30)]
 
         var initialIncrement = 10
-        actions.toAsync().subscribe(onNext: { (action) in
-            guard let action = action as? IncreaseAction else {
+        let actionsToTest = try actions.toAsync().toBlocking().toArray()
+
+        actionsToTest.forEach {
+            if let action = $0 as? IncreaseAction {
+                XCTAssertEqual(initialIncrement, action.increment)
+                initialIncrement += 10
+            } else {
                 XCTFail()
-                return
             }
-            XCTAssertEqual(initialIncrement, action.increment)
-            initialIncrement += 10
-            exp.fulfill()
-        }).disposed(by: self.disposeBag)
-
-        waitForExpectations(timeout: 1)
+        }
     }
-
 }

@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		1A26CF05212BA111008A6D7B /* Lens.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A26CF04212BA111008A6D7B /* Lens.swift */; };
 		1A26CF07212BA15D008A6D7B /* Mutator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A26CF06212BA15D008A6D7B /* Mutator.swift */; };
-		1A2A7571208D4750009883BF /* RxReduce.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A2A7567208D474F009883BF /* RxReduce.framework */; };
 		1A2A7576208D4750009883BF /* ActionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2A7575208D4750009883BF /* ActionTests.swift */; };
 		1A2A7578208D4750009883BF /* RxReduce.h in Headers */ = {isa = PBXBuildFile; fileRef = 1A2A756A208D4750009883BF /* RxReduce.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1A2A7584208D50BC009883BF /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A2A7582208D50BC009883BF /* RxSwift.framework */; };
@@ -24,6 +23,8 @@
 		1A708BAB20CF1F8000F30C9C /* Actions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A708BAA20CF1F8000F30C9C /* Actions.swift */; };
 		1A708BAD20CF1FE100F30C9C /* States.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A708BAC20CF1FE100F30C9C /* States.swift */; };
 		1A708BB020CF233600F30C9C /* Reducers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A708BAF20CF233600F30C9C /* Reducers.swift */; };
+		1A7139792134E4A200903866 /* RxBlocking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A7139782134E4A200903866 /* RxBlocking.framework */; };
+		1A71397A2134E4C400903866 /* RxBlocking.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 1A7139782134E4A200903866 /* RxBlocking.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,6 +44,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				1A71397A2134E4C400903866 /* RxBlocking.framework in CopyFiles */,
 				1A708BA620CF1BFC00F30C9C /* RxCocoa.framework in CopyFiles */,
 				1A708BA720CF1BFC00F30C9C /* RxSwift.framework in CopyFiles */,
 			);
@@ -67,6 +69,7 @@
 		1A708BAA20CF1F8000F30C9C /* Actions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Actions.swift; sourceTree = "<group>"; };
 		1A708BAC20CF1FE100F30C9C /* States.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = States.swift; sourceTree = "<group>"; };
 		1A708BAF20CF233600F30C9C /* Reducers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reducers.swift; sourceTree = "<group>"; };
+		1A7139782134E4A200903866 /* RxBlocking.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxBlocking.framework; path = Carthage/Build/iOS/RxBlocking.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,7 +86,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1A2A7571208D4750009883BF /* RxReduce.framework in Frameworks */,
+				1A7139792134E4A200903866 /* RxBlocking.framework in Frameworks */,
 				1A708BA420CF187300F30C9C /* RxSwift.framework in Frameworks */,
 				1A708BA320CF187300F30C9C /* RxCocoa.framework in Frameworks */,
 			);
@@ -138,6 +141,7 @@
 		1A2A7581208D50BB009883BF /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1A7139782134E4A200903866 /* RxBlocking.framework */,
 				1A2A7583208D50BC009883BF /* RxCocoa.framework */,
 				1A2A7582208D50BC009883BF /* RxSwift.framework */,
 			);

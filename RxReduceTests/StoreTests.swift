@@ -9,7 +9,8 @@
 import XCTest
 import RxSwift
 import RxCocoa
-@testable import RxReduce
+import RxReduce
+import RxBlocking
 
 class StoreTests: XCTestCase {
 
@@ -42,106 +43,74 @@ class StoreTests: XCTestCase {
         store.dispatch(action: ClearAction()).subscribe().disposed(by: self.disposeBag)
     }
 
-    func testSynchronousAction() {
-        let exp = expectation(description: "synchronous subscription")
+    func testSynchronousAction() throws {
 
         let increaseAction = IncreaseAction(increment: 10)
 
-        let subscription = store
+        let state = try store
             .dispatch(action: increaseAction)
-            .subscribe(onNext: { (state) in
-                let counterState = state.counterState
-                let userState = state.userState
+            .toBlocking()
+            .single()
 
-                XCTAssertEqual(userState, .loggedOut)
-                guard case let .increasing(value) = counterState else {
-                    XCTFail()
-                    return
-                }
-
-                XCTAssertEqual(10, value)
-                exp.fulfill()
-            })
-
-        waitForExpectations(timeout: 1) { (_) in
-            subscription.dispose()
+        XCTAssertEqual(state.userState, UserState.loggedOut)
+        if case let .increasing(value) = state.counterState {
+            XCTAssertEqual(10, value)
+        } else {
+            XCTFail()
         }
     }
 
-    func testSubstateSubscription() {
-
-        let exp = expectation(description: "Substate subscription")
-        exp.expectedFulfillmentCount = 1
+    func testSubstateSubscription() throws {
 
         let increaseAction = IncreaseAction(increment: 10)
 
-        let subscription = store
+        let counterState = try store
             .dispatch(action: increaseAction) { $0.counterState }
-            .subscribe(onNext: { (counterState) in
-                guard case let .increasing(value) = counterState else {
-                    XCTFail()
-                    return
-                }
+            .toBlocking()
+            .single()
 
-                XCTAssertEqual(10, value)
-                exp.fulfill()
-            })
-
-        waitForExpectations(timeout: 1) { (_) in
-            subscription.dispose()
-        }
-    }
-
-    func testAsynchronousAction() {
-        let exp = expectation(description: "asynchronous subscription")
-
-        let increaseAction = Observable<Action>.just(IncreaseAction(increment: 10)).subscribeOn(ConcurrentMainScheduler.instance).observeOn(ConcurrentMainScheduler.instance)
-
-        let subscription = store.dispatch(action: increaseAction).subscribe(onNext: { (state) in
-            XCTAssertTrue(Thread.isMainThread)
-
-            let counterState = state.counterState
-            let userState = state.userState
-
-            XCTAssertEqual(userState, .loggedOut)
-            guard case let .increasing(value) = counterState else {
-                XCTFail()
-                return
-            }
-
+        if case let .increasing(value) = counterState {
             XCTAssertEqual(10, value)
-            exp.fulfill()
-        })
-
-        waitForExpectations(timeout: 1) { (_) in
-            subscription.dispose()
+        } else {
+            XCTFail()
         }
     }
 
-    func testArrayOfActionsWithObservable () {
+    func testAsynchronousAction() throws {
 
-        let exp = expectation(description: "Array subscription")
+        let increaseAction = Observable<Action>.just(IncreaseAction(increment: 10))
+
+        let state = try store
+            .dispatch(action: increaseAction)
+            .toBlocking()
+            .single()
+
+        XCTAssertEqual(state.userState, UserState.loggedOut)
+        if case let .increasing(value) = state.counterState {
+            XCTAssertEqual(10, value)
+        } else {
+            XCTFail()
+        }
+    }
+
+    func testArrayOfActionsWithObservable () throws {
 
         let actions: [Action] = [IncreaseAction(increment: 10), Observable<Action>.just(DecreaseAction(decrement: 20)), LogUserAction(user: "Spock")]
 
-        let subscription = store.dispatch(action: actions).subscribe(onNext: { (state) in
+        let statesToTest = try store.dispatch(action: actions).toBlocking().toArray()
 
-            if case let .increasing(value) = state.counterState {
+        statesToTest.forEach {
+            if case let .increasing(value) = $0.counterState {
                 XCTAssertEqual(10, value)
             }
 
-            if case let .decreasing(value) = state.counterState {
+            if case let .decreasing(value) = $0.counterState {
                 XCTAssertEqual(-10, value)
             }
 
-            if case let .loggedIn(user) = state.userState {
+            if case let .loggedIn(user) = $0.userState {
                 XCTAssertEqual("Spock", user)
-                exp.fulfill()
             }
-        })
-
-        waitForExpectations(timeout: 1) { (_) in
-            subscription.dispose()
         }
     }
 

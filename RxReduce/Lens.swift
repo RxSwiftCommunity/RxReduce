@@ -10,8 +10,18 @@
 public struct Lens<State, SubState> {
 
     /// retrieves a Substate from a State
-    public let get: (State) -> SubState
+    let get: (State) -> SubState
 
-    /// Generates a new State based on an original State and on an original SubState 
-    public let set: (State, SubState) -> State
+    /// Generates a new State based on an original State and on an original SubState
+    let set: (State, SubState) -> State
+
+    /// Lens initializer
+    ///
+    /// - Parameters:
+    ///   - get: the closure that allows to get a subState given a state
+    ///   - set: the closure that allows to mutate a state given a subState
+    public init (get: @escaping (State) -> SubState, set: @escaping (State, SubState) -> State) {
+        self.get = get
+        self.set = set
+    }
 }

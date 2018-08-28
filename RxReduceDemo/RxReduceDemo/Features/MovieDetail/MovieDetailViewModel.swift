@@ -24,14 +24,11 @@ final class MovieDetailViewModel: ViewModel, Injectable {
 
     func loadMovieDetail () -> Driver<MovieDetailState> {
 
-        // build a synchronous action to pick the movie
-        let loadMovieDetailAction = LoadMovieDetailAction(movieId: self.movieId)
-
         // dispatch the synchronous Load Movie Detail action
-        self.injectionContainer.store.dispatch(action: loadMovieDetailAction)
-
-        // listen for the store's state
-        return self.injectionContainer.store.state { $0.movieDetailState }
+        return self.injectionContainer
+            .store
+            .dispatch(action: MovieAction.loadMovie(movieId: self.movieId)) { $0.movieDetailState }
+            .asDriver(onErrorJustReturn: MovieDetailState.empty)
     }
 
 }
