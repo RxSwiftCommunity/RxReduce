@@ -20,11 +20,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private lazy var store: Store<AppState> = {
         let store = Store<AppState>(withState: AppState(movieListState: .empty, movieDetailState: .empty))
 
-        let movieListMutator = Mutator<AppState, MovieListState>(lens: AppLenses.movieListLens, reducer: movieListReducer)
-        let movieDetailMutator = Mutator<AppState, MovieDetailState>(lens: AppLenses.movieDetailLens, reducer: movieDetailReducer)
-
-        store.register(mutator: movieListMutator)
-        store.register(mutator: movieDetailMutator)
+        store.register(mutator: AppMutators.movieListMutator)
+        store.register(mutator: AppMutators.movieDetailMutator)
         store.register(middleware: loggingMiddleware)
         
         return store

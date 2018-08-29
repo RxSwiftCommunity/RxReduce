@@ -12,6 +12,7 @@
 		1A16F86B20C31E1400D5BE85 /* DiscoverTVResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A16F86820C31E1400D5BE85 /* DiscoverTVResponse.swift */; };
 		1A16F86C20C31E1400D5BE85 /* DiscoverMovieResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A16F86920C31E1400D5BE85 /* DiscoverMovieResponse.swift */; };
 		1A16F86D20C31E1400D5BE85 /* Media.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A16F86A20C31E1400D5BE85 /* Media.swift */; };
+		1A71397C21363E2F00903866 /* AppMutators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A71397B21363E2F00903866 /* AppMutators.swift */; };
 		1A74D063212E4A0400BAE637 /* AppLenses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A74D062212E4A0400BAE637 /* AppLenses.swift */; };
 		1AAA7E1B20952A7F00BED242 /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A3BB49E2093A4F500B1E37F /* RxCocoa.framework */; };
 		1AAA7E1C20952A7F00BED242 /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A3BB4A02093A4F500B1E37F /* RxSwift.framework */; };
@@ -48,6 +49,7 @@
 		1A16F86820C31E1400D5BE85 /* DiscoverTVResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscoverTVResponse.swift; sourceTree = "<group>"; };
 		1A16F86920C31E1400D5BE85 /* DiscoverMovieResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscoverMovieResponse.swift; sourceTree = "<group>"; };
 		1A16F86A20C31E1400D5BE85 /* Media.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Media.swift; sourceTree = "<group>"; };
+		1A71397B21363E2F00903866 /* AppMutators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppMutators.swift; sourceTree = "<group>"; };
 		1A74D062212E4A0400BAE637 /* AppLenses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLenses.swift; sourceTree = "<group>"; };
 		1AAA7E2320952BF900BED242 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		1AAA7E2520952C3300BED242 /* AppActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppActions.swift; sourceTree = "<group>"; };
@@ -124,6 +126,7 @@
 				1AFFA38420B25C3400A0BB81 /* AppMiddlewares.swift */,
 				1AAA7E2520952C3300BED242 /* AppActions.swift */,
 				1A74D062212E4A0400BAE637 /* AppLenses.swift */,
+				1A71397B21363E2F00903866 /* AppMutators.swift */,
 			);
 			path = State;
 			sourceTree = "<group>";
@@ -332,6 +335,7 @@
 				1A16F86D20C31E1400D5BE85 /* Media.swift in Sources */,
 				1AC102CE20C98D890083BB46 /* MovieListViewModel.swift in Sources */,
 				1AAA7E2420952BF900BED242 /* AppState.swift in Sources */,
+				1A71397C21363E2F00903866 /* AppMutators.swift in Sources */,
 				1AC102BD20C5F8240083BB46 /* UIViewController+ViewModelBased.swift in Sources */,
 				1AC102C020C5F8610083BB46 /* Injectable.swift in Sources */,
 				1AC102D820C99CD60083BB46 /* MovieDetailViewModel.swift in Sources */,
