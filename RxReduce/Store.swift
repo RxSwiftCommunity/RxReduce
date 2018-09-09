@@ -47,6 +47,8 @@ public final class Store<State: Equatable> {
                     self.neededReducersPerSubState[subStateType] = 1
                 }
         }
+
+        self.reducers.reserveCapacity(self.neededReducersPerSubState.count)
     }
 
     /// Registers a Mutator dedicated to a State/SubState mutation.
