@@ -37,7 +37,6 @@
 		1AC102D620C99CA60083BB46 /* MovieDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AC102D520C99CA60083BB46 /* MovieDetailViewController.swift */; };
 		1AC102D820C99CD60083BB46 /* MovieDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AC102D720C99CD60083BB46 /* MovieDetailViewModel.swift */; };
 		1ADAD0C520A524FC003049A9 /* RxReduce.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1ADAD0C420A524FC003049A9 /* RxReduce.framework */; };
-		1AFFA38520B25C3400A0BB81 /* AppMiddlewares.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AFFA38420B25C3400A0BB81 /* AppMiddlewares.swift */; };
 		4A3BB48420939F9000B1E37F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3BB48320939F9000B1E37F /* AppDelegate.swift */; };
 		4A3BB48B20939F9100B1E37F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4A3BB48A20939F9100B1E37F /* Assets.xcassets */; };
 		4A3BB48E20939F9100B1E37F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4A3BB48C20939F9100B1E37F /* LaunchScreen.storyboard */; };
@@ -69,7 +68,6 @@
 		1AC102D520C99CA60083BB46 /* MovieDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailViewController.swift; sourceTree = "<group>"; };
 		1AC102D720C99CD60083BB46 /* MovieDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailViewModel.swift; sourceTree = "<group>"; };
 		1ADAD0C420A524FC003049A9 /* RxReduce.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxReduce.framework; path = Carthage/Build/iOS/RxReduce.framework; sourceTree = "<group>"; };
-		1AFFA38420B25C3400A0BB81 /* AppMiddlewares.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppMiddlewares.swift; sourceTree = "<group>"; };
 		4A3BB48020939F9000B1E37F /* RxReduceDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RxReduceDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A3BB48320939F9000B1E37F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4A3BB48A20939F9100B1E37F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -123,7 +121,6 @@
 			children = (
 				1AAA7E2320952BF900BED242 /* AppState.swift */,
 				1AAA7E272095305800BED242 /* AppReducers.swift */,
-				1AFFA38420B25C3400A0BB81 /* AppMiddlewares.swift */,
 				1AAA7E2520952C3300BED242 /* AppActions.swift */,
 				1A74D062212E4A0400BAE637 /* AppLenses.swift */,
 				1A71397B21363E2F00903866 /* AppMutators.swift */,
@@ -353,7 +350,6 @@
 				1A74D063212E4A0400BAE637 /* AppLenses.swift in Sources */,
 				1AC102D620C99CA60083BB46 /* MovieDetailViewController.swift in Sources */,
 				1AAA7E2620952C3300BED242 /* AppActions.swift in Sources */,
-				1AFFA38520B25C3400A0BB81 /* AppMiddlewares.swift in Sources */,
 				1A16F86B20C31E1400D5BE85 /* DiscoverTVResponse.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

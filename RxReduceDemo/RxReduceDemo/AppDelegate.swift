@@ -22,7 +22,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         store.register(mutator: AppMutators.movieListMutator)
         store.register(mutator: AppMutators.movieDetailMutator)
-        store.register(middleware: loggingMiddleware)
         
         return store
     }()
@@ -31,9 +30,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return DependencyContainer(withStore: self.store, withNetworkService: self.networkService)
     }()
 
+    private let disposeBag = DisposeBag()
+
     internal func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
         guard let window = self.window else { return false }
+
+        // you can observe the State ... the same way you would do with a Middleware
+        self.store.state.subscribe(onNext: { appState in
+            print (appState)
+        }).disposed(by: self.disposeBag)
 
         let movieListViewModel = MovieListViewModel(with: self.dependencyContainer)
         let movieListViewController = MovieListViewController.instantiate(with: movieListViewModel)
