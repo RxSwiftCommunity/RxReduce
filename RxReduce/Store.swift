@@ -14,28 +14,37 @@ import RxCocoa
 /// Internally, Reducers come from registered Mutator defines a Reducer.
 public final class Store<State: Equatable> {
 
-    /// A Middleware acts like a valve in which a dispatched Action passes through.
-    /// It cannot mutate the State. Middlewares can be used for logging purposes for instance
-    public typealias Middleware = (_ state: State, _ action: Action) -> Void
+    /// Reducer correspond to the apply func of a Mutator
     private typealias Reducer = (State, Action) -> State
 
-    private var state: State
+    private let stateSubject: BehaviorRelay<State>
     private var neededReducersPerSubState = [String: Int]()
     private var reducers = ContiguousArray<Reducer>()
-    private var middlewares = ContiguousArray<Middleware>()
+    private let serialDispatchScheduler: SerialDispatchQueueScheduler = {
+        let serialQueue = DispatchQueue(label: "com.rxswiftcommunity.rxreduce.serialqueue")
+        return SerialDispatchQueueScheduler.init(queue: serialQueue, internalSerialQueueName: "com.rxswiftcommunity.rxreduce.serialscheduler")
+    }()
+
+    /// The global State is exposed via an Observable, just like some kind of "middleware".
+    /// This global State will trigger a new value after a dispatch(action) has triggered a "onNext" event.
+    public lazy var state: Observable<State> = {
+        return self.stateSubject.asObservable()
+    }()
 
     /// Inits a Store with an initial State
     ///
     /// - Parameter state: the initial State
     public init(withState state: State) {
-        self.state = state
+
+        // Sets the initial State value
+        self.stateSubject = BehaviorRelay<State>(value: state)
 
         // We analyze the State children (aka SubState)
         // to be able to check that each of them will be handled
         // by a reducer function (it allows to be sure that if we
         // add a new SubState to the State, there is a reducer in charge
         // of its mutation)
-        let stateMirror = Mirror(reflecting: self.state)
+        let stateMirror = Mirror(reflecting: state)
         stateMirror
             .children
             .map { Mirror(reflecting: $0.value) }
@@ -75,14 +84,6 @@ public final class Store<State: Equatable> {
         self.neededReducersPerSubState[subStateType] = neededReducerForSubState - 1
     }
 
-    /// Registers a Middleware. Middlewares will be applied in sequence
-    /// in the same order than their addition
-    ///
-    /// - Parameter middleware: The Middleware to add
-    public func register (middleware: @escaping Middleware) {
-        self.middlewares.append(middleware)
-    }
-
     /// Dispatches an Action to the registered Reducers.
     /// The Action will first go through the Middlewares and
     /// then through the Reducers producing a mutated State.
@@ -100,18 +101,16 @@ public final class Store<State: Equatable> {
         // every received action is converted to an async action
         return action
             .toAsync()
-            .do(onNext: { [unowned self] (action) in
-                self.middlewares.forEach({ [unowned self] (middleware) in
-                    middleware(self.state, action)
-                })
-            })
             .map { [unowned self] (action) -> State in
-                return self.reducers.reduce(self.state, { (currentState, reducer) -> State in
+                return self.reducers.reduce(self.stateSubject.value, { (currentState, reducer) -> State in
                     return reducer(currentState, action)
                 })
-            }.do(onNext: { [unowned self] (newState) in
-                self.state = newState
-            }).distinctUntilChanged()
+            }
+            .do(onNext: { [unowned self] (newState) in
+                self.stateSubject.accept(newState)
+            })
+            .distinctUntilChanged()
+            .subscribeOn(self.serialDispatchScheduler)
     }
 
     /// Dispatches an Action to the registered Mutators but instead of

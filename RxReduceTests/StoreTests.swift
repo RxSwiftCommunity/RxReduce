@@ -12,23 +12,23 @@ import RxCocoa
 import RxReduce
 import RxBlocking
 
-class StoreTests: XCTestCase {
+final class StoreTests: XCTestCase {
 
-    let disposeBag = DisposeBag()
+    private let disposeBag = DisposeBag()
 
-    let counterLens = Lens<TestState, CounterState> (get: { $0.counterState }) { (testState, counterState) -> TestState in
+    private let counterLens = Lens<TestState, CounterState> (get: { $0.counterState }) { (testState, counterState) -> TestState in
         var mutableTestState = testState
         mutableTestState.counterState = counterState
         return mutableTestState
     }
 
-    let userLens = Lens<TestState, UserState> (get: { $0.userState }) { (testState, userState) -> TestState in
+    private let userLens = Lens<TestState, UserState> (get: { $0.userState }) { (testState, userState) -> TestState in
         var mutableTestState = testState
         mutableTestState.userState = userState
         return mutableTestState
     }
 
-    lazy var store: Store<TestState> = {
+    private lazy var store: Store<TestState> = {
         let store = Store<TestState>(withState: TestState(counterState: .empty, userState: .loggedOut))
         let counterMutator = Mutator<TestState, CounterState>(lens: counterLens, reducer: counterReduce)
         let userMutator = Mutator<TestState, UserState>(lens: userLens, reducer: userReduce)
@@ -40,7 +40,11 @@ class StoreTests: XCTestCase {
     }()
 
     override func tearDown() {
-        store.dispatch(action: ClearAction()).subscribe().disposed(by: self.disposeBag)
+        do {
+            _ = try store.dispatch(action: ClearAction()).toBlocking(timeout: 1).single()
+        } catch {
+            XCTFail(error.localizedDescription)
+        }
     }
 
     func testSynchronousAction() throws {
@@ -114,29 +118,23 @@ class StoreTests: XCTestCase {
         }
     }
 
-    func testMiddlewares () {
-
-        let exp = expectation(description: "Middleware subscription")
+    func testStateObservable () throws {
+        let exp = expectation(description: "State Observable Expectation")
 
         let increaseAction = IncreaseAction(increment: 10)
 
-        let middlewareStore = Store<TestState>(withState: TestState(counterState: .empty, userState: .loggedOut))
+        Observable.combineLatest(self.store.dispatch(action: increaseAction), self.store.state) { (newState1, newState2) -> (TestState, TestState) in
+            return (newState1, newState2)
+            }.subscribe(onNext: { (states) in
+                guard states.0 == TestState(counterState: CounterState.increasing(10), userState: UserState.loggedOut) else {
+                    return
+                }
+                
+                if states.0 == states.1 {
+                    exp.fulfill()
+                }
+            }).disposed(by: self.disposeBag)
 
-        let counterMutator = Mutator<TestState, CounterState>(lens: counterLens, reducer: counterReduce)
-        let userMutator = Mutator<TestState, UserState>(lens: userLens, reducer: userReduce)
-
-        middlewareStore.register(mutator: counterMutator)
-        middlewareStore.register(mutator: userMutator)
-
-        middlewareStore.register { (state, action) in
-            exp.fulfill()
-        }
-
-        let subscription = middlewareStore.dispatch(action: increaseAction).subscribe()
-
-        waitForExpectations(timeout: 1) { (_) in
-            subscription.dispose()
-        }
-
+        waitForExpectations(timeout: 1)
     }
 }
