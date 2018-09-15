@@ -23,7 +23,7 @@ final class MovieListViewController: UITableViewController, StoryboardBased, Vie
     private var movies = [DiscoverMovieModel]()
 
     private lazy var activityIndicator: UIActivityIndicatorView = {
-        let indicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+        let indicator = UIActivityIndicatorView(style: .gray)
         indicator.hidesWhenStopped = true
         indicator.color = .black
         indicator.frame = self.view.frame
