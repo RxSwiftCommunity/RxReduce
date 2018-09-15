@@ -18,11 +18,11 @@ class ActionTests: XCTestCase {
 
     func testSynchronousAction() throws {
 
-        let increaseAction = IncreaseAction(increment: 10)
+        let increaseAction = AppAction.increase(increment: 10)
 
         let action = try increaseAction.toAsync().toBlocking().single()
-        if let action = action as? IncreaseAction {
-            XCTAssertEqual(10, action.increment)
+        if case let AppAction.increase(increment) = action {
+            XCTAssertEqual(10, increment)
         } else {
             XCTFail()
         }
@@ -30,11 +30,11 @@ class ActionTests: XCTestCase {
 
     func testAsynchronousAction () throws {
 
-        let increaseAction = Observable<Action>.just(IncreaseAction(increment: 10))
+        let increaseAction = Observable<Action>.just(AppAction.increase(increment: 10))
 
         let action = try increaseAction.toAsync().toBlocking().single()
-        if let action = action as? IncreaseAction {
-            XCTAssertEqual(10, action.increment)
+        if case let AppAction.increase(increment) = action {
+            XCTAssertEqual(10, increment)
         } else {
             XCTFail()
         }
@@ -42,14 +42,14 @@ class ActionTests: XCTestCase {
 
     func testArrayOfActions () throws {
 
-        let actions: [Action] = [IncreaseAction(increment: 10), IncreaseAction(increment: 20), IncreaseAction(increment: 30)]
+        let actions: [Action] = [AppAction.increase(increment: 10), AppAction.increase(increment: 20), AppAction.increase(increment: 30)]
 
         var initialIncrement = 10
         let actionsToTest = try actions.toAsync().toBlocking().toArray()
 
         actionsToTest.forEach {
-            if let action = $0 as? IncreaseAction {
-                XCTAssertEqual(initialIncrement, action.increment)
+            if case let AppAction.increase(increment) = $0 {
+                XCTAssertEqual(initialIncrement, increment)
                 initialIncrement += 10
             } else {
                 XCTFail()
@@ -59,14 +59,14 @@ class ActionTests: XCTestCase {
 
     func testArrayOfActionsWithObservable () throws {
 
-        let actions: [Action] = [IncreaseAction(increment: 10), Observable<Action>.just(IncreaseAction(increment: 20)), IncreaseAction(increment: 30)]
+        let actions: [Action] = [AppAction.increase(increment: 10), Observable<Action>.just(AppAction.increase(increment: 20)), AppAction.increase(increment: 30)]
 
         var initialIncrement = 10
         let actionsToTest = try actions.toAsync().toBlocking().toArray()
 
         actionsToTest.forEach {
-            if let action = $0 as? IncreaseAction {
-                XCTAssertEqual(initialIncrement, action.increment)
+            if case let AppAction.increase(increment) = $0 {
+                XCTAssertEqual(initialIncrement, increment)
                 initialIncrement += 10
             } else {
                 XCTFail()

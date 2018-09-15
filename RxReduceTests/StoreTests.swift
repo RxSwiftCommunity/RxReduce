@@ -41,7 +41,7 @@ final class StoreTests: XCTestCase {
 
     override func tearDown() {
         do {
-            _ = try store.dispatch(action: ClearAction()).toBlocking(timeout: 1).single()
+            _ = try store.dispatch(action: AppAction.clear).toBlocking(timeout: 1).single()
         } catch {
             XCTFail(error.localizedDescription)
         }
@@ -49,7 +49,7 @@ final class StoreTests: XCTestCase {
 
     func testSynchronousAction() throws {
 
-        let increaseAction = IncreaseAction(increment: 10)
+        let increaseAction = AppAction.increase(increment: 10)
 
         let state = try store
             .dispatch(action: increaseAction)
@@ -66,7 +66,7 @@ final class StoreTests: XCTestCase {
 
     func testSubstateSubscription() throws {
 
-        let increaseAction = IncreaseAction(increment: 10)
+        let increaseAction = AppAction.increase(increment: 10)
 
         let counterState = try store
             .dispatch(action: increaseAction) { $0.counterState }
@@ -82,7 +82,7 @@ final class StoreTests: XCTestCase {
 
     func testAsynchronousAction() throws {
 
-        let increaseAction = Observable<Action>.just(IncreaseAction(increment: 10))
+        let increaseAction = Observable<Action>.just(AppAction.increase(increment: 10))
 
         let state = try store
             .dispatch(action: increaseAction)
@@ -99,7 +99,7 @@ final class StoreTests: XCTestCase {
 
     func testArrayOfActionsWithObservable () throws {
 
-        let actions: [Action] = [IncreaseAction(increment: 10), Observable<Action>.just(DecreaseAction(decrement: 20)), LogUserAction(user: "Spock")]
+        let actions: [Action] = [AppAction.increase(increment: 10), Observable<Action>.just(AppAction.decrease(decrement: 20)), AppAction.logUser(user: "Spock")]
 
         let statesToTest = try store.dispatch(action: actions).toBlocking().toArray()
 
@@ -121,7 +121,7 @@ final class StoreTests: XCTestCase {
     func testStateObservable () throws {
         let exp = expectation(description: "State Observable Expectation")
 
-        let increaseAction = IncreaseAction(increment: 10)
+        let increaseAction = AppAction.increase(increment: 10)
 
         Observable.combineLatest(self.store.dispatch(action: increaseAction), self.store.state) { (newState1, newState2) -> (TestState, TestState) in
             return (newState1, newState2)
@@ -156,18 +156,18 @@ final class StoreTests: XCTestCase {
         // Given
         let exp = expectation(description: "Queue expectation")
         exp.expectedFulfillmentCount = 3
-        let actionObservable = Observable<Action>.just (IncreaseAction(increment: 10))
+        let actionObservable = Observable<Action>.just (AppAction.increase(increment: 10))
 
         // When
         actionObservable
-            .map { action -> DecreaseAction in
+            .map { action -> AppAction in
                 if let  queueName = OperationQueue.current?.name!,
                     queueName ==  "SUBSCRIBE_ON_QUEUE" {
                     exp.fulfill()
                 } else {
                     XCTFail("Subscribe on Wrong Queue")
                 }
-                return DecreaseAction(decrement: 10)
+                return AppAction.decrease(decrement: 10)
             }
             .flatMap{ (action) -> Observable<CounterState> in
 
@@ -193,5 +193,82 @@ final class StoreTests: XCTestCase {
 
         // Then
         waitForExpectations(timeout: 1)
+    }
+
+    func testDispatchActionSerialSynchronization () throws {
+        // Given
+        let exp = expectation(description: "Synchronization expectation")
+        exp.expectedFulfillmentCount = 2
+        let concurrentQueue = DispatchQueue(label: "com.rxswiftcommunity.rxreduce.concurrentqueue", qos: .userInitiated, attributes: [.concurrent])
+        let sem = DispatchSemaphore(value: 0)
+        var firstReducerStartTime = DispatchTime.now()
+        var firstReducerEndTime = DispatchTime.now()
+        var secondReducerStartTime = DispatchTime.now()
+        var secondReducerEndTime = DispatchTime.now()
+
+        // Implements Reducers that have specific instructions for Thread lock and Time measurement
+        func userReducer (state: TestState, action: Action) -> UserState {
+            if case let AppAction.logUser(user) = action {
+                firstReducerStartTime = DispatchTime.now()
+                _ = sem.wait(timeout: DispatchTime(uptimeNanoseconds: 1000000000))
+                exp.fulfill()
+                firstReducerEndTime = DispatchTime.now()
+                return UserState.loggedIn(name: user)
+            }
+            return state.userState
+        }
+
+        func counterReducer (state: TestState, action: Action) -> CounterState {
+            if case let AppAction.increase(increment) = action {
+                secondReducerStartTime = DispatchTime.now()
+                _ = sem.wait(timeout: DispatchTime(uptimeNanoseconds: 1000000000))
+                exp.fulfill()
+                secondReducerEndTime = DispatchTime.now()
+                return CounterState.increasing(increment)
+            }
+            return state.counterState
+        }
+
+        // Instantiating Mutators and Store using those 2 Reducers
+        let userMutator = Mutator<TestState, UserState>(lens: userLens,
+                                                        reducer: userReducer)
+
+        let counterMutator = Mutator<TestState, CounterState>(lens: counterLens,
+                                                              reducer: counterReducer)
+
+        let syncTestsStore = Store<TestState>(withState: TestState(counterState: .empty, userState: .loggedOut))
+        syncTestsStore.register(mutator: userMutator)
+        syncTestsStore.register(mutator: counterMutator)
+
+        // When
+        concurrentQueue.async {
+            do {
+                _ = try syncTestsStore.dispatch(action: AppAction.increase(increment: 10)).toBlocking().single()
+            } catch {
+                XCTFail()
+            }
+        }
+
+        concurrentQueue.async {
+            do {
+                _ = try syncTestsStore.dispatch(action: AppAction.logUser(user: "Spock")).toBlocking().single()
+            } catch {
+                XCTFail()
+            }
+        }
+
+        // Then
+        waitForExpectations(timeout: 5) { error in
+            if let error = error {
+                XCTFail(error.localizedDescription)
+                return
+            }
+
+            if firstReducerStartTime < secondReducerStartTime {
+                XCTAssertGreaterThanOrEqual(secondReducerStartTime, firstReducerEndTime)
+            } else {
+                XCTAssertGreaterThanOrEqual(firstReducerStartTime, secondReducerEndTime)
+            }
+        }
     }
 }

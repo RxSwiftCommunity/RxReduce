@@ -9,17 +9,9 @@
 import Foundation
 import RxReduce
 
-struct IncreaseAction: Action {
-    let increment: Int
-}
-
-struct DecreaseAction: Action {
-    let decrement: Int
-}
-
-struct ClearAction: Action {
-}
-
-struct LogUserAction: Action {
-    let user: String
+enum AppAction: Action {
+    case increase(increment: Int)
+    case decrease(decrement: Int)
+    case logUser(user: String)
+    case clear
 }

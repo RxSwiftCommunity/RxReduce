@@ -11,6 +11,8 @@ import RxReduce
 
 func counterReduce (state: TestState, action: Action) -> CounterState {
 
+    guard let action = action as? AppAction else { return state.counterState }
+
     var currentCounter = 0
 
     // we extract the current counter value from the current state
@@ -23,11 +25,11 @@ func counterReduce (state: TestState, action: Action) -> CounterState {
 
     // according to the action we mutate the counter state
     switch action {
-    case let action as IncreaseAction:
-        return .increasing(currentCounter+action.increment)
-    case let action as DecreaseAction:
-        return .decreasing(currentCounter-action.decrement)
-    case is ClearAction:
+    case .increase(let increment):
+        return .increasing(currentCounter+increment)
+    case .decrease(let decrement):
+        return .decreasing(currentCounter-decrement)
+    case .clear:
         return .empty
     default:
         return state.counterState
@@ -36,11 +38,13 @@ func counterReduce (state: TestState, action: Action) -> CounterState {
 
 func userReduce (state: TestState, action: Action) -> UserState {
 
+    guard let action = action as? AppAction else { return state.userState }
+
     // according to the action we mutate the users state
     switch action {
-    case let action as LogUserAction:
-        return .loggedIn(name: action.user)
-    case is ClearAction:
+    case .logUser(let user):
+        return .loggedIn(name: user)
+    case .clear:
         return .loggedOut
     default:
         return state.userState
