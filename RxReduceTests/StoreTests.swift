@@ -137,4 +137,61 @@ final class StoreTests: XCTestCase {
 
         waitForExpectations(timeout: 1)
     }
+
+    func testStoreSchedulers () throws {
+        // create 2 queues: 1 for the observeOn part of the Rx stream, and 1 for the subscriveOn part
+        let subscribeOnScheduler: OperationQueueScheduler = {
+            let queue = OperationQueue()
+            queue.name = "SUBSCRIBE_ON_QUEUE"
+            queue.maxConcurrentOperationCount = 1
+            return OperationQueueScheduler(operationQueue: queue)
+        }()
+        let observeOnScheduler: OperationQueueScheduler = {
+            let queue = OperationQueue()
+            queue.name = "OBSERVE_ON_QUEUE"
+            queue.maxConcurrentOperationCount = 1
+            return OperationQueueScheduler(operationQueue: queue)
+        }()
+
+        // Given
+        let exp = expectation(description: "Queue expectation")
+        exp.expectedFulfillmentCount = 3
+        let actionObservable = Observable<Action>.just (IncreaseAction(increment: 10))
+
+        // When
+        actionObservable
+            .map { action -> DecreaseAction in
+                if let  queueName = OperationQueue.current?.name!,
+                    queueName ==  "SUBSCRIBE_ON_QUEUE" {
+                    exp.fulfill()
+                } else {
+                    XCTFail("Subscribe on Wrong Queue")
+                }
+                return DecreaseAction(decrement: 10)
+            }
+            .flatMap{ (action) -> Observable<CounterState> in
+
+                if let  queueName = OperationQueue.current?.name!,
+                    queueName ==  "SUBSCRIBE_ON_QUEUE" {
+                    exp.fulfill()
+                } else {
+                    XCTFail("Subscribe on Wrong Queue")
+                }
+                return self.store.dispatch(action: action, focusingOn: { $0.counterState })
+            }
+            .subscribeOn(subscribeOnScheduler)
+            .observeOn(observeOnScheduler)
+            .subscribe(onNext: { counterState in
+
+                if let  queueName = OperationQueue.current?.name!,
+                    queueName ==  "OBSERVE_ON_QUEUE" {
+                    exp.fulfill()
+                } else {
+                    XCTFail("Observe on Wrong Queue")
+                }
+            }).disposed(by: self.disposeBag)
+
+        // Then
+        waitForExpectations(timeout: 1)
+    }
 }

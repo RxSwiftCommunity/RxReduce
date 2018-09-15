@@ -20,10 +20,7 @@ public final class Store<State: Equatable> {
     private let stateSubject: BehaviorRelay<State>
     private var neededReducersPerSubState = [String: Int]()
     private var reducers = ContiguousArray<Reducer>()
-    private let serialDispatchScheduler: SerialDispatchQueueScheduler = {
-        let serialQueue = DispatchQueue(label: "com.rxswiftcommunity.rxreduce.serialqueue")
-        return SerialDispatchQueueScheduler.init(queue: serialQueue, internalSerialQueueName: "com.rxswiftcommunity.rxreduce.serialscheduler")
-    }()
+    private let serialQueue = DispatchQueue(label: "com.rxswiftcommunity.rxreduce.serialqueue")
 
     /// The global State is exposed via an Observable, just like some kind of "middleware".
     /// This global State will trigger a new value after a dispatch(action) has triggered a "onNext" event.
@@ -102,15 +99,18 @@ public final class Store<State: Equatable> {
         return action
             .toAsync()
             .map { [unowned self] (action) -> State in
-                return self.reducers.reduce(self.stateSubject.value, { (currentState, reducer) -> State in
-                    return reducer(currentState, action)
-                })
+
+                self.serialQueue.sync {
+                    let newState = self.reducers.reduce(self.stateSubject.value, { (currentState, reducer) -> State in
+                        return reducer(currentState, action)
+                    })
+
+                    self.stateSubject.accept(newState)
+                }
+
+                return self.stateSubject.value
             }
-            .do(onNext: { [unowned self] (newState) in
-                self.stateSubject.accept(newState)
-            })
             .distinctUntilChanged()
-            .subscribeOn(self.serialDispatchScheduler)
     }
 
     /// Dispatches an Action to the registered Mutators but instead of

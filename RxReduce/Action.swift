@@ -35,6 +35,6 @@ extension Array: Action where Element == Action {
 // MARK: - Default implementation of toAsync: Observable<Action> is also an Action
 extension Observable: Action where Element == Action {
     public func toAsync () -> Observable<Action> {
-        return self.map { $0 as Action }
+        return self
     }
 }
