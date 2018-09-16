@@ -16,7 +16,7 @@ final class StoreTests: XCTestCase {
 
     private let disposeBag = DisposeBag()
 
-    private let counterLens = Lens<TestState, CounterState> (get: { $0.counterState }) { (testState, counterState) -> TestState in
+    private let counterLens = Lens<TestState, CounterState> (get: { testState in return testState.counterState }) { (testState, counterState) -> TestState in
         var mutableTestState = testState
         mutableTestState.counterState = counterState
         return mutableTestState
