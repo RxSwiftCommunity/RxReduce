@@ -210,7 +210,7 @@ final class StoreTests: XCTestCase {
         func userReducer (state: TestState, action: Action) -> UserState {
             if case let AppAction.logUser(user) = action {
                 firstReducerStartTime = DispatchTime.now()
-                _ = sem.wait(timeout: DispatchTime(uptimeNanoseconds: 1000000000))
+                _ = sem.wait(timeout: .now() + 1)
                 exp.fulfill()
                 firstReducerEndTime = DispatchTime.now()
                 return UserState.loggedIn(name: user)
@@ -221,7 +221,7 @@ final class StoreTests: XCTestCase {
         func counterReducer (state: TestState, action: Action) -> CounterState {
             if case let AppAction.increase(increment) = action {
                 secondReducerStartTime = DispatchTime.now()
-                _ = sem.wait(timeout: DispatchTime(uptimeNanoseconds: 1000000000))
+                _ = sem.wait(timeout: .now() + 1)
                 exp.fulfill()
                 secondReducerEndTime = DispatchTime.now()
                 return CounterState.increasing(increment)
