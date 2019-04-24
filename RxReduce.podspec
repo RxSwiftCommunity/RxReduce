@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "RxReduce"
-  s.version      = "0.9"
+  s.version      = "0.10"
   s.summary      = "RxReduce is a lightweight framework that ease the implementation of a state container pattern in a Reactive Programming compliant way."
 
   s.description  = <<-DESC
@@ -23,7 +23,7 @@ RxReduce provides:
   s.source       = { :git => "https://github.com/RxSwiftCommunity/RxReduce.git", :tag => s.version.to_s }
   s.source_files  = "RxReduce/**/*.swift"
   s.requires_arc     = true  
-  s.dependency 'RxSwift', '>= 4.2.0'
-  s.dependency 'RxCocoa', '>= 4.2.0'
+  s.dependency 'RxSwift', '>= 4.5.0'
+  s.dependency 'RxCocoa', '>= 4.5.0'
 
 end
